@@ -1,10 +1,5 @@
 pipeline {
     agent any
-    // tools { // this is the jdk specified in global configurations
-    //  jdk 'JDK11'
-    // }
-    def appName = "sandbox"
-    def inPort = 8092
 
     triggers {
         pollSCM('* * * * *')
@@ -35,7 +30,7 @@ pipeline {
         }
         stage("Docker build") {
             steps {
-                sh "docker build -t ozihler/" + appName + ":1 ."
+                sh "docker build -t ozihler/sandbox:1 ."
             }
         }
 
@@ -45,13 +40,13 @@ pipeline {
             }
             steps {
                 sh "docker login --username " + DOCKER_HUB_CREDENTIALS_USR + " --password " + DOCKER_HUB_CREDENTIALS_PSW
-                sh "docker push ozihler/" + appName + ":1"
+                sh "docker push ozihler/sandbox:1"
             }
         }
 
         stage("Deploy to staging") {
             steps {
-                sh "docker stop /" + appName + " || true && docker run -d --rm -p " + inPort + ":5000 --name " + appName + " ozihler/" + appName + ":1"
+                sh "docker stop /sandbox || true && docker run -d --rm -p 8092:5000 --name sandbox ozihler/sandbox:1"
             }
         }
     }
