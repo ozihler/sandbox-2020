@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController("/sample")
-public class SampleResource {
+public class HelloWorldResource {
 
     @GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> helloWorld() {
