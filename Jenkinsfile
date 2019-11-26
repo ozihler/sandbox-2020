@@ -46,7 +46,7 @@ pipeline {
 
         stage("Deploy to staging") {
             steps {
-                sh "docker stop /sandbox || true && docker run -d --rm -p 8092:5000 --name sandbox ozihler/sandbox:1"
+                sh "docker stop /sandbox || true && sleep 30 && docker run -d --rm -p 8092:5000 --name sandbox ozihler/sandbox:1"
             }
         }
     }
