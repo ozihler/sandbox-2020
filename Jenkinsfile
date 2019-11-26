@@ -1,9 +1,14 @@
 pipeline {
     agent any
 
+    options {
+        disableConcurrentBuilds()
+    }
+
     triggers {
         pollSCM('* * * * *')
     }
+
     stages {
         stage("Allow gradlew access") {
             steps {
