@@ -1,11 +1,5 @@
 package com.zihler.wiki.domain.values;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
-
-import static java.lang.String.format;
-
 public class Details {
     private final ReferenceTag referenceTag;
     private final Title title;
