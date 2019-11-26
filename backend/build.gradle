@@ -17,10 +17,6 @@ apply plugin: 'io.spring.dependency-management'
 sourceCompatibility = 1.11
 targetCompatibility = 1.11
 
-repositories {
-    mavenCentral()
-}
-
 // https://stackoverflow.com/questions/26389679/running-spring-app-built-with-gradle-on-heroku?rq=1
 // https://stackoverflow.com/questions/33727502/gradle-leftshift-operator-with-task-needed-is-it-superfluous
 task stage(type: Copy, dependsOn: [clean, build]) {
@@ -38,8 +34,19 @@ clean {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
     implementation('org.springframework.boot:spring-boot-starter-web')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     implementation(project(':frontend'))
 }
