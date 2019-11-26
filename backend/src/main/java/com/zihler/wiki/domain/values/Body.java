@@ -15,8 +15,15 @@ public class Body {
         return new Body("");
     }
 
-    @Override
-    public String toString() {
+    public ReferenceTags extractReferenceTags() {
+        return ReferenceTags.from(this);
+    }
+
+    public BodyDocument asDocument() {
+        return BodyDocument.from(this);
+    }
+
+    public String get() {
         return body;
     }
 }

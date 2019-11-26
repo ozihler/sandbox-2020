@@ -12,7 +12,7 @@ public class Details {
     }
 
     public DetailsDocument asDocument() {
-        return DetailsDocument.of(this);
+        return DetailsDocument.from(this);
     }
 
     public ReferenceTag getReferenceTag() {

@@ -37,4 +37,5 @@ class CreateWikiPageTest {
             this.document = document;
         }
     }
+
 }
