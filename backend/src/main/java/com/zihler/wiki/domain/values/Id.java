@@ -1,14 +1,18 @@
 package com.zihler.wiki.domain.values;
 
 public class Id {
-    private long id;
+    private Long id;
 
-    private Id(long id) {
+    private Id(Long id) {
         this.id = id;
     }
 
-    public static Id of(long id) {
+    public static Id of(Long id) {
         return new Id(id);
+    }
+
+    public static Id empty() {
+        return new Id(null);
     }
 
     public long longValue() {

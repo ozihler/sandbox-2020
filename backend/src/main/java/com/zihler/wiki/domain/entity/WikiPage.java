@@ -13,6 +13,10 @@ public class WikiPage {
         this.details = details;
     }
 
+    public WikiPage(Details details) {
+        this(Id.empty(), details);
+    }
+
     public WikiPageDocument asDocument() {
         return WikiPageDocument.of(this);
     }

@@ -2,23 +2,23 @@ package com.zihler.wiki.use_case;
 
 import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.Details;
-import com.zihler.wiki.domain.values.Id;
 import com.zihler.wiki.use_case.inbound_port.ICreateWikiPage;
 import com.zihler.wiki.use_case.outbound_ports.WikiPagePresenter;
+import com.zihler.wiki.use_case.outbound_ports.WikiPageRepository;
 
 public class CreateWikiPage implements ICreateWikiPage {
-    private CreateWikiPage() {
-    }
+    private WikiPageRepository wikiPageRepository;
 
-    public static CreateWikiPage createWikiPage() {
-        return new CreateWikiPage();
+    public CreateWikiPage(WikiPageRepository wikiPageRepository) {
+        this.wikiPageRepository = wikiPageRepository;
     }
 
     @Override
     public void withDetails(Details details, WikiPagePresenter presenter) {
+        WikiPage wikiPage = new WikiPage(details);
 
-        WikiPage wikiPage = new WikiPage(Id.of(1L), details);
+        WikiPage storedWikiPage = wikiPageRepository.store(wikiPage);
 
-        presenter.present(wikiPage.asDocument());
+        presenter.present(storedWikiPage.asDocument());
     }
 }
