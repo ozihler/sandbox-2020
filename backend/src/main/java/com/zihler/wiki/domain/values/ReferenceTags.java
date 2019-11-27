@@ -41,10 +41,6 @@ public class ReferenceTags {
         return referenceTags.isEmpty();
     }
 
-    public boolean contains(ReferenceTag referenceTag) {
-        return referenceTags.contains(referenceTag);
-    }
-
     public int count() {
         return referenceTags.size();
     }
