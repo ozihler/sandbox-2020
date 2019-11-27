@@ -43,7 +43,6 @@ test {
 }
 
 dependencies {
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
     implementation('org.springframework.boot:spring-boot-starter-web')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'

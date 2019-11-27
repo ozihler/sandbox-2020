@@ -1,9 +1,5 @@
 package com.zihler.wiki.domain.values;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
-
 import static java.lang.String.format;
 
 public class DetailsDocument {
@@ -30,10 +26,6 @@ public class DetailsDocument {
 
     @Override
     public String toString() {
-        try {
-            return new ObjectMapper().writeValueAsString(this);
-        } catch (IOException e) {
-            return format("{ 'referenceTag': '%s', 'title': '%s', 'body': '%s' }", referenceTag, title, body);
-        }
+        return format("{ 'referenceTag': '%s', 'title': '%s', 'body': '%s' }", referenceTag, title, body);
     }
 }
