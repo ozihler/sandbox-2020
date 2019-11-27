@@ -16,11 +16,11 @@ public class ReferencedWikiPages {
         return new ReferencedWikiPages(wikiPages);
     }
 
-    ReferencedWikiPagesDocument toDocument() {
+    ReferencedWikiPagesDocument asDocument() {
         return ReferencedWikiPagesDocument.from(this);
     }
 
-    public Set<WikiPage> getWikiPages() {
+    Set<WikiPage> getWikiPages() {
         return wikiPages;
     }
 }

@@ -25,7 +25,7 @@ public class ReferencedDetails {
                 .collect(toSet());
     }
 
-    public ReferencedWikiPages toWikiPages() {
+    public ReferencedWikiPages toReferencedWikiPages() {
         return ReferencedWikiPages.from(referencedDetails.stream().map(WikiPage::from).collect(toSet()));
     }
 }

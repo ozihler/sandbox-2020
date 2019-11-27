@@ -29,7 +29,7 @@ public class WikiPage {
         return details.getBody()
                 .foundReferenceTags()
                 .toReferencedDetails()
-                .toWikiPages();
+                .toReferencedWikiPages();
     }
 
     public WikiPageDocument asDocument() {

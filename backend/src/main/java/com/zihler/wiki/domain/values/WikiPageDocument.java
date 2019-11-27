@@ -14,7 +14,7 @@ public class WikiPageDocument {
     }
 
     public static WikiPageDocument of(WikiPage wikiPage) {
-        return new WikiPageDocument(wikiPage.getId(), wikiPage.getDetails().asDocument(), wikiPage.getReferencedWikiPages().toDocument());
+        return new WikiPageDocument(wikiPage.getId(), wikiPage.getDetails().asDocument(), wikiPage.getReferencedWikiPages().asDocument());
     }
 
     @Override
