@@ -1,12 +1,8 @@
-package com.zihler.wiki.domain.values.builder;
+package com.zihler.wiki.domain.values;
 
 import com.zihler.wiki.domain.exceptions.IllegalReferenceTagException;
-import com.zihler.wiki.domain.values.Body;
-import com.zihler.wiki.domain.values.Details;
-import com.zihler.wiki.domain.values.ReferenceTag;
-import com.zihler.wiki.domain.values.Title;
 
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 public class DetailsBuilder {
     private ReferenceTag referenceTag;

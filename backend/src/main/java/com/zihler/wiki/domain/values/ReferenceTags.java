@@ -48,4 +48,9 @@ public class ReferenceTags {
     public boolean containsAll(ReferenceTag referenceTag, ReferenceTag... referenceTags) {
         return this.referenceTags.contains(referenceTag) || this.referenceTags.containsAll(Arrays.asList(referenceTags));
     }
+
+    public ReferencedDetails toReferencedDetails() {
+        return ReferencedDetails.from(referenceTags);
+    }
+
 }

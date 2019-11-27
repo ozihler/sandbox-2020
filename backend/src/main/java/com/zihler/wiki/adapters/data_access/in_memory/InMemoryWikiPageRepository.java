@@ -7,6 +7,6 @@ import com.zihler.wiki.use_case.outbound_ports.WikiPageRepository;
 public class InMemoryWikiPageRepository implements WikiPageRepository {
     @Override
     public WikiPage store(WikiPage wikiPage) {
-        return new WikiPage(Id.of(1L), wikiPage.getDetails());
+        return new WikiPage(Id.of(1L), wikiPage.getDetails(), wikiPage.getReferencedWikiPages());
     }
 }

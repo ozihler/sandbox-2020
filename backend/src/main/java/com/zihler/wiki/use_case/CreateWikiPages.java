@@ -2,12 +2,9 @@ package com.zihler.wiki.use_case;
 
 import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.Details;
-import com.zihler.wiki.domain.values.ReferenceTags;
 import com.zihler.wiki.use_case.inbound_port.ICreateWikiPages;
 import com.zihler.wiki.use_case.outbound_ports.WikiPagePresenter;
 import com.zihler.wiki.use_case.outbound_ports.WikiPageRepository;
-
-import java.util.List;
 
 public class CreateWikiPages implements ICreateWikiPages {
     private WikiPageRepository wikiPageRepository;
@@ -18,17 +15,10 @@ public class CreateWikiPages implements ICreateWikiPages {
 
     @Override
     public void from(Details details, WikiPagePresenter presenter) {
-        ReferenceTags referenceTags = details.getBody().foundReferenceTags();
+        WikiPage wikiPage = WikiPage.from(details);
 
-        List<Details> referencedDetails = Details.from(referenceTags);
-        referencedDetails.add(details);
+        WikiPage storedWikiPage = wikiPageRepository.store(wikiPage);
 
-        for (Details detail : referencedDetails) {
-            WikiPage wikiPage = WikiPage.from(details);
-            WikiPage storedWikiPage = wikiPageRepository.store(wikiPage);
-        }
-
-
-        //presenter.present(storedWikiPage.asDocument());
+        presenter.present(storedWikiPage.asDocument());
     }
 }

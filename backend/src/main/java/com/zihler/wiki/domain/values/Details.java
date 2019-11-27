@@ -1,20 +1,14 @@
 package com.zihler.wiki.domain.values;
 
-import java.util.List;
-
 public class Details {
-    private final ReferenceTag referenceTag;
+    private final ReferenceTag referenceTag; // Identifier / Unique
     private final Title title;
     private final Body body;
 
-    public Details(ReferenceTag referenceTag, Title title, Body body) {
+    Details(ReferenceTag referenceTag, Title title, Body body) {
         this.referenceTag = referenceTag;
         this.title = title;
         this.body = body;
-    }
-
-    public static List<Details> from(ReferenceTags referenceTags) {
-        return null;
     }
 
     public DetailsDocument asDocument() {
