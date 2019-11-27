@@ -1,5 +1,7 @@
 package com.zihler.wiki.domain.values;
 
+import java.util.List;
+
 public class Details {
     private final ReferenceTag referenceTag;
     private final Title title;
@@ -9,6 +11,10 @@ public class Details {
         this.referenceTag = referenceTag;
         this.title = title;
         this.body = body;
+    }
+
+    public static List<Details> from(ReferenceTags referenceTags) {
+        return null;
     }
 
     public DetailsDocument asDocument() {

@@ -15,7 +15,7 @@ public class Body {
         return new Body("");
     }
 
-    public ReferenceTags extractReferenceTags() {
+    public ReferenceTags foundReferenceTags() {
         return ReferenceTags.from(this);
     }
 

@@ -1,5 +1,7 @@
 package com.zihler.wiki.domain.values;
 
+import java.util.Objects;
+
 public class ReferenceTag {
     private final String tag;
 
@@ -22,5 +24,18 @@ public class ReferenceTag {
     @Override
     public String toString() {
         return tag;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReferenceTag that = (ReferenceTag) o;
+        return Objects.equals(tag, that.tag);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tag);
     }
 }

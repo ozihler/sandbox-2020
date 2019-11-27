@@ -10,7 +10,7 @@ import static com.zihler.wiki.domain.values.builder.DetailsBuilder.newWikiPageDe
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class CreateWikiPageTest {
+class CreateWikiPagesTest {
 
     @Test
     void create_wiki_page__creates_new_wiki_page() {
@@ -21,9 +21,11 @@ class CreateWikiPageTest {
 
         TestWikiPagePresenter testPresenter = new TestWikiPagePresenter();
 
-        WikiPageRepository wikiPageRepository = new InMemoryWikiPageRepository();
-        CreateWikiPage createWikiPage = new CreateWikiPage(wikiPageRepository);
-        createWikiPage.withDetails(details, testPresenter);
+        WikiPageRepository repo = new InMemoryWikiPageRepository();
+
+        CreateWikiPages createWikiPages = new CreateWikiPages(repo);
+
+        createWikiPages.from(details, testPresenter);
 
         assertTrue(testPresenter.document.id().longValue() > 0L);
         assertEquals(details.asDocument().toString(), testPresenter.document.toString());
