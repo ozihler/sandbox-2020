@@ -18,11 +18,13 @@ import {
 import {LibraryComponent} from './library/library.component';
 import {TableModule} from "primeng/table";
 import {CommonModule} from "@angular/common";
+import {WikiComponent} from './wiki/wiki.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LibraryComponent
+    LibraryComponent,
+    WikiComponent
   ],
   imports: [
     BrowserModule,
