@@ -7,18 +7,18 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 public class ReferencedWikiPagesDocument {
-    private Set<WikiPageDocument> wikiPages;
+    private Set<_WikiPageDocument> wikiPages;
 
-    private ReferencedWikiPagesDocument(Set<WikiPageDocument> wikiPages) {
+    private ReferencedWikiPagesDocument(Set<_WikiPageDocument> wikiPages) {
         this.wikiPages = wikiPages;
     }
 
     public static ReferencedWikiPagesDocument from(ReferencedWikiPages referencedWikiPages) {
-        Set<WikiPageDocument> wikiPageDocuments = referencedWikiPages.getWikiPages().stream().map(WikiPage::asDocument).collect(toSet());
+        Set<_WikiPageDocument> wikiPageDocuments = referencedWikiPages.getWikiPages().stream().map(WikiPage::asDocument).collect(toSet());
         return new ReferencedWikiPagesDocument(wikiPageDocuments);
     }
 
-    public Set<WikiPageDocument> getWikiPages() {
+    public Set<_WikiPageDocument> getWikiPages() {
         return wikiPages;
     }
 

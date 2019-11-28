@@ -1,4 +1,6 @@
-package com.zihler.wiki.domain.values;
+package com.zihler.wiki.application.use_cases.ports;
+
+import com.zihler.wiki.domain.values.Body;
 
 public class BodyDocument {
     private String body;
@@ -9,6 +11,10 @@ public class BodyDocument {
 
     public static BodyDocument from(Body body) {
         return new BodyDocument(body.get());
+    }
+
+    public static BodyDocument from(String body) {
+        return new BodyDocument(body);
     }
 
     @Override

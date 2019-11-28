@@ -1,5 +1,7 @@
 package com.zihler.wiki.domain.values;
 
+import com.zihler.wiki.application.use_cases.ports.BodyDocument;
+
 import static java.lang.String.format;
 
 public class DetailsDocument {

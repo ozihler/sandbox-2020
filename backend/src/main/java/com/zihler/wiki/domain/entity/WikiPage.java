@@ -3,7 +3,7 @@ package com.zihler.wiki.domain.entity;
 import com.zihler.wiki.domain.values.Details;
 import com.zihler.wiki.domain.values.Id;
 import com.zihler.wiki.domain.values.ReferencedWikiPages;
-import com.zihler.wiki.domain.values.WikiPageDocument;
+import com.zihler.wiki.domain.values._WikiPageDocument;
 
 public class WikiPage {
     private Id id;
@@ -32,8 +32,8 @@ public class WikiPage {
                 .toReferencedWikiPages();
     }
 
-    public WikiPageDocument asDocument() {
-        return WikiPageDocument.of(this);
+    public _WikiPageDocument asDocument() {
+        return _WikiPageDocument.of(this);
     }
 
     public Details getDetails() {

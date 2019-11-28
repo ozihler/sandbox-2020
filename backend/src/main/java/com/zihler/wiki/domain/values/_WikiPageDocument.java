@@ -2,19 +2,19 @@ package com.zihler.wiki.domain.values;
 
 import com.zihler.wiki.domain.entity.WikiPage;
 
-public class WikiPageDocument {
+public class _WikiPageDocument {
     private Id id;
     private DetailsDocument details;
     private ReferencedWikiPagesDocument referencedWikiPages;
 
-    private WikiPageDocument(Id id, DetailsDocument details, ReferencedWikiPagesDocument referencedWikiPages) {
+    private _WikiPageDocument(Id id, DetailsDocument details, ReferencedWikiPagesDocument referencedWikiPages) {
         this.id = id;
         this.details = details;
         this.referencedWikiPages = referencedWikiPages;
     }
 
-    public static WikiPageDocument of(WikiPage wikiPage) {
-        return new WikiPageDocument(wikiPage.getId(), wikiPage.getDetails().asDocument(), wikiPage.getReferencedWikiPages().asDocument());
+    public static _WikiPageDocument of(WikiPage wikiPage) {
+        return new _WikiPageDocument(wikiPage.getId(), wikiPage.getDetails().asDocument(), wikiPage.getReferencedWikiPages().asDocument());
     }
 
     @Override

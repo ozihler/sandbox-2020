@@ -1,4 +1,4 @@
-package com.zihler.wiki.use_case.outbound_ports;
+package com.zihler.wiki.application.use_cases.ports;
 
 import com.zihler.wiki.domain.entity.WikiPage;
 
