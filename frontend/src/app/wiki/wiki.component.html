@@ -1,5 +1,27 @@
-<p>wiki works!</p>
-<input placeholder="Wiki page title"/>
-<textarea placeholder="Wiki page body">
-  This is a new #WikiPage which will be generated in backend.
-</textarea>
+<form [formGroup]="wikiPage">
+  <div class="form-group">
+    <input
+      (keyup)="update($event)"
+      class="form-control"
+      formControlName="title"
+      id="wiki-page-title"
+      type="text"/>
+
+    <textarea
+      (keyup)="update($event)"
+      class="form-control"
+      formControlName="body"
+      id="wiki-page-body">
+    </textarea>
+  </div>
+</form>
+<div>
+  <table>
+    <tr>
+      <td>Value</td>
+      <td>{{wikiPage.controls.title.value}}</td>
+      <td>{{wikiPage.controls.body.value}}</td>
+    </tr>
+
+  </table>
+</div>
