@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WikiPageUpdateRequest} from "./wiki-page-update-request";
 import {FormControl, FormGroup} from "@angular/forms";
-import {CreateWikiPageService} from "../create-wiki-page.service";
+import {CreateWikiPageService} from "./create-wiki-page.service";
 
 @Component({
   selector: 'app-wiki',
