@@ -12,4 +12,8 @@ public class RestWikiPagePresenter implements WikiPagePresenter {
     public void present(WikiPageDocument document) {
         response = ResponseEntity.ok(document);
     }
+
+    public ResponseEntity<WikiPageDocument> getResponseEntity() {
+        return response;
+    }
 }

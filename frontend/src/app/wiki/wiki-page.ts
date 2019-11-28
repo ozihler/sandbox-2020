@@ -1,3 +1,5 @@
+import {WikiPageUpdateResponse} from "./wiki-page-update-response";
+
 export class WikiPage {
   private id: number;
   private title: string;
