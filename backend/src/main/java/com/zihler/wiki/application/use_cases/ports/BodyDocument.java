@@ -2,6 +2,8 @@ package com.zihler.wiki.application.use_cases.ports;
 
 import com.zihler.wiki.domain.values.Body;
 
+import java.util.Objects;
+
 public class BodyDocument {
     private String body;
 
@@ -22,4 +24,16 @@ public class BodyDocument {
         return body;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BodyDocument that = (BodyDocument) o;
+        return Objects.equals(body, that.body);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(body);
+    }
 }

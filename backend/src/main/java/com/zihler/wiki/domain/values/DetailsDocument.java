@@ -19,7 +19,7 @@ public class DetailsDocument {
         return new DetailsDocument(
                 details.getReferenceTag(),
                 details.getTitle(),
-                details.getBody().asDocument());
+                BodyDocument.from(""));
     }
 
     private DetailsDocument() {

@@ -18,7 +18,7 @@ export class CreateWikiPageService {
 
   updateWith(wikiPageUpdateRequest: WikiPageUpdateRequest): Observable<WikiPage> {
     return this.http.post<WikiPageUpdateResponse>
-    (environment.baseUrl + "/sandbox/wiki", wikiPageUpdateRequest)
+    (environment.baseUrl + "/sandbox/wiki/page/title", wikiPageUpdateRequest)
       .pipe(
         map(response => WikiPage.from(response))
       );

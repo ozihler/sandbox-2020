@@ -4,13 +4,9 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.Arrays.stream;
 
 public class ReferenceTags {
-    private static final Pattern REFERENCE_TAG_MATCHING_PATTERN = Pattern.compile("(.*(?<!.)#[A-Z0-9]+[a-z0-9]*)+");
-    private static final String SPLIT_WORDS_PATTERN = "[\\s.,!?:;'\"-]+";
+    public static final Pattern REFERENCE_TAG_MATCHING_PATTERN = Pattern.compile("(.*(?<!.)#[A-Z0-9]+[a-z0-9]*)+");
 
     private final Set<ReferenceTag> referenceTags;
 
@@ -23,14 +19,10 @@ public class ReferenceTags {
     }
 
     private static Set<ReferenceTag> extractReferenceTagsFrom(Body body) {
-        return tokensFrom(body.get())
+        return body.toWordTokens()
                 .filter(ReferenceTags::isReferenceTag)
                 .map(ReferenceTag::from)
                 .collect(Collectors.toSet());
-    }
-
-    private static Stream<String> tokensFrom(String textToParse) {
-        return stream(textToParse.split(SPLIT_WORDS_PATTERN));
     }
 
     private static boolean isReferenceTag(String word) {

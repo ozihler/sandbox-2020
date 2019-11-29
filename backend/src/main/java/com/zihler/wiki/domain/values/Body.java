@@ -1,6 +1,9 @@
 package com.zihler.wiki.domain.values;
 
-import com.zihler.wiki.application.use_cases.ports.BodyDocument;
+import java.util.Arrays;
+import java.util.stream.Stream;
+
+import static com.zihler.wiki.utils.WordSplitterUtils.NON_CHARACTER_TOKENS;
 
 public class Body {
     private String body;
@@ -21,11 +24,12 @@ public class Body {
         return ReferenceTags.from(this);
     }
 
-    public BodyDocument asDocument() {
-        return BodyDocument.from(this);
-    }
-
     public String get() {
         return body;
     }
+
+    Stream<String> toWordTokens() {
+        return Arrays.stream(get().split(NON_CHARACTER_TOKENS));
+    }
+
 }

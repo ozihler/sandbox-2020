@@ -2,7 +2,10 @@ package com.zihler.wiki.domain.values;
 
 import java.util.Objects;
 
+import static java.lang.String.format;
+
 public class ReferenceTag {
+    private static final String REFERENCE_SYMBOL = "#";
     private final String tag;
 
     private ReferenceTag(String tag) {
@@ -13,12 +16,12 @@ public class ReferenceTag {
         return new ReferenceTag(tag);
     }
 
-    public boolean isValid() {
-        return !isInvalid();
+    public static ReferenceTag from(Title title) {
+        return new ReferenceTag(format("%s%s", REFERENCE_SYMBOL, Title.toCamelCase(title)));
     }
 
-    private boolean isInvalid() {
-        return tag == null && tag.isBlank() && tag.contains(" ") && tag.contains("\\n") && !tag.contains("#");
+    boolean isValid() {
+        return (tag != null || !tag.isBlank() || tag.contains(REFERENCE_SYMBOL));
     }
 
     @Override

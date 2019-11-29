@@ -1,4 +1,4 @@
-package com.zihler.wiki.adapters.presentation.controllers.rest;
+package com.zihler.wiki.adapters.presentation.controllers.rest.dtos;
 
 public class UpdateWikiPageBodyRequest {
     private String referenceTag;
