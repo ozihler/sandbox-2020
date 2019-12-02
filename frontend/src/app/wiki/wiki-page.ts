@@ -1,22 +1,32 @@
 import {WikiPageUpdateResponse} from "./wiki-page-update-response";
+import {Title} from "./domain/values/title";
+import {Body} from "./domain/values/body";
+import {ReferenceTag} from "./domain/values/reference-tag";
 
 export class WikiPage {
-  title: string;
-  body: string;
-  referenceTag: string;
-
-  constructor(title: string, body: string, referenceTag: string) {
-    this.title = title;
-    this.body = body;
-    this.referenceTag = referenceTag;
+  constructor(
+    private _title: Title,
+    private _body: Body,
+    private _referenceTag: ReferenceTag) {
   }
 
+  get title(): Title {
+    return this._title;
+  }
+
+  get body(): Body {
+    return this._body;
+  }
+
+  get referenceTag(): ReferenceTag {
+    return this._referenceTag;
+  }
 
   static from(response: WikiPageUpdateResponse): WikiPage {
-    return new WikiPage(response.title, response.body, response.referenceTag);
+    return new WikiPage(Title.from(response.title), Body.from(response.body), ReferenceTag.from(response.referenceTag));
   }
 
-  static empty() {
-    return new WikiPage("", "", "");
+  static empty(): WikiPage {
+    return new WikiPage(Title.empty(), Body.empty(), ReferenceTag.empty());
   }
 }
