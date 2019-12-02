@@ -23,6 +23,7 @@ import {WikiComponent} from './wiki/wiki.component';
   declarations: [
     AppComponent,
     WikiComponent
+
   ],
   imports: [
     BrowserModule,

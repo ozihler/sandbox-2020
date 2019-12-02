@@ -1,13 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {CreateWikiPageFromTitleRequest} from "./create-wiki-page-from-title-request";
 import {FormControl, FormGroup} from "@angular/forms";
-import {CreateWikiPageService} from "./create-wiki-page.service";
 import {WikiPage} from "./wiki-page";
+import {CreateWikiPage} from "./create-wiki-page.use-case";
+import {CreateWikiPageService} from "./create-wiki-page.service";
 
 @Component({
   selector: 'app-wiki',
   templateUrl: './wiki.component.html',
-  styleUrls: ['./wiki.component.css']
+  styleUrls: ['./wiki.component.css'],
+  providers: [{provide: CreateWikiPage, useClass: CreateWikiPageService}]
 })
 export class WikiComponent implements OnInit {
   wikiPageInputForm: FormGroup = new FormGroup({
@@ -18,7 +20,7 @@ export class WikiComponent implements OnInit {
   private wikiPageViewModel: WikiPage = WikiPage.empty();
 
 
-  constructor(private createWikiPage: CreateWikiPageService) {
+  constructor(private createWikiPage: CreateWikiPage) {
   }
 
   ngOnInit() {
