@@ -15,7 +15,6 @@ export class ReferenceTag {
   }
 
   public isEmpty(): boolean {
-    console.log("Reference tag: " + this._referenceTag);
     return !this._referenceTag;
   }
 }

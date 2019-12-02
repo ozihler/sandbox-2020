@@ -1,5 +1,5 @@
 export class Body {
-  constructor(private body: string) {
+  constructor(private _body: string) {
 
   }
 
@@ -9,5 +9,10 @@ export class Body {
 
   static from(body: string) {
     return new Body(body);
+  }
+
+
+  get body(): string {
+    return this._body;
   }
 }

@@ -7,8 +7,12 @@ import {WikiPage} from "../wiki-page";
       <app-wiki-page-title
               [title]="wikiPage.title"
               [referenceTag]="wikiPage.referenceTag"
-              (wikiPageCreated)="wikiPageCreated($event)">
-      </app-wiki-page-title>`
+              (wikiPageCreated)="updateWikiPage($event)">
+      </app-wiki-page-title>
+      <app-wiki-page-body
+              [body]="wikiPage.body"
+              [referenceTag]="wikiPage.referenceTag">
+      </app-wiki-page-body>`
 })
 export class WikiPageComponent implements OnInit {
   private wikiPage: WikiPage = WikiPage.empty();
@@ -19,8 +23,7 @@ export class WikiPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  wikiPageCreated(wikiPage: WikiPage) {
-    console.log("Received wiki page: ", wikiPage);
+  updateWikiPage(wikiPage: WikiPage) {
     this.wikiPage = wikiPage;
   }
 }

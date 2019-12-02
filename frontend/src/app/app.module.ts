@@ -20,13 +20,15 @@ import {CommonModule} from "@angular/common";
 import {WikiComponent} from './wiki/wiki.component';
 import {WikiPageComponent} from './wiki/wiki-page/wiki-page.component';
 import {WikiPageTitleComponent} from './wiki/wiki-page/wiki-page-title/wiki-page-title.component';
+import {WikiPageBodyComponent} from './wiki/wiki-page/wiki-page-body/wiki-page-body.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WikiComponent,
     WikiPageComponent,
-    WikiPageTitleComponent
+    WikiPageTitleComponent,
+    WikiPageBodyComponent
 
   ],
   imports: [
