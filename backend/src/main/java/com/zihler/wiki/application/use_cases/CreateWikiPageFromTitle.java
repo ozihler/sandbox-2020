@@ -12,7 +12,9 @@ public class CreateWikiPageFromTitle {
     }
 
     public void from(Title title, IPresentWikiPages presenter) {
+
         ReferenceTag referenceTag = ReferenceTag.from(title);
+
 
         WikiPageDocument wikiPage = WikiPageDocument.of(referenceTag, title, BodyDocument.from(""));
 

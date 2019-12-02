@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {WikiPageUpdateRequest} from "./wiki-page-update-request";
+import {CreateWikiPageFromTitleRequest} from "./create-wiki-page-from-title-request";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
@@ -16,7 +16,7 @@ export class CreateWikiPageService {
   constructor(private http: HttpClient) {
   }
 
-  updateWith(wikiPageUpdateRequest: WikiPageUpdateRequest): Observable<WikiPage> {
+  fromTitle(wikiPageUpdateRequest: CreateWikiPageFromTitleRequest): Observable<WikiPage> {
     return this.http.post<WikiPageUpdateResponse>
     (environment.baseUrl + "/sandbox/wiki/page/title", wikiPageUpdateRequest)
       .pipe(

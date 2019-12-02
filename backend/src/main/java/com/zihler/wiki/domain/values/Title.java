@@ -1,5 +1,7 @@
 package com.zihler.wiki.domain.values;
 
+import com.zihler.wiki.domain.exceptions.IllegalTitleException;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -15,8 +17,14 @@ public class Title {
         this.title = title;
     }
 
-    public static Title from(String title) {
-        return new Title(title);
+    public static Title from(String titleString) {
+        Title title = new Title(titleString);
+
+        if (!title.isValid()) {
+            throw new IllegalTitleException("A title cannot be empty!");
+        }
+
+        return title;
     }
 
     public static Title empty() {
@@ -62,5 +70,9 @@ public class Title {
     @Override
     public int hashCode() {
         return Objects.hash(title);
+    }
+
+    private boolean isValid() {
+        return !(title == null || title.isBlank());
     }
 }

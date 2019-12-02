@@ -8,12 +8,12 @@ import org.springframework.http.ResponseEntity;
 public class CreateWikiPageFromTitlePresenter implements IPresentWikiPages {
     private ResponseEntity<WikiPageResponse> response;
 
-    public ResponseEntity<WikiPageResponse> getResponseEntity() {
-        return response;
-    }
-
     @Override
     public void present(WikiPageDocument document) {
+        this.response = ResponseEntity.ok(WikiPageResponse.from(document));
+    }
 
+    public ResponseEntity<WikiPageResponse> getResponseEntity() {
+        return response;
     }
 }

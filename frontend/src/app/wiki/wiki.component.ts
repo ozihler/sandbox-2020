@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {WikiPageUpdateRequest} from "./wiki-page-update-request";
+import {CreateWikiPageFromTitleRequest} from "./create-wiki-page-from-title-request";
 import {FormControl, FormGroup} from "@angular/forms";
 import {CreateWikiPageService} from "./create-wiki-page.service";
+import {WikiPage} from "./wiki-page";
 
 @Component({
   selector: 'app-wiki',
@@ -9,25 +10,36 @@ import {CreateWikiPageService} from "./create-wiki-page.service";
   styleUrls: ['./wiki.component.css']
 })
 export class WikiComponent implements OnInit {
-  wikiPage: FormGroup = new FormGroup({
+  wikiPageInputForm: FormGroup = new FormGroup({
     title: new FormControl(''),
     body: new FormControl('')
   });
 
-  constructor(private createWikiPageService: CreateWikiPageService) {
+  private wikiPageViewModel: WikiPage = WikiPage.empty();
+
+
+  constructor(private createWikiPage: CreateWikiPageService) {
   }
 
   ngOnInit() {
   }
 
-  update($event: Event) {
-    console.warn("Event occured", $event);
-    console.warn(this.wikiPage.value);
+  updateTitle($event: Event): void {
+    console.warn("Update title event occured", $event);
 
-    let wikiPageUpdateRequest = new WikiPageUpdateRequest(
-      this.wikiPage.controls.title.value,
-      this.wikiPage.controls.body.value);
+    if (this.wikiPageInputForm.controls.title.value.trim().length == 0) {
+      return;
+    }
 
-    this.createWikiPageService.updateWith(wikiPageUpdateRequest);
+    let wikiPageUpdateRequest = new CreateWikiPageFromTitleRequest(this.wikiPageInputForm.controls.title.value);
+
+    this.createWikiPage.fromTitle(wikiPageUpdateRequest)
+      .subscribe(response => {
+        this.wikiPageViewModel = response;
+      });
+  }
+
+  updateBody($event: KeyboardEvent) {
+
   }
 }

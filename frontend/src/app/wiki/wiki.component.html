@@ -1,14 +1,14 @@
-<form [formGroup]="wikiPage">
+<form [formGroup]="wikiPageInputForm">
   <div class="form-group">
     <input
-      (keyup)="update($event)"
       class="form-control"
       formControlName="title"
       id="wiki-page-title"
       type="text"/>
+    <button (click)="updateTitle($event)"> ></button>
 
     <textarea
-      (keyup)="update($event)"
+      (keyup)="updateBody($event)"
       class="form-control"
       formControlName="body"
       id="wiki-page-body">
@@ -19,8 +19,9 @@
   <table>
     <tr>
       <td>Value</td>
-      <td>{{wikiPage.controls.title.value}}</td>
-      <td>{{wikiPage.controls.body.value}}</td>
+      <td>{{wikiPageViewModel.referenceTag}}</td>
+      <td>{{wikiPageViewModel.title}}</td>
+      <td>{{wikiPageViewModel.body}}</td>
     </tr>
 
   </table>
