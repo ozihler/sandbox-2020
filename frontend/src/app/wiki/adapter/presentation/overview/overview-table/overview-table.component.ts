@@ -9,14 +9,9 @@ import {WikiPage} from "../../../../domain/wiki-page";
               <td>Wiki Pages</td>
           </tr>
           <tr *ngFor="let wikiPage of wikiPages">
-              <td><a
-                      [routerLink]="['/wiki-page']"
-                      [queryParams]="{
-                      referenceTag: wikiPage.referenceTag.referenceTag,
-                      title: wikiPage.title.title,
-                      body: wikiPage.body.body
-                      }">
-                  {{wikiPage.title.title}}</a></td>
+              <td><a [routerLink]="['/wiki-page']"
+                     [queryParams]="wikiPage.asDto()">{{wikiPage.title.title}}</a>
+              </td>
           </tr>
       </table>`
 })
@@ -31,3 +26,4 @@ export class OverviewTableComponent implements OnInit {
   }
 
 }
+
