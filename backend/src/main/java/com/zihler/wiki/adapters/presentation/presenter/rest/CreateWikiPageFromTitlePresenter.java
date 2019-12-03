@@ -1,11 +1,11 @@
 package com.zihler.wiki.adapters.presentation.presenter.rest;
 
 import com.zihler.wiki.adapters.presentation.controllers.rest.dtos.WikiPageResponse;
-import com.zihler.wiki.application.use_cases.ports.IPresentWikiPages;
 import com.zihler.wiki.application.use_cases.ports.WikiPageDocument;
+import com.zihler.wiki.application.use_cases.ports.WikiPagePresenter;
 import org.springframework.http.ResponseEntity;
 
-public class CreateWikiPageFromTitlePresenter implements IPresentWikiPages {
+public class CreateWikiPageFromTitlePresenter implements WikiPagePresenter {
     private ResponseEntity<WikiPageResponse> response;
 
     @Override

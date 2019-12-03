@@ -1,50 +1,34 @@
 package com.zihler.wiki.domain.entity;
 
-import com.zihler.wiki.domain.values.Details;
-import com.zihler.wiki.domain.values.Id;
-import com.zihler.wiki.domain.values.ReferencedWikiPages;
-import com.zihler.wiki.domain.values._WikiPageDocument;
+import com.zihler.wiki.domain.values.Body;
+import com.zihler.wiki.domain.values.ReferenceTag;
+import com.zihler.wiki.domain.values.Title;
 
 public class WikiPage {
-    private Id id;
-    private Details details;
-    private ReferencedWikiPages referencedWikiPages;
+    private final ReferenceTag referenceTag;
+    private final Title title;
+    private final Body body;
 
-    public WikiPage(Id id, Details details, ReferencedWikiPages referencedWikiPages) {
-        this.id = id;
-        this.details = details;
-        this.referencedWikiPages = referencedWikiPages;
+    private WikiPage(ReferenceTag referenceTag, Title title, Body body) {
+        this.referenceTag = referenceTag;
+        this.title = title;
+        this.body = body;
     }
 
-
-    private WikiPage(Details details, ReferencedWikiPages referencedWikiPages) {
-        this(Id.empty(), details, referencedWikiPages);
+    public static WikiPage from(Title title) {
+        ReferenceTag referenceTag = ReferenceTag.from(title);
+        return new WikiPage(referenceTag, title, Body.empty());
     }
 
-    public static WikiPage from(Details details) {
-        return new WikiPage(details, referencedWikiPagesFrom(details));
+    public ReferenceTag getReferenceTag() {
+        return referenceTag;
     }
 
-    private static ReferencedWikiPages referencedWikiPagesFrom(Details details) {
-        return details.getBody()
-                .foundReferenceTags()
-                .toReferencedDetails()
-                .toReferencedWikiPages();
+    public Title getTitle() {
+        return title;
     }
 
-    public _WikiPageDocument asDocument() {
-        return _WikiPageDocument.of(this);
-    }
-
-    public Details getDetails() {
-        return details;
-    }
-
-    public Id getId() {
-        return this.id;
-    }
-
-    public ReferencedWikiPages getReferencedWikiPages() {
-        return referencedWikiPages;
+    public Body getBody() {
+        return body;
     }
 }

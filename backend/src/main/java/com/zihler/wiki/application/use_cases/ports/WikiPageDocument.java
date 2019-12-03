@@ -1,5 +1,6 @@
 package com.zihler.wiki.application.use_cases.ports;
 
+import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
 
@@ -14,8 +15,9 @@ public class WikiPageDocument {
         this.body = body;
     }
 
-    public static WikiPageDocument of(ReferenceTag referenceTag, Title title, BodyDocument body) {
-        return new WikiPageDocument(referenceTag, title, body);
+    public static WikiPageDocument of(WikiPage wikiPage) {
+        BodyDocument bodyDocument = BodyDocument.from(wikiPage.getBody());
+        return new WikiPageDocument(wikiPage.getReferenceTag(), wikiPage.getTitle(), bodyDocument);
     }
 
     public ReferenceTag getReferenceTag() {
@@ -29,6 +31,4 @@ public class WikiPageDocument {
     public BodyDocument getBody() {
         return body;
     }
-
-
 }

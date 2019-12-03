@@ -3,9 +3,9 @@ import {CreateWikiPage} from "../../create-wiki-page.use-case";
 import {CreateWikiPageService} from "../../create-wiki-page.service";
 import {CreateWikiPageFromTitleRequest} from "../../create-wiki-page-from-title-request";
 import {FormControl} from "@angular/forms";
-import {Title} from "../../domain/values/title";
+import {Title} from "../domain/values/title";
 import {WikiPage} from "../../wiki-page";
-import {ReferenceTag} from "../../domain/values/reference-tag";
+import {ReferenceTag} from "../domain/values/reference-tag";
 
 @Component({
   selector: 'app-wiki-page-title',
@@ -15,9 +15,8 @@ import {ReferenceTag} from "../../domain/values/reference-tag";
           <h3>{{referenceTag.referenceTag}}</h3>
 
           <input id="wiki-page-title"
-                 [formControl]="titleInput"
                  class="form-control"
-                 type="text"/>
+                 [formControl]="titleInput"/>
 
           <button id="create-wiki-page-from-title-button"
                   *ngIf="referenceTag.isEmpty()"

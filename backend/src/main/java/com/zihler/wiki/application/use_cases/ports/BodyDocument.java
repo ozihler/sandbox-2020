@@ -12,7 +12,7 @@ public class BodyDocument {
     }
 
     public static BodyDocument from(Body body) {
-        return new BodyDocument(body.get());
+        return new BodyDocument(body.asString());
     }
 
     public static BodyDocument from(String body) {

@@ -1,8 +1,8 @@
 package com.zihler.wiki.application.use_cases;
 
 import com.zihler.wiki.application.use_cases.ports.BodyDocument;
-import com.zihler.wiki.application.use_cases.ports.IPresentWikiPages;
 import com.zihler.wiki.application.use_cases.ports.WikiPageDocument;
+import com.zihler.wiki.application.use_cases.ports.WikiPagePresenter;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +26,7 @@ class CreateWikiPageFromTitleTest {
         assertEquals(BodyDocument.from(""), presenter.getDocument().getBody());
     }
 
-    private static class TestPresenter implements IPresentWikiPages {
+    private static class TestPresenter implements WikiPagePresenter {
         private WikiPageDocument document;
 
         WikiPageDocument getDocument() {

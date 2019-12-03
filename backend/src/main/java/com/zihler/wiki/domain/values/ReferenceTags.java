@@ -1,12 +1,11 @@
 package com.zihler.wiki.domain.values;
 
-import java.util.Arrays;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static com.zihler.wiki.domain.values.Patterns.REFERENCE_TAG_MATCHING_REGEX;
+
 public class ReferenceTags {
-    public static final Pattern REFERENCE_TAG_MATCHING_PATTERN = Pattern.compile("(.*(?<!.)#[A-Z0-9]+[a-z0-9]*)+");
 
     private final Set<ReferenceTag> referenceTags;
 
@@ -26,23 +25,6 @@ public class ReferenceTags {
     }
 
     private static boolean isReferenceTag(String word) {
-        return REFERENCE_TAG_MATCHING_PATTERN.matcher(word).find();
+        return REFERENCE_TAG_MATCHING_REGEX.toPattern().matcher(word).find();
     }
-
-    public boolean isEmpty() {
-        return referenceTags.isEmpty();
-    }
-
-    public int count() {
-        return referenceTags.size();
-    }
-
-    public boolean containsAll(ReferenceTag referenceTag, ReferenceTag... referenceTags) {
-        return this.referenceTags.contains(referenceTag) || this.referenceTags.containsAll(Arrays.asList(referenceTags));
-    }
-
-    public ReferencedDetails toReferencedDetails() {
-        return ReferencedDetails.from(referenceTags);
-    }
-
 }

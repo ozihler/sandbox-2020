@@ -2,18 +2,12 @@ package com.zihler.wiki.domain.values;
 
 import com.zihler.wiki.domain.exceptions.IllegalTitleException;
 
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Stream;
 
-import static com.zihler.wiki.utils.WordSplitterUtils.NON_CHARACTER_TOKENS;
-import static java.util.stream.Collectors.joining;
-
-public class Title {
+public class Title implements Stringifiable {
     private String title;
 
     private Title(String title) {
-
         this.title = title;
     }
 
@@ -27,31 +21,13 @@ public class Title {
         return title;
     }
 
-    public static Title empty() {
-        return new Title("");
+    String toCamelCase() {
+        return Tokens.from(this).toCamelCase();
     }
 
-    static String toCamelCase(Title title) {
-        return title.toWordTokens()
-                .filter(token -> !token.isBlank())
-                .map(Title::toCamelCase)
-                .collect(joining());
-    }
-
-    private static String toCamelCase(String token) {
-        return firstCharacterOf(token).toUpperCase() + restOf(token);
-    }
-
-    private static String restOf(String token) {
-        return token.length() > 1 ? token.substring(1) : "";
-    }
-
-    private static String firstCharacterOf(String token) {
-        return token.substring(0, 1);
-    }
-
-    private Stream<String> toWordTokens() {
-        return Arrays.stream(title.split(NON_CHARACTER_TOKENS));
+    @Override
+    public String asString() {
+        return title;
     }
 
     @Override

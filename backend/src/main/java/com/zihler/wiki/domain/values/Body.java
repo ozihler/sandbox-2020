@@ -3,9 +3,9 @@ package com.zihler.wiki.domain.values;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static com.zihler.wiki.utils.WordSplitterUtils.NON_CHARACTER_TOKENS;
+import static com.zihler.wiki.domain.values.Patterns.NON_CHARACTER_TOKEN_REGEX;
 
-public class Body {
+public class Body implements Stringifiable {
     private String body;
 
     private Body(String body) {
@@ -20,16 +20,12 @@ public class Body {
         return new Body("");
     }
 
-    public ReferenceTags foundReferenceTags() {
-        return ReferenceTags.from(this);
+    Stream<String> toWordTokens() {
+        return Arrays.stream(asString().split(NON_CHARACTER_TOKEN_REGEX.toString()));
     }
 
-    public String get() {
+    @Override
+    public String asString() {
         return body;
     }
-
-    Stream<String> toWordTokens() {
-        return Arrays.stream(get().split(NON_CHARACTER_TOKENS));
-    }
-
 }

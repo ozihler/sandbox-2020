@@ -17,11 +17,7 @@ public class ReferenceTag {
     }
 
     public static ReferenceTag from(Title title) {
-        return new ReferenceTag(format("%s%s", REFERENCE_SYMBOL, Title.toCamelCase(title)));
-    }
-
-    boolean isValid() {
-        return (tag != null || !tag.isBlank() || tag.contains(REFERENCE_SYMBOL));
+        return new ReferenceTag(format("%s%s", REFERENCE_SYMBOL, title.toCamelCase()));
     }
 
     @Override
