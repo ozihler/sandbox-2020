@@ -6,12 +6,17 @@ import {WikiPage} from "../../../../domain/wiki-page";
   template: `
       <table class="table">
           <tr>
-              <td>Title</td>
-              <td>Reference Tag</td>
+              <td>Wiki Pages</td>
           </tr>
           <tr *ngFor="let wikiPage of wikiPages">
-              <td>{{wikiPage.title.title}}</td>
-              <td>{{wikiPage.referenceTag.referenceTag}}</td>
+              <td><a
+                      [routerLink]="['/wiki-page']"
+                      [queryParams]="{
+                      referenceTag: wikiPage.referenceTag.referenceTag,
+                      title: wikiPage.title.title,
+                      body: wikiPage.body.body
+                      }">
+                  {{wikiPage.title.title}}</a></td>
           </tr>
       </table>`
 })

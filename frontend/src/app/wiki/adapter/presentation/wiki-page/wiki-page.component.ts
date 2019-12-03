@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {WikiPage} from "../../../domain/wiki-page";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-wiki-page',
@@ -21,10 +22,15 @@ import {WikiPage} from "../../../domain/wiki-page";
 export class WikiPageComponent implements OnInit {
   private wikiPage: WikiPage = WikiPage.empty();
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.route.queryParamMap.subscribe(params => {
+      if (params.keys.length > 0) {
+        this.wikiPage = WikiPage.new(params.get("referenceTag"), params.get("title"), params.get("body"));
+      }
+    })
   }
 
   updateWikiPage(wikiPage: WikiPage) {

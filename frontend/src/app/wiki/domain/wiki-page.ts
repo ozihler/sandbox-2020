@@ -5,9 +5,9 @@ import {ReferenceTag} from "./reference-tag";
 
 export class WikiPage {
   constructor(
+    private _referenceTag: ReferenceTag,
     private _title: Title,
-    private _body: Body,
-    private _referenceTag: ReferenceTag) {
+    private _body: Body) {
   }
 
   get title(): Title {
@@ -22,11 +22,15 @@ export class WikiPage {
     return this._referenceTag;
   }
 
+  static new(referenceTag: string, title: string, body: string): WikiPage {
+    return new WikiPage(ReferenceTag.from(referenceTag), Title.from(title), Body.from(body));
+  }
+
   static from(response: WikiPageUpdateResponse): WikiPage {
-    return new WikiPage(Title.from(response.title), Body.from(response.body), ReferenceTag.from(response.referenceTag));
+    return new WikiPage(ReferenceTag.from(response.referenceTag), Title.from(response.title), Body.from(response.body));
   }
 
   static empty(): WikiPage {
-    return new WikiPage(Title.empty(), Body.empty(), ReferenceTag.empty());
+    return new WikiPage(ReferenceTag.empty(), Title.empty(), Body.empty());
   }
 }
