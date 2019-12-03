@@ -1,7 +1,7 @@
-import {WikiPageUpdateResponse} from "./wiki-page-update-response";
-import {Title} from "./wiki-page/domain/values/title";
-import {Body} from "./wiki-page/domain/values/body";
-import {ReferenceTag} from "./wiki-page/domain/values/reference-tag";
+import {WikiPageUpdateResponse} from "../adapter/gateway/create-wiki-page/wiki-page-update-response";
+import {Title} from "./title";
+import {Body} from "./body";
+import {ReferenceTag} from "./reference-tag";
 
 export class WikiPage {
   constructor(

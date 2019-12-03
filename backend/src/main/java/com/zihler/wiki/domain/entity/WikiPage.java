@@ -4,7 +4,7 @@ import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
 
-public class WikiPage {
+public class WikiPage implements Comparable<WikiPage> {
     private final ReferenceTag referenceTag;
     private final Title title;
     private final Body body;
@@ -30,5 +30,10 @@ public class WikiPage {
 
     public Body getBody() {
         return body;
+    }
+
+    @Override
+    public int compareTo(WikiPage wikiPage) {
+        return this.referenceTag.compareTo(wikiPage.referenceTag);
     }
 }

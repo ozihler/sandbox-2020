@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {CreateWikiPageFromTitle} from "../../create-wiki-page.port";
-import {CreateWikiPageFromTitleUseCase} from "../../create-wiki-page.service";
+import {CreateWikiPageFromTitleUseCase} from "../../gateway/create-wiki-page/create-wiki-page.service";
 import {FormControl} from "@angular/forms";
-import {Title} from "../domain/values/title";
-import {WikiPage} from "../../wiki-page";
-import {ReferenceTag} from "../domain/values/reference-tag";
+import {Title} from "../../../domain/title";
+import {WikiPage} from "../../../domain/wiki-page";
+import {ReferenceTag} from "../../../domain/reference-tag";
+import {CreateWikiPageFromTitle} from "../../../application.use_case/create-wiki-page.port";
 
 @Component({
   selector: 'app-wiki-page-title',

@@ -1,7 +1,6 @@
 import {Observable} from "rxjs";
-import {WikiPage} from "./wiki-page";
-import {Title} from "./wiki-page/domain/values/title";
-
+import {WikiPage} from "../domain/wiki-page";
+import {Title} from "../domain/title";
 
 export abstract class CreateWikiPageFromTitle {
   abstract from(title: Title): Observable<WikiPage>;

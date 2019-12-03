@@ -1,9 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {WikiPage} from "../wiki-page";
+import {WikiPage} from "../../../domain/wiki-page";
 
 @Component({
   selector: 'app-wiki-page',
   template: `
+      <app-route-button
+              buttonText="Back"
+              link="overview">
+      </app-route-button>
       <app-wiki-page-title
               [title]="wikiPage.title"
               [referenceTag]="wikiPage.referenceTag"

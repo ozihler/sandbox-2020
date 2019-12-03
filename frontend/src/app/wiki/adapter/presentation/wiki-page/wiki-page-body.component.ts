@@ -1,9 +1,10 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {Body} from "../domain/values/body";
+
 import {FormControl} from "@angular/forms";
-import {ReferenceTag} from "../domain/values/reference-tag";
+import {ReferenceTag} from "../../../domain/reference-tag";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
-import {ReferenceTags} from "../domain/values/reference-tags";
+import {ReferenceTags} from "../../../domain/reference-tags";
+import {Body} from "../../../domain/body";
 
 @Component({
   selector: 'app-wiki-page-body',

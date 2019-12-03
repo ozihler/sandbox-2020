@@ -1,8 +1,12 @@
 package com.zihler.wiki.adapters.presentation.rest.dtos;
 
-import com.zihler.wiki.application.use_cases.ports.WikiPageDocument;
+import com.zihler.wiki.application.use_cases.outbound_ports.WikiPageDocument;
 
-public class WikiPageResponse {
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
+public class WikiPageResponse implements Comparable<WikiPageResponse> {
     private final String referenceTag;
     private final String title;
     private final String body;
@@ -21,6 +25,12 @@ public class WikiPageResponse {
         );
     }
 
+    public static TreeSet<WikiPageResponse> from(SortedSet<WikiPageDocument> wikiPages) {
+        return wikiPages.stream()
+                .map(WikiPageResponse::from)
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
     public String getReferenceTag() {
         return referenceTag;
     }
@@ -31,5 +41,10 @@ public class WikiPageResponse {
 
     public String getBody() {
         return body;
+    }
+
+    @Override
+    public int compareTo(WikiPageResponse wikiPageResponse) {
+        return this.referenceTag.compareTo(wikiPageResponse.referenceTag);
     }
 }

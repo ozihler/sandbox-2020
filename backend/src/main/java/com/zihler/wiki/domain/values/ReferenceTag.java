@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static java.lang.String.format;
 
-public class ReferenceTag {
+public class ReferenceTag implements Comparable<ReferenceTag> {
     private static final String REFERENCE_SYMBOL = "#";
     private final String tag;
 
@@ -37,4 +37,10 @@ public class ReferenceTag {
     public int hashCode() {
         return Objects.hash(tag);
     }
+
+    @Override
+    public int compareTo(ReferenceTag referenceTag) {
+        return this.tag.toUpperCase().compareTo(referenceTag.tag.toUpperCase());
+    }
+
 }

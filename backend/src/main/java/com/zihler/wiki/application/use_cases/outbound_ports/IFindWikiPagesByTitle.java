@@ -5,6 +5,6 @@ import com.zihler.wiki.domain.values.Title;
 
 import java.util.Optional;
 
-public interface IFindWikiPages {
-    Optional<WikiPage> findBy(Title title);
+public interface IFindWikiPagesByTitle {
+    Optional<WikiPage> findFor(Title title);
 }

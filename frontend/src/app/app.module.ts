@@ -17,10 +17,12 @@ import {
 } from "primeng/primeng";
 import {TableModule} from "primeng/table";
 import {CommonModule} from "@angular/common";
-import {WikiComponent} from './wiki/wiki.component';
-import {WikiPageComponent} from './wiki/wiki-page/wiki-page.component';
-import {WikiPageTitleComponent} from './wiki/wiki-page/wiki-page-title/wiki-page-title.component';
-import {WikiPageBodyComponent} from './wiki/wiki-page/wiki-page-body/wiki-page-body.component';
+import {WikiComponent} from './wiki/adapter/presentation/overview/wiki.component';
+import {WikiPageComponent} from './wiki/adapter/presentation/wiki-page/wiki-page.component';
+import {WikiPageTitleComponent} from './wiki/adapter/presentation/wiki-page/wiki-page-title.component';
+import {WikiPageBodyComponent} from './wiki/adapter/presentation/wiki-page/wiki-page-body.component';
+import {RouteButtonComponent} from './wiki/adapter/presentation/route-button.component';
+import {OverviewTableComponent} from './wiki/adapter/presentation/overview/overview-table/overview-table.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {WikiPageBodyComponent} from './wiki/wiki-page/wiki-page-body/wiki-page-b
     WikiComponent,
     WikiPageComponent,
     WikiPageTitleComponent,
-    WikiPageBodyComponent
+    WikiPageBodyComponent,
+    RouteButtonComponent,
+    OverviewTableComponent
 
   ],
   imports: [

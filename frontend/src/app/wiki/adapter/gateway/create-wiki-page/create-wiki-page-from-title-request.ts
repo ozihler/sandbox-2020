@@ -1,4 +1,4 @@
-import {Title} from "./wiki-page/domain/values/title";
+import {Title} from "../../../domain/title";
 
 export class CreateWikiPageFromTitleRequest {
   title: string;

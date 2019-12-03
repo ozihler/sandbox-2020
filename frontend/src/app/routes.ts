@@ -1,6 +1,6 @@
 import {Routes} from "@angular/router";
-import {WikiComponent} from "./wiki/wiki.component";
-import {WikiPageComponent} from "./wiki/wiki-page/wiki-page.component";
+import {WikiComponent} from "./wiki/adapter/presentation/overview/wiki.component";
+import {WikiPageComponent} from "./wiki/adapter/presentation/wiki-page/wiki-page.component";
 
 
 export const routes: Routes = [
