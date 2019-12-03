@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {CreateWikiPage} from "../../create-wiki-page.use-case";
-import {CreateWikiPageService} from "../../create-wiki-page.service";
-import {CreateWikiPageFromTitleRequest} from "../../create-wiki-page-from-title-request";
+import {CreateWikiPageFromTitle} from "../../create-wiki-page.port";
+import {CreateWikiPageFromTitleUseCase} from "../../create-wiki-page.service";
 import {FormControl} from "@angular/forms";
 import {Title} from "../domain/values/title";
 import {WikiPage} from "../../wiki-page";
@@ -9,7 +8,7 @@ import {ReferenceTag} from "../domain/values/reference-tag";
 
 @Component({
   selector: 'app-wiki-page-title',
-  providers: [{provide: CreateWikiPage, useClass: CreateWikiPageService}],
+  providers: [{provide: CreateWikiPageFromTitle, useClass: CreateWikiPageFromTitleUseCase}],
   template: `
       <div>
           <h3>{{referenceTag.referenceTag}}</h3>
@@ -31,7 +30,7 @@ export class WikiPageTitleComponent implements OnChanges {
 
   titleInput: FormControl;
 
-  constructor(private createWikiPage: CreateWikiPage) {
+  constructor(private createWikiPage: CreateWikiPageFromTitle) {
   }
 
   createNewWikiPage($event: MouseEvent) {
@@ -39,9 +38,7 @@ export class WikiPageTitleComponent implements OnChanges {
       return;
     }
 
-    let wikiPageUpdateRequest = new CreateWikiPageFromTitleRequest(this.titleInput.value);
-
-    this.createWikiPage.fromTitle(wikiPageUpdateRequest)
+    this.createWikiPage.from(Title.from(this.titleInput.value))
       .subscribe(wikiPage => {
         this.wikiPageCreated.emit(wikiPage);
       });

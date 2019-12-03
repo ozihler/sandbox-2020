@@ -1,5 +1,7 @@
 package com.zihler.wiki.application.use_cases;
 
+import com.zihler.wiki.adapters.data_access.in_memory.InMemoryWikiPageRepository;
+import com.zihler.wiki.application.use_cases.outbound_ports.IFindWikiPages;
 import com.zihler.wiki.application.use_cases.ports.BodyDocument;
 import com.zihler.wiki.application.use_cases.ports.WikiPageDocument;
 import com.zihler.wiki.application.use_cases.ports.WikiPagePresenter;
@@ -8,7 +10,6 @@ import com.zihler.wiki.domain.values.Title;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.zihler.wiki.application.use_cases.CreateWikiPageFromTitle.createWikiPage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CreateWikiPageFromTitleTest {
@@ -19,7 +20,7 @@ class CreateWikiPageFromTitleTest {
         TestPresenter presenter = new TestPresenter();
 
         String title = "mySuper stupidTitle";
-        createWikiPage().from(Title.from(title), presenter);
+        new CreateWikiPageFromTitleUseCase((IFindWikiPages) new InMemoryWikiPageRepository(), wikiPageStorage).from(Title.from(title), presenter);
 
         assertEquals(ReferenceTag.from("#MySuperStupidTitle"), presenter.getDocument().getReferenceTag());
         assertEquals(Title.from(title), presenter.getDocument().getTitle());

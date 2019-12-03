@@ -6,24 +6,25 @@ import {environment} from "../../environments/environment";
 import {map} from "rxjs/operators";
 import {WikiPageUpdateResponse} from "./wiki-page-update-response";
 import {WikiPage} from "./wiki-page";
-import {CreateWikiPage} from "./create-wiki-page.use-case";
+import {CreateWikiPageFromTitle} from "./create-wiki-page.port";
+import {Title} from "./wiki-page/domain/values/title";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CreateWikiPageService implements CreateWikiPage {
+export class CreateWikiPageFromTitleUseCase implements CreateWikiPageFromTitle {
+
+  private url: string = `${environment.baseUrl}/sandbox/wiki/page/title`;
 
   constructor(private http: HttpClient) {
   }
 
+  from(title: Title): Observable<WikiPage> {
+    let request = new CreateWikiPageFromTitleRequest(title);
 
-  fromTitle(wikiPageUpdateRequest: CreateWikiPageFromTitleRequest): Observable<WikiPage> {
-    return this.http.post<WikiPageUpdateResponse>
-    (environment.baseUrl + "/sandbox/wiki/page/title", wikiPageUpdateRequest)
-      .pipe(
-        map(response => WikiPage.from(response))
-      );
+    return this.http.post<WikiPageUpdateResponse>(this.url, request)
+      .pipe(map(response => WikiPage.from(response)));
 
   }
 
