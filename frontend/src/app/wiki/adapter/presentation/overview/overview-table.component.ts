@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WikiPage} from "../../../../domain/wiki-page";
+import {WikiPage} from "../../../domain/wiki-page";
 
 @Component({
   selector: 'app-overview-table',

@@ -1,6 +1,7 @@
 package com.zihler.wiki.adapters.data_access.in_memory;
 
 import com.zihler.wiki.application.use_cases.outbound_ports.IFindAllWikiPages;
+import com.zihler.wiki.application.use_cases.outbound_ports.IFindWikiPagesByReferenceTag;
 import com.zihler.wiki.application.use_cases.outbound_ports.IFindWikiPagesByTitle;
 import com.zihler.wiki.application.use_cases.outbound_ports.IStoreWikiPages;
 import com.zihler.wiki.domain.entity.WikiPage;
@@ -20,7 +21,8 @@ import static java.util.Optional.of;
 public class InMemoryWikiPageRepositoryByTitle implements
         IFindWikiPagesByTitle,
         IStoreWikiPages,
-        IFindAllWikiPages {
+        IFindAllWikiPages,
+        IFindWikiPagesByReferenceTag {
     private HashMap<ReferenceTag, WikiPage> db = new HashMap<>();
 
     @Override
@@ -45,5 +47,14 @@ public class InMemoryWikiPageRepositoryByTitle implements
     @Override
     public WikiPagesSearchResult all() {
         return WikiPagesSearchResult.from(new TreeSet<>(db.values()));
+    }
+
+    @Override
+    public Optional<WikiPage> findBy(ReferenceTag referenceTag) {
+        if (!db.containsKey(referenceTag)) {
+            return empty();
+        } else {
+            return Optional.of(db.get(referenceTag));
+        }
     }
 }

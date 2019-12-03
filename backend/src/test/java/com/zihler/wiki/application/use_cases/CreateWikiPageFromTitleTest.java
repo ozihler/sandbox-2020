@@ -2,7 +2,6 @@ package com.zihler.wiki.application.use_cases;
 
 import com.zihler.wiki.adapters.data_access.in_memory.InMemoryWikiPageRepositoryByTitle;
 import com.zihler.wiki.application.use_cases.outbound_ports.BodyDocument;
-import com.zihler.wiki.application.use_cases.outbound_ports.IFindWikiPagesByTitle;
 import com.zihler.wiki.application.use_cases.outbound_ports.Presenter;
 import com.zihler.wiki.application.use_cases.outbound_ports.WikiPageDocument;
 import com.zihler.wiki.domain.values.ReferenceTag;
@@ -20,7 +19,8 @@ class CreateWikiPageFromTitleTest {
         TestPresenter presenter = new TestPresenter();
 
         String title = "mySuper stupidTitle";
-        new CreateWikiPageFromTitleUseCase((IFindWikiPagesByTitle) new InMemoryWikiPageRepositoryByTitle(), wikiPageStorage).from(Title.from(title), presenter);
+        InMemoryWikiPageRepositoryByTitle repo = new InMemoryWikiPageRepositoryByTitle();
+        new CreateWikiPageFromTitleUseCase(repo, repo).from(Title.from(title), presenter);
 
         assertEquals(ReferenceTag.from("#MySuperStupidTitle"), presenter.getDocument().getReferenceTag());
         assertEquals(Title.from(title), presenter.getDocument().getTitle());

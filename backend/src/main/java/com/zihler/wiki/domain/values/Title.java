@@ -21,6 +21,11 @@ public class Title implements Stringifiable {
         return title;
     }
 
+    public static Title from(ReferenceTag referenceTag) {
+        Tokens tokens = Tokens.withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(referenceTag);
+        return from(tokens.toString());
+    }
+
     String toCamelCase() {
         return Tokens.from(this).toCamelCase();
     }

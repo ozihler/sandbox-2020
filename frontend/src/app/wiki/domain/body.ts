@@ -11,6 +11,9 @@ export class Body {
     return new Body(body);
   }
 
+  set body(value: string) {
+    this._body = value;
+  }
 
   get body(): string {
     return this._body;

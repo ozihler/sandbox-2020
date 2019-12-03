@@ -11,11 +11,10 @@ import {CreateWikiPageFromTitle} from "../../../application.use_case/create-wiki
   providers: [{provide: CreateWikiPageFromTitle, useClass: CreateWikiPageFromTitleUseCase}],
   template: `
       <div>
-          <h3>{{referenceTag.referenceTag}}</h3>
-
           <input id="wiki-page-title"
                  class="form-control"
                  [formControl]="titleInput"/>
+          <h3>{{title.title}}</h3>
 
           <button id="create-wiki-page-from-title-button"
                   *ngIf="referenceTag.isEmpty()"

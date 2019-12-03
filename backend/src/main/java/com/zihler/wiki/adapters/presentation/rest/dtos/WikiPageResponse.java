@@ -25,7 +25,7 @@ public class WikiPageResponse implements Comparable<WikiPageResponse> {
         );
     }
 
-    public static TreeSet<WikiPageResponse> from(SortedSet<WikiPageDocument> wikiPages) {
+    public static SortedSet<WikiPageResponse> from(SortedSet<WikiPageDocument> wikiPages) {
         return wikiPages.stream()
                 .map(WikiPageResponse::from)
                 .collect(Collectors.toCollection(TreeSet::new));

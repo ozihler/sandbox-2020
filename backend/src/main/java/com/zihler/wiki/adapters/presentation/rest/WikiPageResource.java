@@ -1,12 +1,13 @@
 package com.zihler.wiki.adapters.presentation.rest;
 
-import com.zihler.wiki.adapters.presentation.rest.dtos.CreateWikiPageFromTitleRequest;
-import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPageResponse;
-import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPagesSearchResultResponse;
-import com.zihler.wiki.adapters.presentation.rest.facade.SpringCreateWikiPageFromTitleUseCaseFacade;
-import com.zihler.wiki.adapters.presentation.rest.facade.SpringFindWikiPagesUseCaseFacade;
+import com.zihler.wiki.adapters.facades.SpringCreateWikiPageFromTitleUseCaseFacade;
+import com.zihler.wiki.adapters.facades.SpringCreateWikiPagesFromBodyUseCaseFacade;
+import com.zihler.wiki.adapters.facades.SpringFindWikiPagesUseCaseFacade;
+import com.zihler.wiki.adapters.presentation.rest.dtos.*;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagePresenter;
+import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesPresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesSearchResultPresenter;
+import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.Title;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,15 +17,18 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "api/sandbox/wiki/pages", produces = "application/json")
 public class WikiPageResource {
-    private SpringCreateWikiPageFromTitleUseCaseFacade createWikiPage;
+    private SpringCreateWikiPageFromTitleUseCaseFacade createWikiPageFromTitle;
     private SpringFindWikiPagesUseCaseFacade findWikiPages;
+    private SpringCreateWikiPagesFromBodyUseCaseFacade createWikiPagesFromBody;
 
     @Autowired
     public WikiPageResource(
-            SpringCreateWikiPageFromTitleUseCaseFacade createWikiPage,
-            SpringFindWikiPagesUseCaseFacade findWikiPages) {
-        this.createWikiPage = createWikiPage;
+            SpringCreateWikiPageFromTitleUseCaseFacade createWikiPageFromTitle,
+            SpringFindWikiPagesUseCaseFacade findWikiPages,
+            SpringCreateWikiPagesFromBodyUseCaseFacade createWikiPagesFromBody) {
+        this.createWikiPageFromTitle = createWikiPageFromTitle;
         this.findWikiPages = findWikiPages;
+        this.createWikiPagesFromBody = createWikiPagesFromBody;
     }
 
     @PostMapping(path = "/title")
@@ -33,7 +37,18 @@ public class WikiPageResource {
 
         RestWikiPagePresenter presenter = new RestWikiPagePresenter();
 
-        this.createWikiPage.from(title, presenter);
+        this.createWikiPageFromTitle.from(title, presenter);
+
+        return presenter.getResponseEntity();
+    }
+
+    @PostMapping(path = "/body")
+    public ResponseEntity<WikiPagesResponse> createWikiPagesFromBody(@RequestBody CreateWikiPagesFromBodyRequest request) {
+        Body body = Body.from(request.getBody());
+
+        RestWikiPagesPresenter presenter = new RestWikiPagesPresenter();
+
+        this.createWikiPagesFromBody.from(body, presenter);
 
         return presenter.getResponseEntity();
     }

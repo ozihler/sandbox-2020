@@ -1,4 +1,4 @@
-package com.zihler.wiki.adapters.presentation.rest.facade;
+package com.zihler.wiki.adapters.facades;
 
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesSearchResultPresenter;
 import com.zihler.wiki.application.use_cases.FindWikiPagesUseCase;

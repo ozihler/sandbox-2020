@@ -15,9 +15,16 @@ public class WikiPage implements Comparable<WikiPage> {
         this.body = body;
     }
 
-    public static WikiPage from(Title title) {
-        ReferenceTag referenceTag = ReferenceTag.from(title);
+    private static WikiPage from(ReferenceTag referenceTag, Title title) {
         return new WikiPage(referenceTag, title, Body.empty());
+    }
+
+    public static WikiPage from(Title title) {
+        return from(ReferenceTag.from(title), title);
+    }
+
+    public static WikiPage from(ReferenceTag referenceTag) {
+        return WikiPage.from(referenceTag, Title.from(referenceTag));
     }
 
     public ReferenceTag getReferenceTag() {

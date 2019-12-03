@@ -34,7 +34,6 @@ export class WikiPage {
     return new WikiPage(ReferenceTag.empty(), Title.empty(), Body.empty());
   }
 
-
   asDto(): {} {
     return {
       referenceTag: this.referenceTag.referenceTag,

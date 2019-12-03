@@ -22,7 +22,7 @@ import {WikiPageComponent} from './wiki/adapter/presentation/wiki-page/wiki-page
 import {WikiPageTitleComponent} from './wiki/adapter/presentation/wiki-page/wiki-page-title.component';
 import {WikiPageBodyComponent} from './wiki/adapter/presentation/wiki-page/wiki-page-body.component';
 import {RouteButtonComponent} from './wiki/adapter/presentation/route-button.component';
-import {OverviewTableComponent} from './wiki/adapter/presentation/overview/overview-table/overview-table.component';
+import {OverviewTableComponent} from './wiki/adapter/presentation/overview/overview-table.component';
 
 @NgModule({
   declarations: [

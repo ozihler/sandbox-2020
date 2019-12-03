@@ -7,12 +7,8 @@ import {FetchWikiPagesGateway} from "../../gateway/fetch-wiki-pages/fetch-wiki-p
   selector: 'app-wiki',
   providers: [{provide: FetchWikiPages, useClass: FetchWikiPagesGateway}],
   template: `
-      <app-route-button
-              buttonText="New"
-              link="wiki-page">
-      </app-route-button>
-      <app-overview-table [wikiPages]="wikiPages">
-      </app-overview-table>`
+      <app-route-button buttonText="New" link="wiki-page"></app-route-button>
+      <app-overview-table [wikiPages]="wikiPages"></app-overview-table>`
 })
 export class WikiComponent implements OnInit {
   private wikiPages: WikiPage[];

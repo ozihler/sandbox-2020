@@ -13,7 +13,7 @@ public class ReferenceTags {
         this.referenceTags = referenceTags;
     }
 
-    static ReferenceTags from(Body body) {
+    public static ReferenceTags from(Body body) {
         return new ReferenceTags(extractReferenceTagsFrom(body));
     }
 
@@ -26,5 +26,9 @@ public class ReferenceTags {
 
     private static boolean isReferenceTag(String word) {
         return REFERENCE_TAG_MATCHING_REGEX.toPattern().matcher(word).find();
+    }
+
+    public Set<ReferenceTag> getReferenceTags() {
+        return referenceTags;
     }
 }
