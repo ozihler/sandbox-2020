@@ -30,11 +30,10 @@ public class Tokens {
                 .collect(toList());
     }
 
-    static Tokens withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(ReferenceTag referenceTag) {
-        String referenceTagString = referenceTag.withoutReferenceSymbol();
+    static Tokens withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(String value) {
 
-        List<Token> tokens = IntStream.range(0, referenceTagString.length())
-                .mapToObj(i -> Token.from(referenceTagString.charAt(i)))
+        List<Token> tokens = IntStream.range(0, value.length())
+                .mapToObj(i -> Token.from(value.charAt(i)))
                 .map(Token::withHeadingSpace)
                 .collect(toList());
 

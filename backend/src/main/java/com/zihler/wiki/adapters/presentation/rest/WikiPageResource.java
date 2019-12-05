@@ -1,14 +1,17 @@
 package com.zihler.wiki.adapters.presentation.rest;
 
-import com.zihler.wiki.adapters.facades.SpringCreateWikiPageFromTitleUseCaseFacade;
-import com.zihler.wiki.adapters.facades.SpringCreateWikiPagesFromBodyUseCaseFacade;
-import com.zihler.wiki.adapters.facades.SpringFindWikiPagesUseCaseFacade;
-import com.zihler.wiki.adapters.presentation.rest.dtos.*;
+import com.zihler.wiki.adapters.facades.SpringCreateWikiPageUseCaseFacade;
+import com.zihler.wiki.adapters.facades.SpringCreateWikiPagesUseCaseFacade;
+import com.zihler.wiki.adapters.facades.SpringFindAllWikiPagesUseCaseFacade;
+import com.zihler.wiki.adapters.presentation.rest.dto.IntendedWikiPageDto;
+import com.zihler.wiki.adapters.presentation.rest.dto.WikiPageResponse;
+import com.zihler.wiki.adapters.presentation.rest.dto.WikiPagesResponse;
+import com.zihler.wiki.adapters.presentation.rest.dto.WikiPagesSearchResultResponse;
+import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPageFromTitleInput;
+import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPagesFromBodyInput;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagePresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesPresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesSearchResultPresenter;
-import com.zihler.wiki.domain.values.Body;
-import com.zihler.wiki.domain.values.Title;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,49 +20,55 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "api/sandbox/wiki/pages", produces = "application/json")
 public class WikiPageResource {
-    private SpringCreateWikiPageFromTitleUseCaseFacade createWikiPageFromTitle;
-    private SpringFindWikiPagesUseCaseFacade findWikiPages;
-    private SpringCreateWikiPagesFromBodyUseCaseFacade createWikiPagesFromBody;
+    private SpringCreateWikiPageUseCaseFacade createWikiPage;
+    private SpringFindAllWikiPagesUseCaseFacade findAllWikiPages;
+    private SpringCreateWikiPagesUseCaseFacade createWikiPages;
 
     @Autowired
     public WikiPageResource(
-            SpringCreateWikiPageFromTitleUseCaseFacade createWikiPageFromTitle,
-            SpringFindWikiPagesUseCaseFacade findWikiPages,
-            SpringCreateWikiPagesFromBodyUseCaseFacade createWikiPagesFromBody) {
-        this.createWikiPageFromTitle = createWikiPageFromTitle;
-        this.findWikiPages = findWikiPages;
-        this.createWikiPagesFromBody = createWikiPagesFromBody;
+            SpringCreateWikiPageUseCaseFacade createWikiPage,
+            SpringFindAllWikiPagesUseCaseFacade findAllWikiPages,
+            SpringCreateWikiPagesUseCaseFacade createWikiPages) {
+        this.createWikiPage = createWikiPage;
+        this.findAllWikiPages = findAllWikiPages;
+        this.createWikiPages = createWikiPages;
     }
 
     @PostMapping(path = "/title")
-    public ResponseEntity<WikiPageResponse> createWikiPageFromTitle(@RequestBody CreateWikiPageFromTitleRequest request) {
-        Title title = Title.from(request.getTitle());
+    public ResponseEntity<WikiPageResponse> createWikiPageFromTitle(@RequestBody IntendedWikiPageDto request) {
 
-        RestWikiPagePresenter presenter = new RestWikiPagePresenter();
+        var input = new CreateWikiPageFromTitleInput(request);
 
-        this.createWikiPageFromTitle.from(title, presenter);
+        var output = new RestWikiPagePresenter();
 
-        return presenter.getResponseEntity();
+        createWikiPage.from(input.title(), output);
+
+        return output.getResponseEntity();
+
     }
 
     @PostMapping(path = "/body")
-    public ResponseEntity<WikiPagesResponse> createWikiPagesFromBody(@RequestBody CreateWikiPagesFromBodyRequest request) {
-        Body body = Body.from(request.getBody());
+    public ResponseEntity<WikiPagesResponse> createWikiPagesFromBody(@RequestBody IntendedWikiPageDto request) {
 
-        RestWikiPagesPresenter presenter = new RestWikiPagesPresenter();
+        var input = new CreateWikiPagesFromBodyInput(request);
 
-        this.createWikiPagesFromBody.from(body, presenter);
+        var output = new RestWikiPagesPresenter();
 
-        return presenter.getResponseEntity();
+        createWikiPages.from(input.body(), output);
+
+        return output.getResponseEntity();
+
     }
 
     @GetMapping
     public ResponseEntity<WikiPagesSearchResultResponse> fetchAllWikiPages() {
-        RestWikiPagesSearchResultPresenter presenter = new RestWikiPagesSearchResultPresenter();
 
-        this.findWikiPages.all(presenter);
+        var presenter = new RestWikiPagesSearchResultPresenter();
+
+        findAllWikiPages.callWith(presenter);
 
         return presenter.getResponseEntity();
+
     }
 
 }

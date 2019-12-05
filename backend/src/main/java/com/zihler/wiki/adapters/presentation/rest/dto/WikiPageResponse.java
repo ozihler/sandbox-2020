@@ -1,6 +1,6 @@
-package com.zihler.wiki.adapters.presentation.rest.dtos;
+package com.zihler.wiki.adapters.presentation.rest.dto;
 
-import com.zihler.wiki.application.use_cases.outbound_ports.WikiPageDocument;
+import com.zihler.wiki.application.use_cases.outbound_ports.documents.WikiPageDocument;
 
 import java.util.SortedSet;
 import java.util.TreeSet;

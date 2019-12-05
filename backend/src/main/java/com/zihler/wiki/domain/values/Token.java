@@ -17,7 +17,7 @@ public class Token {
         return from("" + token);
     }
 
-    public String toCamelCase() {
+    String toCamelCase() {
         return firstCharacter().toUpperCase() + tail();
     }
 
@@ -34,11 +34,11 @@ public class Token {
     }
 
     Token withHeadingSpace() {
-        if (!isUpperCase()) {
-            return this;
-        } else {
+        if (isUpperCase()) {
             return from(" " + this);
         }
+
+        return this;
     }
 
     @Override

@@ -9,21 +9,23 @@ public class Title implements Stringifiable {
 
     private Title(String title) {
         this.title = title;
+
+        if (!isValid()) {
+            throw new IllegalTitleException("A title cannot be empty!");
+        }
     }
 
     public static Title from(String titleString) {
-        Title title = new Title(titleString);
-
-        if (!title.isValid()) {
-            throw new IllegalTitleException("A title cannot be empty!");
-        }
-
-        return title;
+        return new Title(titleString);
     }
 
     public static Title from(ReferenceTag referenceTag) {
-        Tokens tokens = Tokens.withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(referenceTag);
+        Tokens tokens = Tokens.withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(referenceTag.withoutReferenceSymbol());
         return from(tokens.toString());
+    }
+
+    private boolean isValid() {
+        return !(title == null || title.isBlank());
     }
 
     String toCamelCase() {
@@ -37,7 +39,7 @@ public class Title implements Stringifiable {
 
     @Override
     public String toString() {
-        return title;
+        return asString();
     }
 
     @Override
@@ -51,9 +53,5 @@ public class Title implements Stringifiable {
     @Override
     public int hashCode() {
         return Objects.hash(title);
-    }
-
-    private boolean isValid() {
-        return !(title == null || title.isBlank());
     }
 }

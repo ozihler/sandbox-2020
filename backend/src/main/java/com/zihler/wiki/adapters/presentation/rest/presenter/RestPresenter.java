@@ -9,7 +9,6 @@ abstract class RestPresenter<T> {
         return response;
     }
 
-
     void setOkResponse(T response) {
         this.response = ResponseEntity.ok(response);
     }

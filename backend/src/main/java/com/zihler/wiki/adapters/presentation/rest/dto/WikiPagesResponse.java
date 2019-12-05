@@ -1,6 +1,6 @@
-package com.zihler.wiki.adapters.presentation.rest.dtos;
+package com.zihler.wiki.adapters.presentation.rest.dto;
 
-import com.zihler.wiki.application.use_cases.outbound_ports.WikiPageDocument;
+import com.zihler.wiki.application.use_cases.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.domain.values.WikiPagesDocument;
 
 import java.util.Set;
