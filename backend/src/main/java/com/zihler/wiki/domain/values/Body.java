@@ -20,6 +20,7 @@ public class Body implements Stringifiable {
         return new Body("");
     }
 
+    // TODO: 12/6/2019 Move to use case 
     Stream<String> toWordTokens() {
         return Arrays.stream(asString().split(NON_CHARACTER_TOKEN_REGEX.toString()));
     }

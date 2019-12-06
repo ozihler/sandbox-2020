@@ -4,6 +4,7 @@ import com.zihler.wiki.domain.exceptions.IllegalReferenceTagException;
 
 import java.util.Objects;
 
+import static com.zihler.wiki.domain.values.Patterns.REFERENCE_TAG_MATCHING_REGEX;
 import static java.lang.String.format;
 
 public class ReferenceTag implements Comparable<ReferenceTag>, Stringifiable {
@@ -22,9 +23,10 @@ public class ReferenceTag implements Comparable<ReferenceTag>, Stringifiable {
     }
 
     private static boolean isValid(String tag) {
-        return tag.contains("#") && Patterns.REFERENCE_TAG_MATCHING_REGEX.toPattern().matcher(tag).find();
+        return tag.contains("#") && REFERENCE_TAG_MATCHING_REGEX.toPattern().matcher(tag).find();
     }
 
+    // TODO: 12/6/2019 Maybe move to use case?
     public static ReferenceTag from(Title title) {
         return new ReferenceTag(format("%s%s", REFERENCE_SYMBOL, title.toCamelCase()));
     }
@@ -57,6 +59,7 @@ public class ReferenceTag implements Comparable<ReferenceTag>, Stringifiable {
         return tag;
     }
 
+    // TODO: 12/6/2019 Maybe move to use case?
     String withoutReferenceSymbol() {
         return tag.replace(REFERENCE_SYMBOL, "");
     }

@@ -18,11 +18,13 @@ public class CreateWikiPageUseCase implements CreateWikiPage {
 
     @Override
     public void from(Title title, Presenter<WikiPageDocument> presenter) {
+
         CreatedWikiPage wikiPage = CreatedWikiPage.create(title, findWikiPage, storeWikiPage);
 
         wikiPage.store();
 
         presenter.present(wikiPage.asDocument());
+
     }
 
 }

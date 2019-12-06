@@ -6,4 +6,9 @@ import java.util.Optional;
 
 public interface FindWikiPage<T> {
     Optional<WikiPage> by(T type);
+
+
+    default boolean having(T type) {
+        return by(type).isPresent();
+    }
 }

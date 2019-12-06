@@ -21,7 +21,7 @@ class CreatedWikiPage {
     }
 
     static CreatedWikiPage create(Title title, FindWikiPage<Title> findWikiPage, StoreWikiPage storeWikiPage) {
-        if (findWikiPage.by(title).isPresent()) {
+        if (findWikiPage.having(title)) {
             throw new IllegalTitleException(format("Title named %s exists already", title));
         }
 

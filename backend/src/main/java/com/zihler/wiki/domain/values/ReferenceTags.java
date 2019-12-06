@@ -17,6 +17,7 @@ public class ReferenceTags {
         return new ReferenceTags(extractReferenceTagsFrom(body));
     }
 
+    // TODO: 12/6/2019 Move to use case
     private static Set<ReferenceTag> extractReferenceTagsFrom(Body body) {
         return body.toWordTokens()
                 .filter(ReferenceTags::isReferenceTag)
@@ -24,6 +25,7 @@ public class ReferenceTags {
                 .collect(Collectors.toSet());
     }
 
+    // TODO: 12/6/2019 Maybe move to use case?
     private static boolean isReferenceTag(String word) {
         return REFERENCE_TAG_MATCHING_REGEX.toPattern().matcher(word).find();
     }

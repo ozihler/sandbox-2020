@@ -4,12 +4,9 @@ import com.zihler.wiki.application.use_cases.outbound_ports.gateway.FindWikiPage
 import com.zihler.wiki.application.use_cases.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.application.use_cases.outbound_ports.presenter.Presenter;
 import com.zihler.wiki.application.use_cases.ports.CreateWikiPages;
-import com.zihler.wiki.domain.entity.WikiPage;
-import com.zihler.wiki.domain.values.*;
-
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import com.zihler.wiki.domain.values.Body;
+import com.zihler.wiki.domain.values.ReferenceTag;
+import com.zihler.wiki.domain.values.WikiPagesDocument;
 
 public class CreateWikiPagesUseCase implements CreateWikiPages {
     private final FindWikiPage<ReferenceTag> findWikiPage;
@@ -22,24 +19,11 @@ public class CreateWikiPagesUseCase implements CreateWikiPages {
 
     @Override
     public void from(Body body, Presenter<WikiPagesDocument> presenter) {
-        ReferenceTags referenceTags = ReferenceTags.from(body);
+        CreatedWikiPages wikiPages = CreatedWikiPages.create(body, findWikiPage, storeWikiPage);
 
-        WikiPages wikiPages = findOrCreateFrom(referenceTags);
+        wikiPages.storeAll();
 
-        presenter.present(WikiPagesDocument.of(wikiPages));
+        presenter.present(wikiPages.toDocument());
     }
 
-    private WikiPages findOrCreateFrom(ReferenceTags referenceTags) {
-        Set<WikiPage> wikiPages = new HashSet<>();
-
-        for (ReferenceTag referenceTag : referenceTags.getReferenceTags()) {
-            Optional<WikiPage> wikiPage = findWikiPage.by(referenceTag);
-            wikiPages.add(wikiPage.orElseGet(() -> {
-                Title title = Title.from(referenceTag);
-                return storeWikiPage.as(WikiPage.from(referenceTag, title));
-            }));
-        }
-
-        return new WikiPages(wikiPages);
-    }
 }
