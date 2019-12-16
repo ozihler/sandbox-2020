@@ -9,11 +9,10 @@ public class CreateProductsUseCase implements CreateProducts {
 
     @Override
     public void withInputs(ProductsDocument intendedProducts, ProductPresenter productPresenter) {
-
         for (ProductDocument intendedProduct : intendedProducts.getProducts()) {
             // this is a habit
             CreateProductContext
-                    .initialize(intendedProduct, storeProduct, productPresenter)
+                    .initializeWith(intendedProduct, storeProduct, productPresenter)
                     .enactUseCase();
         }
     }

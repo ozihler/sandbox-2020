@@ -1,37 +1,23 @@
 package com.zihler.products;
 
 public class CreateProductContext implements Context {
-
-    private final ProductDocument product;
-    private final StoreProduct storeProduct;
-    private final ProductPresenter presenter;
     private CreatedProduct createdProduct;
 
-    private CreateProductContext(ProductDocument product,
-                                 StoreProduct storeProduct,
-                                 ProductPresenter presenter) {
-        this.product = product;
-        this.storeProduct = storeProduct;
-        this.presenter = presenter;
+    public CreateProductContext(CreatedProduct createdProduct) {
+        this.createdProduct = createdProduct;
     }
 
-    static CreateProductContext newContext(ProductDocument product,
-                                           StoreProduct storeProduct,
-                                           ProductPresenter presenter) {
+    static CreateProductContext initializeWith(ProductDocument intendedProduct,
+                                               StoreProduct storeProduct,
+                                               ProductPresenter presenter) {
+        var self = new Product(intendedProduct.getTitle());
+        var createdProduct = new CreatedProduct(self, storeProduct, presenter);
 
-        return new CreateProductContext(product, storeProduct, presenter);
-    }
-
-    public CreateProductContext initialize() {
-        var self = new Product(product.getTitle());
-        this.createdProduct = new CreatedProduct(self, storeProduct, presenter);
-
-        return this;
+        return new CreateProductContext(createdProduct);
     }
 
     @Override
     public void enactUseCase() {
-        createdProduct.store()
-                .present();
+        createdProduct.store().present();
     }
 }

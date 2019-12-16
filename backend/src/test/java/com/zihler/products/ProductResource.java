@@ -23,9 +23,7 @@ public class ProductResource {
 
         RestProductPresenter output = new RestProductPresenter();
 
-        ProductDocument productToCreate = input.productDocument();
-
-        createProduct.withInputs(productToCreate, output);
+        createProduct.withInputs(input.productDocument(), output);
 
         return output.toResponseEntity();
     }
