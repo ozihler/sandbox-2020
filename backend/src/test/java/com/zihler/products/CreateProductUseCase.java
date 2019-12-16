@@ -1,5 +1,7 @@
 package com.zihler.products;
 
+import static com.zihler.products.CreateProductContext.newContext;
+
 public class CreateProductUseCase implements CreateProduct {
     private StoreProduct storeProduct;
 
@@ -11,8 +13,8 @@ public class CreateProductUseCase implements CreateProduct {
     public void withInputs(ProductDocument intendedProduct, ProductPresenter productPresenter) {
 
         // this is a habit
-        CreateProductContext
-                .initialize(intendedProduct, storeProduct, productPresenter)
+        newContext(intendedProduct, storeProduct, productPresenter)
+                .initialize()
                 .enactUseCase();
     }
 
