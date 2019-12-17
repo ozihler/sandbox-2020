@@ -8,6 +8,7 @@ import com.zihler.wiki.application.use_cases.UseCaseContext;
 import com.zihler.wiki.application.use_cases.exceptions.WikiPageNotFoundException;
 import com.zihler.wiki.application.use_cases.update_wiki_page.roles.UpdatedWikiPage;
 import com.zihler.wiki.domain.entity.WikiPage;
+import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
 
 import static java.lang.String.format;
@@ -23,6 +24,10 @@ public class UpdateWikiPageUseCaseContext implements UseCaseContext {
     public static UpdateWikiPageUseCaseContext initialize(WikiPageDocument newWikiPageData, FindWikiPage findWikiPages, StoreWikiPage storeWikiPage, WikiPagePresenter output) {
         WikiPage wikiPage = findWikiPages.by(newWikiPageData.referenceTag())
                 .orElseThrow(() -> wikiPageNotFoundException(newWikiPageData.referenceTag()));
+
+        wikiPage.setReferenceTag(newWikiPageData.referenceTag());
+        wikiPage.setTitle(newWikiPageData.title());
+        wikiPage.setBody(Body.from(newWikiPageData.body().toString()));
 
         UpdatedWikiPage updatedWikiPage = new UpdatedWikiPage(wikiPage, storeWikiPage, output);
 
