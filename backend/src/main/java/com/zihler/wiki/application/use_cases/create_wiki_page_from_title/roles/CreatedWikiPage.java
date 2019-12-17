@@ -5,6 +5,7 @@ import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.domain.entity.WikiPage;
+import com.zihler.wiki.domain.values.Body;
 
 public class CreatedWikiPage {
 
@@ -12,8 +13,8 @@ public class CreatedWikiPage {
     private StoreWikiPage storeWikiPage;
     private WikiPagePresenter presenter;
 
-    private CreatedWikiPage(WikiPage wikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
-        self = wikiPage;
+    private CreatedWikiPage(WikiPage self, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
+        this.self = self;
         this.storeWikiPage = storeWikiPage;
         this.presenter = presenter;
     }
@@ -27,7 +28,7 @@ public class CreatedWikiPage {
 
     private static WikiPage findOrCreateWikiPage(WikiPageDocument intendedWikiPage, FindWikiPage findWikiPage) {
         return findWikiPage.by(intendedWikiPage.getReferenceTag())
-                .orElse(WikiPage.from(intendedWikiPage.getReferenceTag(), intendedWikiPage.getTitle()));
+                .orElse(WikiPage.from(intendedWikiPage.getReferenceTag(), intendedWikiPage.getTitle(), Body.from(intendedWikiPage.getBody().toString())));
     }
 
 
