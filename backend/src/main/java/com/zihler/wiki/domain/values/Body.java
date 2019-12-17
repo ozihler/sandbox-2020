@@ -29,4 +29,9 @@ public class Body implements Stringifiable {
     public String asString() {
         return body;
     }
+
+    @Override
+    public String toString() {
+        return body;
+    }
 }
