@@ -1,8 +1,6 @@
 package com.zihler.wiki.adapters.presentation.rest;
 
-import com.zihler.wiki.adapters.facades.SpringCreateWikiPageUseCaseFacade;
-import com.zihler.wiki.adapters.facades.SpringCreateWikiPagesUseCaseFacade;
-import com.zihler.wiki.adapters.facades.SpringFindAllWikiPagesUseCaseFacade;
+import com.zihler.wiki.adapters.facades.SpringWikiPagesFacade;
 import com.zihler.wiki.adapters.presentation.rest.dto.WikiPageDto;
 import com.zihler.wiki.adapters.presentation.rest.dto.WikiPagesDto;
 import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPageFromTitleInput;
@@ -17,18 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "api/sandbox/wiki/pages", produces = "application/json")
 public class WikiPageResource {
-    private SpringCreateWikiPageUseCaseFacade createWikiPage;
-    private SpringFindAllWikiPagesUseCaseFacade findAllWikiPages;
-    private SpringCreateWikiPagesUseCaseFacade createWikiPages;
+    private SpringWikiPagesFacade wikiPagesFacade;
 
     @Autowired
-    public WikiPageResource(
-            SpringCreateWikiPageUseCaseFacade createWikiPage,
-            SpringFindAllWikiPagesUseCaseFacade findAllWikiPages,
-            SpringCreateWikiPagesUseCaseFacade createWikiPages) {
-        this.createWikiPage = createWikiPage;
-        this.findAllWikiPages = findAllWikiPages;
-        this.createWikiPages = createWikiPages;
+    public WikiPageResource(SpringWikiPagesFacade wikiPagesFacade) {
+        this.wikiPagesFacade = wikiPagesFacade;
     }
 
     @PostMapping(path = "/title")
@@ -37,7 +28,7 @@ public class WikiPageResource {
 
         var output = new RestWikiPagePresenter();
 
-        createWikiPage.from(input.title(), output);
+        wikiPagesFacade.createSingleWikiPageFrom(input.title(), output);
 
         return output.getResponseEntity();
     }
@@ -48,7 +39,7 @@ public class WikiPageResource {
 
         var output = new RestWikiPagesPresenter();
 
-        createWikiPages.from(input.body(), output);
+        wikiPagesFacade.createMultipleWikiPagesFrom(input.body(), output);
 
         return output.getResponseEntity();
 
@@ -58,7 +49,7 @@ public class WikiPageResource {
     public ResponseEntity<WikiPagesDto> fetchAllWikiPages() {
         var presenter = new RestWikiPagesPresenter();
 
-        findAllWikiPages.callWith(presenter);
+        wikiPagesFacade.findAllWikiPages(presenter);
 
         return presenter.getResponseEntity();
 
