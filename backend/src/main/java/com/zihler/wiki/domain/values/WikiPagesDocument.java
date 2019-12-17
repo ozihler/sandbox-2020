@@ -5,6 +5,7 @@ import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toSet;
 
 public class WikiPagesDocument {
@@ -32,5 +33,10 @@ public class WikiPagesDocument {
 
     public void add(WikiPageDocument wikiPageDocument) {
         wikiPages.add(wikiPageDocument);
+    }
+
+    @Override
+    public String toString() {
+        return "[\n" + wikiPages.stream().map(Object::toString).collect(joining(",\n")) + "\n]";
     }
 }

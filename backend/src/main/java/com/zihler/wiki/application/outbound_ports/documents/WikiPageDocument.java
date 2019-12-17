@@ -1,8 +1,11 @@
 package com.zihler.wiki.application.outbound_ports.documents;
 
 import com.zihler.wiki.domain.entity.WikiPage;
+import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
+
+import java.util.Objects;
 
 public class WikiPageDocument implements Comparable<WikiPageDocument> {
     private ReferenceTag referenceTag;
@@ -21,7 +24,7 @@ public class WikiPageDocument implements Comparable<WikiPageDocument> {
     }
 
     public static WikiPageDocument from(Title title, ReferenceTag referenceTag) {
-        return new WikiPageDocument(referenceTag, title, null);
+        return new WikiPageDocument(referenceTag, title, BodyDocument.from(Body.empty()));
     }
 
     public ReferenceTag getReferenceTag() {
@@ -39,5 +42,29 @@ public class WikiPageDocument implements Comparable<WikiPageDocument> {
     @Override
     public int compareTo(WikiPageDocument wikiPageDocument) {
         return referenceTag.compareTo(wikiPageDocument.referenceTag);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WikiPageDocument document = (WikiPageDocument) o;
+        return Objects.equals(referenceTag, document.referenceTag) &&
+                Objects.equals(title, document.title) &&
+                Objects.equals(body, document.body);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(referenceTag, title, body);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\n\t\"referenceTag\": \"" + referenceTag + "\"," +
+                "\n\t\"title\" \":" + title + "\"," +
+                "\n\t\"body\": \"" + body + "\"" +
+                "\n}";
     }
 }

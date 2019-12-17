@@ -16,8 +16,8 @@ class BodyReferenceTag {
         return new BodyReferenceTag(self);
     }
 
-    private static ReferenceTag withoutReferenceSymbol(ReferenceTag referenceTag) {
-        return ReferenceTag.from(referenceTag.asString().replace(ReferenceTag.REFERENCE_SYMBOL, ""));
+    private static String withoutReferenceSymbol(ReferenceTag referenceTag) {
+        return referenceTag.asString().replace(ReferenceTag.REFERENCE_SYMBOL, "");
     }
 
     WikiPageDocument toWikiPageDocument() {
@@ -25,8 +25,8 @@ class BodyReferenceTag {
     }
 
     private Title asTitle() {
-        ReferenceTag withoutReferenceSymbol = withoutReferenceSymbol(self);
-        Tokens tokens = Tokens.withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(withoutReferenceSymbol.asString());
+        String withoutReferenceSymbol = withoutReferenceSymbol(self);
+        Tokens tokens = Tokens.withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(withoutReferenceSymbol);
         return Title.from(tokens.toString());
     }
 
