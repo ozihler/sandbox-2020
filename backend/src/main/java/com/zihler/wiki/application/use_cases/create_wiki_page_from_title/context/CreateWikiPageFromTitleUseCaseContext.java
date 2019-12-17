@@ -1,9 +1,9 @@
 package com.zihler.wiki.application.use_cases.create_wiki_page_from_title.context;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
-import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
-import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
+import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
+import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
+import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.UseCaseContext;
 import com.zihler.wiki.application.use_cases.create_wiki_page_from_title.roles.CreatedWikiPage;
 import com.zihler.wiki.application.use_cases.create_wiki_page_from_title.roles.TitleBasedReferenceTag;

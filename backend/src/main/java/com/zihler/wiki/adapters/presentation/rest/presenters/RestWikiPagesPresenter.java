@@ -1,9 +1,9 @@
-package com.zihler.wiki.adapters.presentation.rest.presenter;
+package com.zihler.wiki.adapters.presentation.rest.presenters;
 
-import com.zihler.wiki.adapters.presentation.rest.dto.WikiPagesDto;
+import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPagesDto;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPagesDocument;
-import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
+import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import org.springframework.http.ResponseEntity;
 
 public class RestWikiPagesPresenter implements WikiPagePresenter {

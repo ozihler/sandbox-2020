@@ -1,12 +1,12 @@
 package com.zihler.wiki.adapters.presentation.rest;
 
-import com.zihler.wiki.adapters.presentation.rest.dto.WikiPageDto;
-import com.zihler.wiki.adapters.presentation.rest.dto.WikiPagesDto;
-import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPageFromTitleInput;
-import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPagesFromBodyInput;
-import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagePresenter;
-import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesPresenter;
-import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesSearchResultPresenter;
+import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPageDto;
+import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPagesDto;
+import com.zihler.wiki.adapters.presentation.rest.inputs.CreateWikiPageFromTitleInput;
+import com.zihler.wiki.adapters.presentation.rest.inputs.CreateWikiPagesFromBodyInput;
+import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagePresenter;
+import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagesPresenter;
+import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagesSearchResultPresenter;
 import com.zihler.wiki.adapters.spring.SpringWikiPagesFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

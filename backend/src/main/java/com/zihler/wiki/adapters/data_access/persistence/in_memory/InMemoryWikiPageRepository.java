@@ -1,8 +1,8 @@
-package com.zihler.wiki.adapters.data_access.in_memory;
+package com.zihler.wiki.adapters.data_access.persistence.in_memory;
 
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
-import com.zihler.wiki.application.outbound_ports.gateway.RetrieveAllWikiPages;
-import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
+import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
+import com.zihler.wiki.application.outbound_ports.gateways.RetrieveAllWikiPages;
+import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
 import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.WikiPages;

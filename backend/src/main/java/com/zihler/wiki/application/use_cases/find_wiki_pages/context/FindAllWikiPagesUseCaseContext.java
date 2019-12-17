@@ -1,6 +1,6 @@
 package com.zihler.wiki.application.use_cases.find_wiki_pages.context;
 
-import com.zihler.wiki.application.outbound_ports.gateway.RetrieveAllWikiPages;
+import com.zihler.wiki.application.outbound_ports.gateways.RetrieveAllWikiPages;
 import com.zihler.wiki.application.use_cases.UseCaseContext;
 import com.zihler.wiki.application.use_cases.find_wiki_pages.outbound_port.WikiPagesSearchResultPresenter;
 import com.zihler.wiki.application.use_cases.find_wiki_pages.roles.WikiPagesSearchResult;

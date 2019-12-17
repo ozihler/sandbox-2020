@@ -1,4 +1,4 @@
-package com.zihler.wiki.application.outbound_ports.gateway;
+package com.zihler.wiki.application.outbound_ports.gateways;
 
 import com.zihler.wiki.domain.values.WikiPages;
 

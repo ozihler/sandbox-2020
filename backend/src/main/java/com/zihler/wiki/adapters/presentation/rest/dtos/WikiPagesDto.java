@@ -1,4 +1,4 @@
-package com.zihler.wiki.adapters.presentation.rest.dto;
+package com.zihler.wiki.adapters.presentation.rest.dtos;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPagesDocument;

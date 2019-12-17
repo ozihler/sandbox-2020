@@ -1,6 +1,6 @@
-package com.zihler.wiki.adapters.presentation.rest.input;
+package com.zihler.wiki.adapters.presentation.rest.inputs;
 
-import com.zihler.wiki.adapters.presentation.rest.dto.WikiPageDto;
+import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPageDto;
 import com.zihler.wiki.domain.values.Body;
 
 public class CreateWikiPagesFromBodyInput {

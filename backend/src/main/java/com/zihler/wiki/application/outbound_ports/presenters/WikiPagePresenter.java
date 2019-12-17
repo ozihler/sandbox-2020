@@ -1,4 +1,4 @@
-package com.zihler.wiki.application.outbound_ports.presenter;
+package com.zihler.wiki.application.outbound_ports.presenters;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 

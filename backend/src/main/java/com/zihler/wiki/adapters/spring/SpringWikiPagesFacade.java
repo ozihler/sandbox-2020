@@ -1,9 +1,9 @@
 package com.zihler.wiki.adapters.spring;
 
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
-import com.zihler.wiki.application.outbound_ports.gateway.RetrieveAllWikiPages;
-import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
-import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
+import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
+import com.zihler.wiki.application.outbound_ports.gateways.RetrieveAllWikiPages;
+import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
+import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.create_wiki_page_from_title.CreateWikiPageFromTitleUseCase;
 import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.CreateWikiPagesFromBodyUseCase;
 import com.zihler.wiki.application.use_cases.find_wiki_pages.FindAllWikiPagesUseCase;
