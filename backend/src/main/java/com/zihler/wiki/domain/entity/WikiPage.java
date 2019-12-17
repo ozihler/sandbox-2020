@@ -5,9 +5,9 @@ import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
 
 public class WikiPage implements Comparable<WikiPage> {
-    private final ReferenceTag referenceTag;
-    private final Title title;
-    private final Body body;
+    private ReferenceTag referenceTag;
+    private Title title;
+    private Body body;
 
     private WikiPage(ReferenceTag referenceTag, Title title, Body body) {
         this.referenceTag = referenceTag;
@@ -15,20 +15,40 @@ public class WikiPage implements Comparable<WikiPage> {
         this.body = body;
     }
 
+    private WikiPage() {
+
+    }
+
     public static WikiPage from(ReferenceTag referenceTag, Title title, Body body) {
         return new WikiPage(referenceTag, title, body);
+    }
+
+    public static WikiPage empty() {
+        return new WikiPage();
     }
 
     public ReferenceTag getReferenceTag() {
         return referenceTag;
     }
 
+    public void setReferenceTag(ReferenceTag referenceTag) {
+        this.referenceTag = referenceTag;
+    }
+
     public Title getTitle() {
         return title;
     }
 
+    public void setTitle(Title title) {
+        this.title = title;
+    }
+
     public Body getBody() {
         return body;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles;
 
+import com.zihler.wiki.application.outbound_ports.documents.BodyDocument;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.use_cases.wiki_page_creation_utils.Tokens;
+import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
 
@@ -21,7 +23,7 @@ class BodyReferenceTag {
     }
 
     WikiPageDocument toWikiPageDocument() {
-        return WikiPageDocument.from(asTitle(), self);
+        return WikiPageDocument.from(self, asTitle(), BodyDocument.from(Body.empty()));
     }
 
     private Title asTitle() {

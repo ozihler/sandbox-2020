@@ -1,7 +1,6 @@
 package com.zihler.wiki.application.outbound_ports.documents;
 
 import com.zihler.wiki.domain.entity.WikiPage;
-import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
 
@@ -20,22 +19,23 @@ public class WikiPageDocument implements Comparable<WikiPageDocument> {
 
     public static WikiPageDocument of(WikiPage wikiPage) {
         BodyDocument bodyDocument = BodyDocument.from(wikiPage.getBody());
-        return new WikiPageDocument(wikiPage.getReferenceTag(), wikiPage.getTitle(), bodyDocument);
+        return from(wikiPage.getReferenceTag(), wikiPage.getTitle(), bodyDocument);
     }
 
-    public static WikiPageDocument from(Title title, ReferenceTag referenceTag) {
-        return new WikiPageDocument(referenceTag, title, BodyDocument.from(Body.empty()));
+    public static WikiPageDocument from(ReferenceTag referenceTag, Title title, BodyDocument body) {
+        return new WikiPageDocument(referenceTag, title, body);
     }
 
-    public ReferenceTag getReferenceTag() {
+
+    public ReferenceTag referenceTag() {
         return referenceTag;
     }
 
-    public Title getTitle() {
+    public Title title() {
         return title;
     }
 
-    public BodyDocument getBody() {
+    public BodyDocument body() {
         return body;
     }
 
@@ -67,4 +67,5 @@ public class WikiPageDocument implements Comparable<WikiPageDocument> {
                 "\n\t\"body\": \"" + body + "\"" +
                 "\n}";
     }
+
 }

@@ -33,15 +33,15 @@ class CreateWikiPageFromTitleUseCaseTest {
         WikiPageDocument document = presenter.getDocument();
 
         assertThat(document)
-                .extracting(WikiPageDocument::getReferenceTag)
+                .extracting(WikiPageDocument::referenceTag)
                 .isEqualTo(TitleBasedReferenceTag.from(title).get());
 
         assertThat(document)
-                .extracting(WikiPageDocument::getTitle)
+                .extracting(WikiPageDocument::title)
                 .isEqualTo(title);
 
         assertThat(document)
-                .extracting(WikiPageDocument::getBody)
+                .extracting(WikiPageDocument::body)
                 .isEqualTo(BodyDocument.from(Body.empty()));
     }
 

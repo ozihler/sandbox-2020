@@ -1,11 +1,11 @@
 package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body;
 
+import com.zihler.wiki.application.outbound_ports.documents.BodyDocument;
 import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.context.CreateWikiPagesFromBodyUseCaseContext;
 import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.inbound_port.CreateWikiPagesFromBody;
-import com.zihler.wiki.domain.values.Body;
 
 public class CreateWikiPagesFromBodyUseCase implements CreateWikiPagesFromBody {
 
@@ -18,7 +18,7 @@ public class CreateWikiPagesFromBodyUseCase implements CreateWikiPagesFromBody {
     }
 
     @Override
-    public void callWith(Body body, WikiPagePresenter presenter) {
+    public void callWith(BodyDocument body, WikiPagePresenter presenter) {
         CreateWikiPagesFromBodyUseCaseContext
                 .initialize(body, findWikiPage, storeWikiPage, presenter)
                 .enactUseCase();

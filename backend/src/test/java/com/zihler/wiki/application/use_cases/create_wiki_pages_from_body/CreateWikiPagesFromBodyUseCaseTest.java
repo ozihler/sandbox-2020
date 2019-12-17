@@ -1,5 +1,6 @@
 package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body;
 
+import com.zihler.wiki.application.outbound_ports.documents.BodyDocument;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPagesDocument;
 import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
@@ -26,8 +27,8 @@ class CreateWikiPagesFromBodyUseCaseTest {
         String tag2 = "#WithCertainPersuasion";
 
         LinkedHashSet<WikiPageDocument> wikiPages = new LinkedHashSet<>();
-        wikiPages.add(WikiPageDocument.from(Title.from("This Is A Ref Tag"), ReferenceTag.from(tag1)));
-        wikiPages.add(WikiPageDocument.from(Title.from("With Certain Persuasion"), ReferenceTag.from(tag2)));
+        wikiPages.add(WikiPageDocument.from(ReferenceTag.from(tag1), Title.from("This Is A Ref Tag"), BodyDocument.from("")));
+        wikiPages.add(WikiPageDocument.from(ReferenceTag.from(tag2), Title.from("With Certain Persuasion"), BodyDocument.from("")));
         WikiPagesDocument expectedWikiPages = new WikiPagesDocument(wikiPages);
 
         StoreWikiPage storeWikiPage = (wikiPage) -> wikiPage;
@@ -37,7 +38,7 @@ class CreateWikiPagesFromBodyUseCaseTest {
 
         Body bodyToParse = Body.from(String.format("Hello world %s and %s.", tag1, tag2));
 
-        createWikiPagesFromBody.callWith(bodyToParse, presenter);
+        createWikiPagesFromBody.callWith(BodyDocument.from(bodyToParse), presenter);
 
         WikiPagesDocument actualWikiPages = presenter.wikiPages;
 

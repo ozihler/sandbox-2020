@@ -3,7 +3,7 @@ package com.zihler.wiki.adapters.presentation.rest;
 import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPageDto;
 import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPagesDto;
 import com.zihler.wiki.adapters.presentation.rest.inputs.CreateWikiPageFromTitleInput;
-import com.zihler.wiki.adapters.presentation.rest.inputs.CreateWikiPagesFromBodyInput;
+import com.zihler.wiki.adapters.presentation.rest.inputs.WikiPagesInput;
 import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagePresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagesPresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagesSearchResultPresenter;
@@ -35,14 +35,13 @@ public class WikiPageResource {
 
     @PostMapping(path = "/body")
     public ResponseEntity<WikiPagesDto> createWikiPagesFromBody(@RequestBody WikiPageDto request) {
-        var input = new CreateWikiPagesFromBodyInput(request);
+        var input = new WikiPagesInput(request);
 
         var output = new RestWikiPagesPresenter();
 
-        wikiPagesFacade.createMultipleWikiPagesFrom(input.body(), output);
+        wikiPagesFacade.createMultipleWikiPagesFrom(input.wikiPage(), output);
 
         return output.getResponseEntity();
-
     }
 
     @GetMapping

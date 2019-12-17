@@ -20,15 +20,15 @@ public class CreatedWikiPage {
     }
 
     public static CreatedWikiPage from(WikiPageDocument intendedWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter, FindWikiPage findWikiPage) {
-        WikiPage wikiPage = findOrCreateWikiPage(intendedWikiPage, findWikiPage);
+        WikiPage wikiPage = findWikiPage
+                .by(intendedWikiPage.referenceTag())
+                .orElse(WikiPage.empty());
+
+        wikiPage.setReferenceTag(intendedWikiPage.referenceTag());
+        wikiPage.setTitle(intendedWikiPage.title());
+        wikiPage.setBody(Body.from(intendedWikiPage.body().toString()));
 
         return new CreatedWikiPage(wikiPage, storeWikiPage, presenter);
-    }
-
-
-    private static WikiPage findOrCreateWikiPage(WikiPageDocument intendedWikiPage, FindWikiPage findWikiPage) {
-        return findWikiPage.by(intendedWikiPage.getReferenceTag())
-                .orElse(WikiPage.from(intendedWikiPage.getReferenceTag(), intendedWikiPage.getTitle(), Body.from(intendedWikiPage.getBody().toString())));
     }
 
 

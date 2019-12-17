@@ -22,9 +22,9 @@ public class WikiPageDto implements Comparable<WikiPageDto> {
 
     public static WikiPageDto from(WikiPageDocument document) {
         return new WikiPageDto(
-                document.getReferenceTag().toString(),
-                document.getTitle().toString(),
-                document.getBody().toString()
+                document.referenceTag().toString(),
+                document.title().toString(),
+                document.body().toString()
         );
     }
 
