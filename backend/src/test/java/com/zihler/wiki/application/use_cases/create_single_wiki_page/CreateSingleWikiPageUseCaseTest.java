@@ -6,7 +6,7 @@ import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.inbound_ports.CreateSingleWikiPage;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.outbound_port.presenter.SingleWikiPagePresenter;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.roles.CamelCaseTitle;
-import com.zihler.wiki.application.use_cases.create_single_wiki_page.roles.CamelCaseTitleReferenceTag;
+import com.zihler.wiki.application.use_cases.create_single_wiki_page.roles.ReferenceTagFromCamelCaseTitle;
 import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.Title;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +31,7 @@ class CreateSingleWikiPageUseCaseTest {
 
         assertThat(document)
                 .extracting(WikiPageDocument::getReferenceTag)
-                .isEqualTo(CamelCaseTitleReferenceTag.from(CamelCaseTitle.from(title)).get());
+                .isEqualTo(ReferenceTagFromCamelCaseTitle.from(CamelCaseTitle.from(title)).get());
 
         assertThat(document)
                 .extracting(WikiPageDocument::getTitle)

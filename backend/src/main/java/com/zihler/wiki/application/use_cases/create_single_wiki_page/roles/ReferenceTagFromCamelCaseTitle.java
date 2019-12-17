@@ -4,15 +4,15 @@ import com.zihler.wiki.domain.values.ReferenceTag;
 
 import static java.lang.String.format;
 
-public class CamelCaseTitleReferenceTag {
+public class ReferenceTagFromCamelCaseTitle {
     private final ReferenceTag self;
 
-    private CamelCaseTitleReferenceTag(CamelCaseTitle title) {
+    private ReferenceTagFromCamelCaseTitle(CamelCaseTitle title) {
         self = ReferenceTag.from(format("%s%s", ReferenceTag.REFERENCE_SYMBOL, title.asString()));
     }
 
-    public static CamelCaseTitleReferenceTag from(CamelCaseTitle title) {
-        return new CamelCaseTitleReferenceTag(title);
+    public static ReferenceTagFromCamelCaseTitle from(CamelCaseTitle title) {
+        return new ReferenceTagFromCamelCaseTitle(title);
     }
 
     public ReferenceTag get() {
