@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CreateWikiPageTest {
 
+
     @Test
     @DisplayName("A wiki page can be created from a title")
     void test_create_wiki_page_from_title() {

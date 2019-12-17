@@ -1,4 +1,4 @@
-package com.zihler.wiki.application.use_cases.create_wiki_pages;
+package com.zihler.wiki.application.use_cases.create_wiki_pages.roles;
 
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByReferenceTag;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
@@ -11,7 +11,7 @@ import com.zihler.wiki.domain.values.WikiPagesDocument;
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
-class CreatedWikiPages {
+public class CreatedWikiPages {
     private final StoreWikiPage storeWikiPage;
     private WikiPages self;
 
@@ -21,7 +21,7 @@ class CreatedWikiPages {
     }
 
 
-    static CreatedWikiPages create(Body body, FindWikiPageByReferenceTag findWikiPage, StoreWikiPage storeWikiPage) {
+    public static CreatedWikiPages create(Body body, FindWikiPageByReferenceTag findWikiPage, StoreWikiPage storeWikiPage) {
         ReferenceTags referenceTags = ReferenceTags.from(body);
 
         WikiPages wikiPages = new WikiPages(create(findWikiPage, referenceTags));
@@ -37,7 +37,7 @@ class CreatedWikiPages {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    void storeAll() {
+    public void storeAll() {
         self = new WikiPages(storeWikiPages());
     }
 
@@ -48,7 +48,7 @@ class CreatedWikiPages {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    WikiPagesDocument toDocument() {
+    public WikiPagesDocument toDocument() {
         return WikiPagesDocument.of(self);
     }
 }

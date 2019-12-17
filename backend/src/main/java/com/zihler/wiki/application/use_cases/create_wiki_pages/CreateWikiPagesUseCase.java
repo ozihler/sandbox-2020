@@ -4,6 +4,7 @@ import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByReferenc
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenter.Presenter;
 import com.zihler.wiki.application.use_cases.create_wiki_pages.inbound_ports.CreateWikiPages;
+import com.zihler.wiki.application.use_cases.create_wiki_pages.roles.CreatedWikiPages;
 import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.WikiPagesDocument;
 
