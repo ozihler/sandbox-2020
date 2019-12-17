@@ -7,12 +7,12 @@ import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.context
 import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.inbound_ports.CreateWikiPagesFromBody;
 import com.zihler.wiki.domain.values.Body;
 
-public class CreateWikiPagesFromBodyFromBodyUseCase implements CreateWikiPagesFromBody {
+public class CreateWikiPagesFromBodyUseCase implements CreateWikiPagesFromBody {
 
     private final FindWikiPage findWikiPage;
     private final StoreWikiPage storeWikiPage;
 
-    public CreateWikiPagesFromBodyFromBodyUseCase(FindWikiPage findWikiPage, StoreWikiPage storeWikiPage) {
+    public CreateWikiPagesFromBodyUseCase(FindWikiPage findWikiPage, StoreWikiPage storeWikiPage) {
         this.findWikiPage = findWikiPage;
         this.storeWikiPage = storeWikiPage;
     }

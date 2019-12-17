@@ -1,32 +1,28 @@
 package com.zihler.wiki.application.use_cases.create_wiki_page_from_title.roles;
 
-import com.zihler.wiki.application.habits.create_wiki_page.context.CreateWikiPageHabitContext;
+import com.zihler.wiki.application.habits.create_wiki_page.inbound_ports.CreateWikiPage;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
-import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
+import com.zihler.wiki.domain.entity.WikiPage;
 
 public class CreatedWikiPageFromTitle {
-    private final WikiPageDocument intendedWikiPage;
-    private final FindWikiPage findWikiPage;
-    private final StoreWikiPage storeWikiPage;
+    private final WikiPage self;
     private final WikiPagePresenter presenter;
+    private final CreateWikiPage createWikiPage;
 
-    private CreatedWikiPageFromTitle(WikiPageDocument intendedWikiPage, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
-
-        this.intendedWikiPage = intendedWikiPage;
-        this.findWikiPage = findWikiPage;
-        this.storeWikiPage = storeWikiPage;
+    private CreatedWikiPageFromTitle(WikiPage self, CreateWikiPage createWikiPage, WikiPagePresenter presenter) {
+        this.self = self;
         this.presenter = presenter;
+        this.createWikiPage = createWikiPage;
     }
 
-    public static CreatedWikiPageFromTitle create(WikiPageDocument intendedWikiPage, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
-        return new CreatedWikiPageFromTitle(intendedWikiPage, findWikiPage, storeWikiPage, presenter);
+    public static CreatedWikiPageFromTitle from(WikiPageDocument intendedWikiPage, CreateWikiPage createWikiPage, WikiPagePresenter presenter) {
+        WikiPage wikiPage = WikiPage.from(intendedWikiPage.getReferenceTag(), intendedWikiPage.getTitle());
+
+        return new CreatedWikiPageFromTitle(wikiPage, createWikiPage, presenter);
     }
 
     public void storeAndPresent() {
-        CreateWikiPageHabitContext
-                .initialize(intendedWikiPage, findWikiPage, storeWikiPage, presenter)
-                .enactHabit();
+        createWikiPage.with(WikiPageDocument.of(self), presenter);
     }
 }

@@ -1,5 +1,6 @@
 package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.context;
 
+import com.zihler.wiki.application.habits.create_wiki_page.CreateWikiPageHabit;
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
@@ -21,7 +22,9 @@ public class CreateWikiPagesFromBodyUseCaseContext implements UseCaseContext {
         BodyReferenceTags bodyReferenceTags = BodyReferenceTags.from(body);
         WikiPagesDocument extractedWikiPages = bodyReferenceTags.toWikiPagesDocument();
 
-        CreatedWikiPagesFromBody createdWikiPagesFromBody = CreatedWikiPagesFromBody.create(extractedWikiPages, findWikiPage, storeWikiPage, presenter);
+        CreateWikiPageHabit createWikiPage = new CreateWikiPageHabit(findWikiPage, storeWikiPage);
+
+        CreatedWikiPagesFromBody createdWikiPagesFromBody = CreatedWikiPagesFromBody.from(extractedWikiPages, presenter, createWikiPage);
 
         return new CreateWikiPagesFromBodyUseCaseContext(createdWikiPagesFromBody);
     }

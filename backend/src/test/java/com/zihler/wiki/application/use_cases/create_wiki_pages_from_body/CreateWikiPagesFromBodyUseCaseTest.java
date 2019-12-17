@@ -15,7 +15,7 @@ class CreateWikiPagesFromBodyUseCaseTest {
         var repo = new InMemoryWikiPageRepository();
         var presenter = new TestMultipleWikiPagesPresenter();
 
-        CreateWikiPagesFromBody createWikiPagesFromBody = new CreateWikiPagesFromBodyFromBodyUseCase(repo, repo);
+        CreateWikiPagesFromBody createWikiPagesFromBody = new CreateWikiPagesFromBodyUseCase(repo, repo);
 
         createWikiPagesFromBody.from(Body.from("Hello world #ThisIsARefTag and #WithCertainPersuasion."), presenter);
 
