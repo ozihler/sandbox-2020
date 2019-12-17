@@ -1,7 +1,7 @@
 package com.zihler.wiki.application.use_cases.create_wiki_page_from_title.roles;
 
+import com.zihler.wiki.application.use_cases.wiki_page_creation_utils.Tokens;
 import com.zihler.wiki.domain.values.Title;
-import com.zihler.wiki.domain.values.Tokens;
 
 public class CamelCaseTitle {
     private final Title self;
@@ -14,7 +14,9 @@ public class CamelCaseTitle {
         return new CamelCaseTitle(title);
     }
 
-    public String asString() {
-        return Title.from(Tokens.from(self).toCamelCase()).asString();
+    @Override
+    public String toString() {
+        Tokens tokens = Tokens.from(self);
+        return Title.from(tokens.toCamelCase()).toString();
     }
 }

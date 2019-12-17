@@ -1,4 +1,4 @@
-package com.zihler.wiki.domain.values;
+package com.zihler.wiki.application.use_cases.wiki_page_creation_utils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,13 +19,13 @@ public class Tokens {
         return new Tokens(tokens);
     }
 
-    public static Tokens from(Stringifiable value) {
+    public static Tokens from(Object value) {
         var tokens = tokenizeByNonCharacterTokens(value);
         return from(tokens);
     }
 
-    private static List<Token> tokenizeByNonCharacterTokens(Stringifiable value) {
-        String[] characters = value.asString().split(NON_CHARACTER_TOKEN_REGEX.toString());
+    private static List<Token> tokenizeByNonCharacterTokens(Object value) {
+        String[] characters = value.toString().split(NON_CHARACTER_TOKEN_REGEX.toString());
 
         return Arrays.stream(characters)
                 .filter(token -> !token.isBlank())

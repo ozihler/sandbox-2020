@@ -4,7 +4,7 @@ import com.zihler.wiki.domain.exceptions.IllegalTitleException;
 
 import java.util.Objects;
 
-public class Title implements Stringifiable {
+public class Title {
     private String title;
 
     private Title(String title) {
@@ -24,13 +24,8 @@ public class Title implements Stringifiable {
     }
 
     @Override
-    public String asString() {
-        return title;
-    }
-
-    @Override
     public String toString() {
-        return asString();
+        return title;
     }
 
     @Override

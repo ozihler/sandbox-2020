@@ -1,8 +1,8 @@
 package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles;
 
+import com.zihler.wiki.application.outbound_ports.documents.WikiPagesDocument;
 import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
-import com.zihler.wiki.domain.values.WikiPagesDocument;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -34,7 +34,7 @@ public class BodyReferenceTags {
     }
 
     private static Stream<String> toWordTokens(Body body) {
-        return Arrays.stream(body.asString().split(NON_CHARACTER_TOKEN_REGEX.toString()));
+        return Arrays.stream(body.toString().split(NON_CHARACTER_TOKEN_REGEX.toString()));
     }
 
     private static boolean isReferenceTag(String word) {

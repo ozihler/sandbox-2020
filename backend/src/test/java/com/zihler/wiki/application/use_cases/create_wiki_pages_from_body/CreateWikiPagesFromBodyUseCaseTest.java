@@ -2,12 +2,12 @@ package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body;
 
 import com.zihler.wiki.adapters.data_access.in_memory.InMemoryWikiPageRepository;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
+import com.zihler.wiki.application.outbound_ports.documents.WikiPagesDocument;
 import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.inbound_ports.CreateWikiPagesFromBody;
 import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
-import com.zihler.wiki.domain.values.WikiPagesDocument;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashSet;

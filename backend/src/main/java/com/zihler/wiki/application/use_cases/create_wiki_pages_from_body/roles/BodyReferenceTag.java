@@ -1,9 +1,9 @@
 package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
+import com.zihler.wiki.application.use_cases.wiki_page_creation_utils.Tokens;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
-import com.zihler.wiki.domain.values.Tokens;
 
 class BodyReferenceTag {
     private ReferenceTag self;
@@ -17,7 +17,7 @@ class BodyReferenceTag {
     }
 
     private static String withoutReferenceSymbol(ReferenceTag referenceTag) {
-        return referenceTag.asString().replace(ReferenceTag.REFERENCE_SYMBOL, "");
+        return referenceTag.toString().replace(ReferenceTag.REFERENCE_SYMBOL, "");
     }
 
     WikiPageDocument toWikiPageDocument() {

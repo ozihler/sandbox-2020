@@ -1,6 +1,6 @@
 package com.zihler.wiki.domain.values;
 
-public class Body implements Stringifiable {
+public class Body {
     private String body;
 
     private Body(String body) {
@@ -13,11 +13,6 @@ public class Body implements Stringifiable {
 
     public static Body empty() {
         return new Body("");
-    }
-
-    @Override
-    public String asString() {
-        return body;
     }
 
     @Override

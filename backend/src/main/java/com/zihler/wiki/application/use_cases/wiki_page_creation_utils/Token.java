@@ -1,4 +1,4 @@
-package com.zihler.wiki.domain.values;
+package com.zihler.wiki.application.use_cases.wiki_page_creation_utils;
 
 import java.util.ArrayList;
 import java.util.List;

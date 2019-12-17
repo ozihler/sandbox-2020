@@ -1,6 +1,6 @@
-package com.zihler.wiki.domain.values;
+package com.zihler.wiki.application.outbound_ports.documents;
 
-import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
+import com.zihler.wiki.domain.values.WikiPages;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import static com.zihler.wiki.domain.values.Patterns.REFERENCE_TAG_MATCHING_REGEX;
 
-public class ReferenceTag implements Comparable<ReferenceTag>, Stringifiable {
+public class ReferenceTag implements Comparable<ReferenceTag> {
     public static final String REFERENCE_SYMBOL = "#";
     private final String tag;
 
@@ -42,12 +42,7 @@ public class ReferenceTag implements Comparable<ReferenceTag>, Stringifiable {
     public int compareTo(ReferenceTag referenceTag) {
         return tag.toUpperCase().compareTo(referenceTag.tag.toUpperCase());
     }
-
-    @Override
-    public String asString() {
-        return tag;
-    }
-
+ 
     @Override
     public String toString() {
         return tag;

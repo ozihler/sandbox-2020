@@ -9,8 +9,7 @@ public class TitleBasedReferenceTag {
     private final ReferenceTag self;
 
     private TitleBasedReferenceTag(Title title) {
-        var camelCaseTitle = CamelCaseTitle.from(title);
-        self = ReferenceTag.from(format("%s%s", ReferenceTag.REFERENCE_SYMBOL, camelCaseTitle.asString()));
+        self = ReferenceTag.from(format("%s%s", ReferenceTag.REFERENCE_SYMBOL, CamelCaseTitle.from(title)));
     }
 
     public static TitleBasedReferenceTag from(Title title) {

@@ -1,5 +1,6 @@
 package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.context;
 
+import com.zihler.wiki.application.outbound_ports.documents.WikiPagesDocument;
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
@@ -7,7 +8,6 @@ import com.zihler.wiki.application.use_cases.UseCaseContext;
 import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles.BodyReferenceTags;
 import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles.CreatedWikiPages;
 import com.zihler.wiki.domain.values.Body;
-import com.zihler.wiki.domain.values.WikiPagesDocument;
 
 public class CreateWikiPagesFromBodyUseCaseContext implements UseCaseContext {
     private CreatedWikiPages createdWikiPages;
