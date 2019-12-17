@@ -1,8 +1,7 @@
 package com.zihler.wiki.adapters.facades;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByReferenceTag;
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByTitle;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.RetrieveAllWikiPages;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenter.Presenter;
@@ -23,13 +22,12 @@ public class SpringWikiPagesFacade {
     private final FindAllWikiPagesUseCase findAllWikiPagesUseCase;
 
     @Autowired
-    public SpringWikiPagesFacade(FindWikiPageByReferenceTag findWikiPages,
+    public SpringWikiPagesFacade(FindWikiPage findWikiPages,
                                  StoreWikiPage storeWikiPage,
-                                 FindWikiPageByTitle findWikiPageByTitle,
                                  RetrieveAllWikiPages retrieveAllWikiPages) {
 
         findAllWikiPagesUseCase = new FindAllWikiPagesUseCase(retrieveAllWikiPages);
-        createWikiPage = new CreateWikiPageUseCase(findWikiPageByTitle, storeWikiPage);
+        createWikiPage = new CreateWikiPageUseCase(findWikiPages, storeWikiPage);
         createWikiPages = new CreateWikiPagesUseCase(findWikiPages, storeWikiPage);
     }
 

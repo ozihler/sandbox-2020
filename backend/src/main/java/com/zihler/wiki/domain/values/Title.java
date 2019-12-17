@@ -19,11 +19,6 @@ public class Title implements Stringifiable {
         return new Title(titleString);
     }
 
-    public static Title from(ReferenceTag referenceTag) {
-        Tokens tokens = Tokens.withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(referenceTag.withoutReferenceSymbol());
-        return from(tokens.toString());
-    }
-
     private boolean isValid() {
         return !(title == null || title.isBlank());
     }

@@ -5,7 +5,8 @@ import java.util.regex.Pattern;
 public enum Patterns {
     NON_CHARACTER_TOKEN_REGEX("[^a-zA-Z0-9#]"),
     REFERENCE_TAG_MATCHING_REGEX("(.*(?<!.)#[A-Z0-9]+[a-z0-9][^ ]*)+"),
-    UPPER_CASE_LETTERS_REGEX("[A-Z]");
+    UPPER_CASE_LETTERS_REGEX("[A-Z]"),
+    NUMBERS("[0-9]");
 
     private String regexPattern;
 

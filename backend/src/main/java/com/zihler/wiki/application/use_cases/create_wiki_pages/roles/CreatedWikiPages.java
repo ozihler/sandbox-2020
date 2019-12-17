@@ -1,11 +1,13 @@
 package com.zihler.wiki.application.use_cases.create_wiki_pages.roles;
 
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByReferenceTag;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
+import com.zihler.wiki.application.use_cases.create_wiki_page.context.CreateWikiPageContext;
 import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.*;
 
 import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CreatedWikiPages {
@@ -17,21 +19,34 @@ public class CreatedWikiPages {
         this.storeWikiPage = storeWikiPage;
     }
 
+    public static CreatedWikiPages create(Body body, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage) {
 
-    public static CreatedWikiPages create(Body body, FindWikiPageByReferenceTag findWikiPage, StoreWikiPage storeWikiPage) {
-        ReferenceTags referenceTags = ReferenceTags.from(body);
+        BodyReferenceTags bodyReferenceTags = new BodyReferenceTags(body);
 
-        WikiPages wikiPages = new WikiPages(create(findWikiPage, referenceTags));
+
+        Set<ReferenceTag> referenceTags = bodyReferenceTags.getReferenceTags();
+
+        for (ReferenceTag referenceTag : referenceTags) {
+            CreateWikiPageContext.initialize(titleFrom(referenceTag), null, storeWikiPage, null);
+
+        }
+        LinkedHashSet<WikiPage> wikiPages1 = referenceTags
+                .stream()
+                .filter(referenceTag -> !findWikiPage.with(referenceTag))
+                .map(referenceTag -> WikiPage.from(referenceTag, titleFrom(referenceTag)))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        WikiPages wikiPages = new WikiPages(wikiPages1);
 
         return new CreatedWikiPages(wikiPages, storeWikiPage);
     }
 
-    private static LinkedHashSet<WikiPage> create(FindWikiPageByReferenceTag findWikiPage, ReferenceTags referenceTags) {
-        return referenceTags.getReferenceTags()
-                .stream()
-                .filter(referenceTag -> !findWikiPage.existsWith(referenceTag))
-                .map(referenceTag -> WikiPage.from(referenceTag, Title.from(referenceTag)))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+    private static Title titleFrom(ReferenceTag referenceTag) {
+        return Title.from(Tokens.withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(withoutReferenceSymbol(referenceTag)).toString());
+    }
+
+    private static String withoutReferenceSymbol(ReferenceTag referenceTag) {
+        return referenceTag.asString().replace(ReferenceTag.REFERENCE_SYMBOL, "");
     }
 
     public void storeAll() {

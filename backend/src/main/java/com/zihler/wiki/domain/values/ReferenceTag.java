@@ -7,6 +7,7 @@ import java.util.Objects;
 import static com.zihler.wiki.domain.values.Patterns.REFERENCE_TAG_MATCHING_REGEX;
 
 public class ReferenceTag implements Comparable<ReferenceTag>, Stringifiable {
+    public static final String REFERENCE_SYMBOL = "#";
     private final String tag;
 
     private ReferenceTag(String tag) {
@@ -22,11 +23,6 @@ public class ReferenceTag implements Comparable<ReferenceTag>, Stringifiable {
 
     private static boolean isValid(String tag) {
         return tag.contains("#") && REFERENCE_TAG_MATCHING_REGEX.toPattern().matcher(tag).find();
-    }
-
-    @Override
-    public String toString() {
-        return tag;
     }
 
     @Override
@@ -52,8 +48,8 @@ public class ReferenceTag implements Comparable<ReferenceTag>, Stringifiable {
         return tag;
     }
 
-    // TODO: 12/6/2019 Maybe move to use case?
-    String withoutReferenceSymbol() {
-        return tag.replace("#", "");
+    @Override
+    public String toString() {
+        return tag;
     }
 }

@@ -6,11 +6,15 @@ import com.zihler.wiki.domain.values.Tokens;
 public class CamelCaseTitle {
     private final Title self;
 
-    public CamelCaseTitle(Title title) {
-        self = toCamelCase(title);
+    private CamelCaseTitle(Title title) {
+        self = Title.from(Tokens.from(title).toCamelCase());
     }
 
-    private Title toCamelCase(Title title) {
-        return Title.from(Tokens.from(title).toCamelCase());
+    public static CamelCaseTitle from(Title title) {
+        return new CamelCaseTitle(title);
+    }
+
+    public String asString() {
+        return self.asString();
     }
 }

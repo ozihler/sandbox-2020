@@ -1,12 +1,10 @@
 package com.zihler.wiki.adapters.data_access.in_memory;
 
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByReferenceTag;
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByTitle;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.RetrieveAllWikiPages;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.ReferenceTag;
-import com.zihler.wiki.domain.values.Title;
 import com.zihler.wiki.domain.values.WikiPages;
 import org.springframework.stereotype.Repository;
 
@@ -15,28 +13,13 @@ import java.util.LinkedHashSet;
 import java.util.Optional;
 
 import static java.util.Optional.empty;
-import static java.util.Optional.of;
 
 @Repository
-public class InMemoryWikiPageRepository implements FindWikiPageByTitle, FindWikiPageByReferenceTag, RetrieveAllWikiPages, StoreWikiPage {
+public class InMemoryWikiPageRepository implements FindWikiPage, RetrieveAllWikiPages, StoreWikiPage {
     private HashMap<ReferenceTag, WikiPage> db = new HashMap<>();
 
     @Override
-    public Optional<WikiPage> having(Title title) {
-
-        ReferenceTag key = ReferenceTag.from(title);
-
-        var wikiPage = db.get(key);
-
-        if (wikiPage == null) {
-            return empty();
-        } else {
-            return of(wikiPage);
-        }
-    }
-
-    @Override
-    public Optional<WikiPage> having(ReferenceTag referenceTag) {
+    public Optional<WikiPage> by(ReferenceTag referenceTag) {
         if (!db.containsKey(referenceTag)) {
             return empty();
         } else {

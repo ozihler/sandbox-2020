@@ -1,19 +1,14 @@
 package com.zihler.wiki.application.use_cases.create_wiki_page.context;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByTitle;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenter.Presenter;
 import com.zihler.wiki.application.use_cases.Context;
 import com.zihler.wiki.application.use_cases.create_wiki_page.roles.CamelCaseTitle;
 import com.zihler.wiki.application.use_cases.create_wiki_page.roles.CreatedWikiPage;
-import com.zihler.wiki.application.use_cases.create_wiki_page.roles.ReferenceTagFromTitle;
-import com.zihler.wiki.domain.entity.WikiPage;
-import com.zihler.wiki.domain.exceptions.IllegalTitleException;
-import com.zihler.wiki.domain.values.ReferenceTag;
+import com.zihler.wiki.application.use_cases.create_wiki_page.roles.TitleReferenceTag;
 import com.zihler.wiki.domain.values.Title;
-
-import static java.lang.String.format;
 
 public class CreateWikiPageContext implements Context {
 
@@ -23,17 +18,12 @@ public class CreateWikiPageContext implements Context {
         this.wikiPage = wikiPage;
     }
 
-    public static CreateWikiPageContext initialize(Title title, FindWikiPageByTitle findWikiPage, StoreWikiPage storeWikiPage, Presenter<WikiPageDocument> presenter) {
-        if (findWikiPage.with(title)) {
-            throw new IllegalTitleException(format("Title named %s exists already", title));
-        }
+    public static CreateWikiPageContext initialize(Title title, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, Presenter<WikiPageDocument> presenter) {
 
-        CamelCaseTitle camelCaseTitle = new CamelCaseTitle(title);
-        ReferenceTagFromTitle referenceTagFromTitle = new ReferenceTagFromTitle(camelCaseTitle);
-        ReferenceTag referenceTag = referenceTagFromTitle.get();
-        WikiPage wikiPageToCreate = WikiPage.from(referenceTag, title);
+        var camelCaseTitle = CamelCaseTitle.from(title);
+        var titleReferenceTag = TitleReferenceTag.from(camelCaseTitle);
 
-        CreatedWikiPage wikiPage = new CreatedWikiPage(wikiPageToCreate, storeWikiPage, presenter);
+        var wikiPage = CreatedWikiPage.from(title, titleReferenceTag.get(), storeWikiPage, findWikiPage, presenter);
 
         return new CreateWikiPageContext(wikiPage);
     }

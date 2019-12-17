@@ -20,17 +20,20 @@ public class Tokens {
     }
 
     public static Tokens from(Stringifiable value) {
-        return from(tokenizeByNonCharacterTokens(value));
+        var tokens = tokenizeByNonCharacterTokens(value);
+        return from(tokens);
     }
 
     private static List<Token> tokenizeByNonCharacterTokens(Stringifiable value) {
-        return Arrays.stream(value.asString().split(NON_CHARACTER_TOKEN_REGEX.toString()))
+        String[] characters = value.asString().split(NON_CHARACTER_TOKEN_REGEX.toString());
+
+        return Arrays.stream(characters)
                 .filter(token -> !token.isBlank())
                 .map(Token::from)
                 .collect(toList());
     }
 
-    static Tokens withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(String value) {
+    public static Tokens withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(String value) {
 
         List<Token> tokens = IntStream.range(0, value.length())
                 .mapToObj(i -> Token.from(value.charAt(i)))

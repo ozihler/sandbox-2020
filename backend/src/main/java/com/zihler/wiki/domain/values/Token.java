@@ -1,5 +1,9 @@
 package com.zihler.wiki.domain.values;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.zihler.wiki.domain.values.Patterns.NUMBERS;
 import static com.zihler.wiki.domain.values.Patterns.UPPER_CASE_LETTERS_REGEX;
 
 public class Token {
@@ -17,16 +21,29 @@ public class Token {
         return from("" + token);
     }
 
+    private static String toUpperCase(String token) {
+        return token.substring(0, 1).toUpperCase() + (token.length() > 1 ? token.substring(1) : "");
+    }
+
     String toCamelCase() {
-        return firstCharacter().toUpperCase() + tail();
-    }
+        List<String> upperCaseTokens = new ArrayList<>();
+        String[] nonNumberTokens = token.split(NUMBERS.toString());
+        for (String nonNumberToken : nonNumberTokens) {
+            if (!nonNumberToken.isBlank()) {
+                upperCaseTokens.add(toUpperCase(nonNumberToken));
+            }
+        }
 
-    private String tail() {
-        return token.length() > 1 ? token.substring(1) : "";
-    }
+        String camelCaseToken = token;
+        for (String nonNumberToken : nonNumberTokens) {
+            for (String token : upperCaseTokens) {
+                if (nonNumberToken.equalsIgnoreCase(token)) {
+                    camelCaseToken = camelCaseToken.replace(nonNumberToken, token);
+                }
+            }
+        }
 
-    private String firstCharacter() {
-        return token.substring(0, 1);
+        return camelCaseToken;
     }
 
     private boolean isUpperCase() {
