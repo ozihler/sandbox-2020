@@ -1,4 +1,4 @@
-package com.zihler.wiki.application.use_cases.create_single_wiki_page.roles;
+package com.zihler.wiki.application.use_cases.create_wiki_page_from_title.roles;
 
 import com.zihler.wiki.domain.values.Title;
 import com.zihler.wiki.domain.values.Tokens;

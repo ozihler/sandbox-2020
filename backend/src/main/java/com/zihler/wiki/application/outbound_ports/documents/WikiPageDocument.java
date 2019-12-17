@@ -20,6 +20,10 @@ public class WikiPageDocument implements Comparable<WikiPageDocument> {
         return new WikiPageDocument(wikiPage.getReferenceTag(), wikiPage.getTitle(), bodyDocument);
     }
 
+    public static WikiPageDocument from(Title title, ReferenceTag referenceTag) {
+        return new WikiPageDocument(referenceTag, title, null);
+    }
+
     public ReferenceTag getReferenceTag() {
         return referenceTag;
     }

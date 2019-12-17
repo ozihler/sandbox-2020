@@ -14,7 +14,7 @@ public class WikiPagesDocument {
         wikiPages = new LinkedHashSet<>();
     }
 
-    private WikiPagesDocument(Set<WikiPageDocument> wikiPages) {
+    public WikiPagesDocument(Set<WikiPageDocument> wikiPages) {
         this.wikiPages = wikiPages;
     }
 

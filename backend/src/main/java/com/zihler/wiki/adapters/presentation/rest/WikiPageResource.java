@@ -7,6 +7,7 @@ import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPageFromTitleI
 import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPagesFromBodyInput;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagePresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesPresenter;
+import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesSearchResultPresenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,12 +48,11 @@ public class WikiPageResource {
 
     @GetMapping
     public ResponseEntity<WikiPagesDto> fetchAllWikiPages() {
-        var presenter = new RestWikiPagesPresenter();
+        var output = new RestWikiPagesSearchResultPresenter();
 
-        wikiPagesFacade.findAllWikiPages(presenter);
+        wikiPagesFacade.findAllWikiPages(output);
 
-        return presenter.getResponseEntity();
-
+        return output.getResponseEntity();
     }
 
 }
