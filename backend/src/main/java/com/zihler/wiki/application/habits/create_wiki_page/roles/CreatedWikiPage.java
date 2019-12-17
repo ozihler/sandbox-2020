@@ -11,10 +11,14 @@ public class CreatedWikiPage {
     private StoreWikiPage storeWikiPage;
     private WikiPagePresenter presenter;
 
-    public CreatedWikiPage(WikiPage wikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
+    private CreatedWikiPage(WikiPage wikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
         self = wikiPage;
         this.storeWikiPage = storeWikiPage;
         this.presenter = presenter;
+    }
+
+    public static CreatedWikiPage create(WikiPage wikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
+        return new CreatedWikiPage(wikiPage, storeWikiPage, presenter);
     }
 
     public CreatedWikiPage store() {

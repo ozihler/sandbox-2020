@@ -13,9 +13,9 @@ public class FindAllWikiPagesUseCase implements FindAllWikiPages {
     }
 
     @Override
-    public void callWith(WikiPagesSearchResultPresenter presenter) {
+    public void andSendThemTo(WikiPagesSearchResultPresenter output) {
         FindAllWikiPagesUseCaseContext
-                .initialize(retrieveAllWikiPages, presenter)
+                .initialize(retrieveAllWikiPages, output)
                 .enactUseCase();
     }
 }

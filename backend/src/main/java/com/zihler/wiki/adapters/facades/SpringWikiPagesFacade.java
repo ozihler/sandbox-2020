@@ -30,15 +30,15 @@ public class SpringWikiPagesFacade {
         createWikiPages = new CreateWikiPagesFromBodyFromBodyUseCase(findWikiPages, storeWikiPage);
     }
 
-    public void createSingleWikiPageFrom(Title title, WikiPagePresenter presenter) {
-        createWikiPage.from(title, presenter);
+    public void createSingleWikiPageFrom(Title title, WikiPagePresenter output) {
+        createWikiPage.from(title, output);
     }
 
-    public void createMultipleWikiPagesFrom(Body body, WikiPagePresenter presenter) {
-        createWikiPages.from(body, presenter);
+    public void createMultipleWikiPagesFrom(Body body, WikiPagePresenter output) {
+        createWikiPages.from(body, output);
     }
 
-    public void findAllWikiPages(WikiPagesSearchResultPresenter presenter) {
-        findAllWikiPagesUseCase.callWith(presenter);
+    public void findAllWikiPages(WikiPagesSearchResultPresenter output) {
+        findAllWikiPagesUseCase.andSendThemTo(output);
     }
 }

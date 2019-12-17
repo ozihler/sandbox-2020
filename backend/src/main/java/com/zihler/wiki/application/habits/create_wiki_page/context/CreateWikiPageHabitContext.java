@@ -19,7 +19,7 @@ public class CreateWikiPageHabitContext implements HabitContext {
     public static CreateWikiPageHabitContext initialize(WikiPageDocument intendedWikiPage, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
         WikiPage wikiPage = findOrCreateWikiPage(intendedWikiPage, findWikiPage);
 
-        CreatedWikiPage createdWikiPage = new CreatedWikiPage(wikiPage, storeWikiPage, presenter);
+        CreatedWikiPage createdWikiPage = CreatedWikiPage.create(wikiPage, storeWikiPage, presenter);
 
         return new CreateWikiPageHabitContext(createdWikiPage);
     }
