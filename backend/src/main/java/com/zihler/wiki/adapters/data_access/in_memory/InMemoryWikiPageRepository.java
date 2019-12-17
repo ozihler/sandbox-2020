@@ -1,48 +1,29 @@
 package com.zihler.wiki.adapters.data_access.in_memory;
 
-import com.zihler.wiki.application.use_cases.outbound_ports.gateway.FindWikiPage;
-import com.zihler.wiki.application.use_cases.outbound_ports.gateway.RetrieveAllWikiPages;
-import com.zihler.wiki.application.use_cases.outbound_ports.gateway.StoreWikiPage;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByReferenceTag;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByTitle;
+import com.zihler.wiki.application.outbound_ports.gateway.RetrieveAllWikiPages;
+import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
-import com.zihler.wiki.domain.values.search.WikiPagesSearchResult;
+import com.zihler.wiki.domain.values.WikiPages;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Optional;
-import java.util.TreeSet;
 
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
 @Repository
-public class InMemoryWikiPageRepository implements FindWikiPage, StoreWikiPage, RetrieveAllWikiPages {
+public class InMemoryWikiPageRepository implements FindWikiPageByTitle, FindWikiPageByReferenceTag, RetrieveAllWikiPages, StoreWikiPage {
     private HashMap<ReferenceTag, WikiPage> db = new HashMap<>();
 
     @Override
-    public WikiPage as(WikiPage wikiPage) {
-        db.put(wikiPage.getReferenceTag(), wikiPage);
-        return db.get(wikiPage.getReferenceTag());
-    }
+    public Optional<WikiPage> having(Title title) {
 
-    @Override
-    public WikiPagesSearchResult get() {
-        return WikiPagesSearchResult.from(new TreeSet<>(db.values()));
-    }
-
-    @Override
-    public Optional<WikiPage> by(Object object) {
-        if (object instanceof ReferenceTag) {
-            return findBy((ReferenceTag) object);
-        } else if (object instanceof Title) {
-            return findByTitle((Title) object);
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    private Optional<WikiPage> findByTitle(Title title) {
         ReferenceTag key = ReferenceTag.from(title);
 
         var wikiPage = db.get(key);
@@ -54,7 +35,8 @@ public class InMemoryWikiPageRepository implements FindWikiPage, StoreWikiPage, 
         }
     }
 
-    private Optional<WikiPage> findBy(ReferenceTag referenceTag) {
+    @Override
+    public Optional<WikiPage> having(ReferenceTag referenceTag) {
         if (!db.containsKey(referenceTag)) {
             return empty();
         } else {
@@ -62,4 +44,15 @@ public class InMemoryWikiPageRepository implements FindWikiPage, StoreWikiPage, 
         }
     }
 
+    @Override
+    public WikiPages get() {
+        return new WikiPages(new LinkedHashSet<>(db.values()));
+
+    }
+
+    @Override
+    public WikiPage as(WikiPage wikiPage) {
+        db.put(wikiPage.getReferenceTag(), wikiPage);
+        return db.get(wikiPage.getReferenceTag());
+    }
 }

@@ -1,4 +1,4 @@
-package com.zihler.wiki.application.use_cases.outbound_ports.gateway;
+package com.zihler.wiki.application.outbound_ports.gateway;
 
 import com.zihler.wiki.domain.entity.WikiPage;
 

@@ -1,10 +1,12 @@
 package com.zihler.wiki.application.use_cases;
 
 import com.zihler.wiki.adapters.data_access.in_memory.InMemoryWikiPageRepository;
-import com.zihler.wiki.application.use_cases.create_wiki_pages.CreateWikiPageUseCase;
-import com.zihler.wiki.application.use_cases.outbound_ports.documents.BodyDocument;
-import com.zihler.wiki.application.use_cases.outbound_ports.documents.WikiPageDocument;
-import com.zihler.wiki.application.use_cases.outbound_ports.presenter.Presenter;
+import com.zihler.wiki.application.outbound_ports.documents.BodyDocument;
+import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
+import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
+import com.zihler.wiki.application.outbound_ports.presenter.Presenter;
+import com.zihler.wiki.application.use_cases.create_wiki_page.CreateWikiPageUseCase;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +23,10 @@ class CreateWikiPageTest {
 
         String title = "mySuper stupidTitle";
         InMemoryWikiPageRepository repo = new InMemoryWikiPageRepository();
-        new CreateWikiPageUseCase(repo, repo).from(Title.from(title), presenter);
+        FindWikiPage<Title> findByTitle = repo::findByTitle;
+        StoreWikiPage storeWikiPage = repo::storeWikiPage;
+
+        new CreateWikiPageUseCase(findByTitle, storeWikiPage).from(Title.from(title), presenter);
 
         assertEquals(ReferenceTag.from("#MySuperStupidTitle"), presenter.getDocument().getReferenceTag());
         assertEquals(Title.from(title), presenter.getDocument().getTitle());

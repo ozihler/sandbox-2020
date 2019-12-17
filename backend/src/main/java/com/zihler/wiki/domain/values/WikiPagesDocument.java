@@ -1,6 +1,6 @@
 package com.zihler.wiki.domain.values;
 
-import com.zihler.wiki.application.use_cases.outbound_ports.documents.WikiPageDocument;
+import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 
 import java.util.Set;
 

@@ -3,15 +3,12 @@ package com.zihler.wiki.adapters.presentation.rest;
 import com.zihler.wiki.adapters.facades.SpringCreateWikiPageUseCaseFacade;
 import com.zihler.wiki.adapters.facades.SpringCreateWikiPagesUseCaseFacade;
 import com.zihler.wiki.adapters.facades.SpringFindAllWikiPagesUseCaseFacade;
-import com.zihler.wiki.adapters.presentation.rest.dto.IntendedWikiPageDto;
-import com.zihler.wiki.adapters.presentation.rest.dto.WikiPageResponse;
-import com.zihler.wiki.adapters.presentation.rest.dto.WikiPagesResponse;
-import com.zihler.wiki.adapters.presentation.rest.dto.WikiPagesSearchResultResponse;
+import com.zihler.wiki.adapters.presentation.rest.dto.WikiPageDto;
+import com.zihler.wiki.adapters.presentation.rest.dto.WikiPagesDto;
 import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPageFromTitleInput;
 import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPagesFromBodyInput;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagePresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesPresenter;
-import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesSearchResultPresenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +32,7 @@ public class WikiPageResource {
     }
 
     @PostMapping(path = "/title")
-    public ResponseEntity<WikiPageResponse> createWikiPageFromTitle(@RequestBody IntendedWikiPageDto request) {
-
+    public ResponseEntity<WikiPageDto> createWikiPageFromTitle(@RequestBody WikiPageDto request) {
         var input = new CreateWikiPageFromTitleInput(request);
 
         var output = new RestWikiPagePresenter();
@@ -44,12 +40,10 @@ public class WikiPageResource {
         createWikiPage.from(input.title(), output);
 
         return output.getResponseEntity();
-
     }
 
     @PostMapping(path = "/body")
-    public ResponseEntity<WikiPagesResponse> createWikiPagesFromBody(@RequestBody IntendedWikiPageDto request) {
-
+    public ResponseEntity<WikiPagesDto> createWikiPagesFromBody(@RequestBody WikiPageDto request) {
         var input = new CreateWikiPagesFromBodyInput(request);
 
         var output = new RestWikiPagesPresenter();
@@ -61,9 +55,8 @@ public class WikiPageResource {
     }
 
     @GetMapping
-    public ResponseEntity<WikiPagesSearchResultResponse> fetchAllWikiPages() {
-
-        var presenter = new RestWikiPagesSearchResultPresenter();
+    public ResponseEntity<WikiPagesDto> fetchAllWikiPages() {
+        var presenter = new RestWikiPagesPresenter();
 
         findAllWikiPages.callWith(presenter);
 

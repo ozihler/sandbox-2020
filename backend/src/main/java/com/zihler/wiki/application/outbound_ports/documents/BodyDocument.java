@@ -1,4 +1,4 @@
-package com.zihler.wiki.application.use_cases.outbound_ports.documents;
+package com.zihler.wiki.application.outbound_ports.documents;
 
 import com.zihler.wiki.domain.values.Body;
 

@@ -1,10 +1,9 @@
 package com.zihler.wiki.application.use_cases.find_wiki_pages;
 
-import com.zihler.wiki.application.use_cases.outbound_ports.documents.WikiPagesSearchResultDocument;
-import com.zihler.wiki.application.use_cases.outbound_ports.gateway.RetrieveAllWikiPages;
-import com.zihler.wiki.application.use_cases.outbound_ports.presenter.Presenter;
-import com.zihler.wiki.application.use_cases.ports.FindAllWikiPages;
-import com.zihler.wiki.domain.values.search.WikiPagesSearchResult;
+import com.zihler.wiki.application.outbound_ports.gateway.RetrieveAllWikiPages;
+import com.zihler.wiki.application.outbound_ports.presenter.Presenter;
+import com.zihler.wiki.application.use_cases.find_wiki_pages.inbound_ports.FindAllWikiPages;
+import com.zihler.wiki.domain.values.WikiPagesDocument;
 
 public class FindAllWikiPagesUseCase implements FindAllWikiPages {
     private RetrieveAllWikiPages retrieveAllWikiPages;
@@ -14,9 +13,10 @@ public class FindAllWikiPagesUseCase implements FindAllWikiPages {
     }
 
     @Override
-    public void callWith(Presenter<WikiPagesSearchResultDocument> presenter) {
-        WikiPagesSearchResult searchResult = retrieveAllWikiPages.get();
+    public void callWith(Presenter<WikiPagesDocument> presenter) {
 
-        presenter.present(WikiPagesSearchResultDocument.from(searchResult));
+        FindAllWikiPagesContext
+                .initialize(retrieveAllWikiPages, presenter)
+                .enactUseCase();
     }
 }

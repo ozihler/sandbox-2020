@@ -1,11 +1,14 @@
 package com.zihler.wiki.application.use_cases.create_wiki_pages;
 
-import com.zihler.wiki.application.use_cases.outbound_ports.gateway.FindWikiPage;
-import com.zihler.wiki.application.use_cases.outbound_ports.gateway.StoreWikiPage;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByReferenceTag;
+import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.domain.entity.WikiPage;
-import com.zihler.wiki.domain.values.*;
+import com.zihler.wiki.domain.values.Body;
+import com.zihler.wiki.domain.values.ReferenceTags;
+import com.zihler.wiki.domain.values.WikiPages;
+import com.zihler.wiki.domain.values.WikiPagesDocument;
 
-import java.util.Set;
+import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
 class CreatedWikiPages {
@@ -18,7 +21,7 @@ class CreatedWikiPages {
     }
 
 
-    static CreatedWikiPages create(Body body, FindWikiPage<ReferenceTag> findWikiPage, StoreWikiPage storeWikiPage) {
+    static CreatedWikiPages create(Body body, FindWikiPageByReferenceTag findWikiPage, StoreWikiPage storeWikiPage) {
         ReferenceTags referenceTags = ReferenceTags.from(body);
 
         WikiPages wikiPages = new WikiPages(create(findWikiPage, referenceTags));
@@ -26,23 +29,23 @@ class CreatedWikiPages {
         return new CreatedWikiPages(wikiPages, storeWikiPage);
     }
 
-    private static Set<WikiPage> create(FindWikiPage<ReferenceTag> findWikiPage, ReferenceTags referenceTags) {
+    private static LinkedHashSet<WikiPage> create(FindWikiPageByReferenceTag findWikiPage, ReferenceTags referenceTags) {
         return referenceTags.getReferenceTags()
                 .stream()
-                .filter(referenceTag -> !findWikiPage.having(referenceTag))
+                .filter(referenceTag -> !findWikiPage.existsWith(referenceTag))
                 .map(WikiPage::from)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     void storeAll() {
-        this.self = new WikiPages(storeWikiPages());
+        self = new WikiPages(storeWikiPages());
     }
 
-    private Set<WikiPage> storeWikiPages() {
+    private LinkedHashSet<WikiPage> storeWikiPages() {
         return self.getWikiPages()
                 .stream()
                 .map(storeWikiPage::as)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     WikiPagesDocument toDocument() {

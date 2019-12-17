@@ -1,8 +1,8 @@
-package com.zihler.wiki.application.use_cases.create_wiki_pages;
+package com.zihler.wiki.application.use_cases.create_wiki_page;
 
-import com.zihler.wiki.application.use_cases.outbound_ports.documents.WikiPageDocument;
-import com.zihler.wiki.application.use_cases.outbound_ports.gateway.FindWikiPage;
-import com.zihler.wiki.application.use_cases.outbound_ports.gateway.StoreWikiPage;
+import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByTitle;
+import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.exceptions.IllegalTitleException;
 import com.zihler.wiki.domain.values.ReferenceTag;
@@ -20,8 +20,8 @@ class CreatedWikiPage {
         this.storeWikiPage = storeWikiPage;
     }
 
-    static CreatedWikiPage create(Title title, FindWikiPage<Title> findWikiPage, StoreWikiPage storeWikiPage) {
-        if (findWikiPage.having(title)) {
+    static CreatedWikiPage create(Title title, FindWikiPageByTitle findWikiPage, StoreWikiPage storeWikiPage) {
+        if (findWikiPage.existsWith(title)) {
             throw new IllegalTitleException(format("Title named %s exists already", title));
         }
 
