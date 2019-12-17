@@ -31,23 +31,35 @@ export class WikiPageBodyComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.bodyInput = new FormControl(this.wikiPage.body.body);
+
     this.bodyInput.valueChanges.pipe(
       debounceTime(2000),
       distinctUntilChanged()
     ).subscribe(res => {
       this.wikiPage.body = Body.from(res);
+
       this.updateWikiPageBody.with(this.wikiPage)
         .subscribe(wikiPages => {
-          // todo: move to use case, add presenter to format bodyInputValue and assign it to body here
-          if (wikiPages.length > 0) {
-            wikiPages.forEach(wikiPage => {
-              this.wikiPage.body.body = this.bodyInput.value.replace(wikiPage.referenceTag.referenceTag,
-                '<a href="#" routerLink="wiki-page" [queryParams]=[wikiPage.toDto()]>' + wikiPage.referenceTag.referenceTag + '</a>');
-            });
-          } else {
-            this.wikiPage.body.body = this.bodyInput.value;
-          }
+          this.handleReceived(wikiPages);
         });
     });
+  }
+
+  private handleReceived(wikiPages: WikiPage[]) {
+    // todo: move to use case, add presenter to format bodyInputValue and assign it to body here
+    if (wikiPages.length > 0) {
+      wikiPages.forEach(wikiPage => {
+        const referenceTag = wikiPage.referenceTag.referenceTag;
+        const currentBody = this.bodyInput.value;
+
+        this.wikiPage.body = Body.from(currentBody.replace(referenceTag, this.newRouterLinkTo(referenceTag)));
+      });
+    } else {
+      this.wikiPage.body.body = this.bodyInput.value;
+    }
+  }
+
+  private newRouterLinkTo(referenceTag: string) {
+    return '<a routerLink="wiki-page" [queryParams]=[wikiPage.toDto()]>' + referenceTag + '</a>';
   }
 }

@@ -3,19 +3,19 @@ export class Body {
 
   }
 
-  static empty() {
-    return this.from("");
-  }
-
-  static from(body: string) {
-    return new Body(body);
+  get body(): string {
+    return this._body;
   }
 
   set body(value: string) {
     this._body = value;
   }
 
-  get body(): string {
-    return this._body;
+  static empty() {
+    return this.from('');
+  }
+
+  static from(body: string) {
+    return new Body(body);
   }
 }
