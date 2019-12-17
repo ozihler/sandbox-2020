@@ -1,4 +1,4 @@
-package com.zihler.wiki.application.use_cases.create_wiki_pages.roles;
+package com.zihler.wiki.application.use_cases.create_multiple_wiki_pages.roles;
 
 import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;

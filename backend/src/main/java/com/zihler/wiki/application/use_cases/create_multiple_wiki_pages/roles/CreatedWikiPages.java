@@ -1,8 +1,8 @@
-package com.zihler.wiki.application.use_cases.create_wiki_pages.roles;
+package com.zihler.wiki.application.use_cases.create_multiple_wiki_pages.roles;
 
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
-import com.zihler.wiki.application.use_cases.create_wiki_page.context.CreateWikiPageContext;
+import com.zihler.wiki.application.use_cases.create_single_wiki_page.context.CreateSingleWikiPageContext;
 import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.*;
 
@@ -27,9 +27,9 @@ public class CreatedWikiPages {
         Set<ReferenceTag> referenceTags = bodyReferenceTags.getReferenceTags();
 
         for (ReferenceTag referenceTag : referenceTags) {
-            CreateWikiPageContext.initialize(titleFrom(referenceTag), null, storeWikiPage, null);
-
+            CreateSingleWikiPageContext.initialize(titleFrom(referenceTag), null, storeWikiPage, null);
         }
+
         LinkedHashSet<WikiPage> wikiPages1 = referenceTags
                 .stream()
                 .filter(referenceTag -> !findWikiPage.with(referenceTag))

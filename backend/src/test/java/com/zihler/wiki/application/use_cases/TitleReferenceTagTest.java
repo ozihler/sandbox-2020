@@ -1,7 +1,7 @@
 package com.zihler.wiki.application.use_cases;
 
-import com.zihler.wiki.application.use_cases.create_wiki_page.roles.CamelCaseTitle;
-import com.zihler.wiki.application.use_cases.create_wiki_page.roles.TitleReferenceTag;
+import com.zihler.wiki.application.use_cases.create_single_wiki_page.roles.CamelCaseTitle;
+import com.zihler.wiki.application.use_cases.create_single_wiki_page.roles.TitleReferenceTag;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package com.zihler.wiki.application.use_cases.create_wiki_page.roles;
+package com.zihler.wiki.application.use_cases.create_single_wiki_page.roles;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
