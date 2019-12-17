@@ -1,8 +1,7 @@
-import {WikiPage} from "../domain/wiki-page";
-import {Observable} from "rxjs";
-import {Body} from "../domain/body";
+import {WikiPage} from '../domain/wiki-page';
+import {Observable} from 'rxjs';
 
 
 export abstract class UpdateWikiPageBody {
-  abstract with(body: Body): Observable<WikiPage[]>;
+  abstract with(wikiPage: WikiPage): Observable<WikiPage[]>;
 }

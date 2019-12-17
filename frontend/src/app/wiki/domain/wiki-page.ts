@@ -1,7 +1,7 @@
-import {WikiPageUpdateResponse} from "../adapter/gateway/create-wiki-page/wiki-page-update-response";
-import {Title} from "./title";
-import {Body} from "./body";
-import {ReferenceTag} from "./reference-tag";
+import {WikiPageUpdateResponse} from '../adapter/gateway/create-wiki-page/wiki-page-update-response';
+import {Title} from './title';
+import {Body} from './body';
+import {ReferenceTag} from './reference-tag';
 
 export class WikiPage {
   constructor(
@@ -10,16 +10,29 @@ export class WikiPage {
     private _body: Body) {
   }
 
+
+  get referenceTag(): ReferenceTag {
+    return this._referenceTag;
+  }
+
+  set referenceTag(value: ReferenceTag) {
+    this._referenceTag = value;
+  }
+
   get title(): Title {
     return this._title;
+  }
+
+  set title(value: Title) {
+    this._title = value;
   }
 
   get body(): Body {
     return this._body;
   }
 
-  get referenceTag(): ReferenceTag {
-    return this._referenceTag;
+  set body(value: Body) {
+    this._body = value;
   }
 
   static new(referenceTag: string, title: string, body: string): WikiPage {
