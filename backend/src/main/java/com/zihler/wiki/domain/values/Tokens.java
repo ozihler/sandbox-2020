@@ -40,7 +40,7 @@ public class Tokens {
         return Tokens.from(tokens);
     }
 
-    String toCamelCase() {
+    public String toCamelCase() {
         return tokens.stream()
                 .map(Token::toCamelCase)
                 .collect(joining());

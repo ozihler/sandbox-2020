@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface FindWikiPageByTitle {
     Optional<WikiPage> having(Title title);
 
-    default boolean existsWith(Title type) {
+    default boolean with(Title type) {
         return having(type).isPresent();
     }
 

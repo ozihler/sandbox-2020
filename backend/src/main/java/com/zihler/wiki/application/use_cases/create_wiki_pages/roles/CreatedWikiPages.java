@@ -3,10 +3,7 @@ package com.zihler.wiki.application.use_cases.create_wiki_pages.roles;
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByReferenceTag;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.domain.entity.WikiPage;
-import com.zihler.wiki.domain.values.Body;
-import com.zihler.wiki.domain.values.ReferenceTags;
-import com.zihler.wiki.domain.values.WikiPages;
-import com.zihler.wiki.domain.values.WikiPagesDocument;
+import com.zihler.wiki.domain.values.*;
 
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
@@ -33,7 +30,7 @@ public class CreatedWikiPages {
         return referenceTags.getReferenceTags()
                 .stream()
                 .filter(referenceTag -> !findWikiPage.existsWith(referenceTag))
-                .map(WikiPage::from)
+                .map(referenceTag -> WikiPage.from(referenceTag, Title.from(referenceTag)))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 

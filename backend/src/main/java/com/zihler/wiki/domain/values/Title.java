@@ -20,18 +20,12 @@ public class Title implements Stringifiable {
     }
 
     public static Title from(ReferenceTag referenceTag) {
-        // TODO: 12/6/2019 Maybe move to use case?
         Tokens tokens = Tokens.withTrailingWhiteSpaceBeforeEveryUpperCaseLetter(referenceTag.withoutReferenceSymbol());
         return from(tokens.toString());
     }
 
     private boolean isValid() {
         return !(title == null || title.isBlank());
-    }
-
-    // TODO: 12/6/2019 Maybe move to use case
-    String toCamelCase() {
-        return Tokens.from(this).toCamelCase();
     }
 
     @Override

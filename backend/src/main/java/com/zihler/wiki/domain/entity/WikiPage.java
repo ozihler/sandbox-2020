@@ -19,10 +19,6 @@ public class WikiPage implements Comparable<WikiPage> {
         return new WikiPage(referenceTag, title, Body.empty());
     }
 
-    public static WikiPage from(ReferenceTag referenceTag) {
-        return from(referenceTag, Title.from(referenceTag));
-    }
-
     public ReferenceTag getReferenceTag() {
         return referenceTag;
     }
@@ -37,6 +33,6 @@ public class WikiPage implements Comparable<WikiPage> {
 
     @Override
     public int compareTo(WikiPage wikiPage) {
-        return this.referenceTag.compareTo(wikiPage.referenceTag);
+        return referenceTag.compareTo(wikiPage.referenceTag);
     }
 }
