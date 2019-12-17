@@ -17,7 +17,7 @@ public class CreateWikiPageFromTitleUseCase implements CreateWikiPageFromTitle {
     }
 
     @Override
-    public void from(Title title, WikiPagePresenter presenter) {
+    public void callWith(Title title, WikiPagePresenter presenter) {
         CreateWikiPageFromTitleUseCaseContext
                 .initialize(title, findWikiPage, storeWikiPage, presenter)
                 .enactUseCase();

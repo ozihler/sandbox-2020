@@ -4,5 +4,5 @@ import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
 import com.zihler.wiki.domain.values.Title;
 
 public interface CreateWikiPageFromTitle {
-    void from(Title title, WikiPagePresenter presenter);
+    void callWith(Title title, WikiPagePresenter presenter);
 }

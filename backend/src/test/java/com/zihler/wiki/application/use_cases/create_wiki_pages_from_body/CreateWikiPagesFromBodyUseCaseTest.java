@@ -17,7 +17,7 @@ class CreateWikiPagesFromBodyUseCaseTest {
 
         CreateWikiPagesFromBody createWikiPagesFromBody = new CreateWikiPagesFromBodyUseCase(repo, repo);
 
-        createWikiPagesFromBody.from(Body.from("Hello world #ThisIsARefTag and #WithCertainPersuasion."), presenter);
+        createWikiPagesFromBody.callWith(Body.from("Hello world #ThisIsARefTag and #WithCertainPersuasion."), presenter);
 
         System.out.println(presenter.wikiPages);
     }

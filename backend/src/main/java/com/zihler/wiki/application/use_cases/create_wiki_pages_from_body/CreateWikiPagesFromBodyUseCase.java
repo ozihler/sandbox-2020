@@ -18,7 +18,7 @@ public class CreateWikiPagesFromBodyUseCase implements CreateWikiPagesFromBody {
     }
 
     @Override
-    public void from(Body body, WikiPagePresenter presenter) {
+    public void callWith(Body body, WikiPagePresenter presenter) {
         CreateWikiPagesFromBodyUseCaseContext
                 .initialize(body, findWikiPage, storeWikiPage, presenter)
                 .enactUseCase();

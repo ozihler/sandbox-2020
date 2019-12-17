@@ -24,7 +24,7 @@ class CreateWikiPageFromTitleUseCaseTest {
         Title title = Title.from("mySuper stupidTitle");
         TestPresenter presenter = new TestPresenter();
 
-        createWikiPageFromTitle.from(title, presenter);
+        createWikiPageFromTitle.callWith(title, presenter);
 
         WikiPageDocument document = presenter.getDocument();
 

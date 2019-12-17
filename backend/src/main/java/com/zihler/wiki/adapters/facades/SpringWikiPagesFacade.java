@@ -31,11 +31,11 @@ public class SpringWikiPagesFacade {
     }
 
     public void createSingleWikiPageFrom(Title title, WikiPagePresenter output) {
-        createWikiPage.from(title, output);
+        createWikiPage.callWith(title, output);
     }
 
     public void createMultipleWikiPagesFrom(Body body, WikiPagePresenter output) {
-        createWikiPages.from(body, output);
+        createWikiPages.callWith(body, output);
     }
 
     public void findAllWikiPages(WikiPagesSearchResultPresenter output) {
