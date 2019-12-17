@@ -7,9 +7,12 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class WikiPageDto implements Comparable<WikiPageDto> {
-    private final String referenceTag;
-    private final String title;
-    private final String body;
+    private String referenceTag;
+    private String title;
+    private String body;
+
+    public WikiPageDto() {
+    }
 
     private WikiPageDto(String referenceTag, String title, String body) {
         this.referenceTag = referenceTag;

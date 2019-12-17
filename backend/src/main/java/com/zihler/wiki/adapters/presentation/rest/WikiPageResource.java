@@ -12,9 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @RestController
-@RequestMapping(path = "api/sandbox/wiki/pages", produces = "application/json")
+@RequestMapping(path = "wiki/pages", produces = "application/json")
 public class WikiPageResource {
     private SpringWikiPagesFacade wikiPagesFacade;
 

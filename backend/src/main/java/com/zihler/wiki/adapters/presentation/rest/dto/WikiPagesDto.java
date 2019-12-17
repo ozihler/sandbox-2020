@@ -10,6 +10,9 @@ import static java.util.stream.Collectors.toSet;
 public class WikiPagesDto {
     private Set<WikiPageDto> wikiPages;
 
+    public WikiPagesDto() {
+    }
+
     private WikiPagesDto(Set<WikiPageDto> wikiPages) {
         this.wikiPages = wikiPages;
     }
