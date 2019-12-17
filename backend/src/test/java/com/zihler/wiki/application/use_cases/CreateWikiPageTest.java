@@ -3,7 +3,7 @@ package com.zihler.wiki.application.use_cases;
 import com.zihler.wiki.adapters.data_access.in_memory.InMemoryWikiPageRepository;
 import com.zihler.wiki.application.outbound_ports.documents.BodyDocument;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
-import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPageByTitle;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenter.Presenter;
 import com.zihler.wiki.application.use_cases.create_wiki_page.CreateWikiPageUseCase;
@@ -23,8 +23,8 @@ class CreateWikiPageTest {
 
         String title = "mySuper stupidTitle";
         InMemoryWikiPageRepository repo = new InMemoryWikiPageRepository();
-        FindWikiPage<Title> findByTitle = repo::findByTitle;
-        StoreWikiPage storeWikiPage = repo::storeWikiPage;
+        FindWikiPageByTitle findByTitle = repo::having;
+        StoreWikiPage storeWikiPage = repo::as;
 
         new CreateWikiPageUseCase(findByTitle, storeWikiPage).from(Title.from(title), presenter);
 
