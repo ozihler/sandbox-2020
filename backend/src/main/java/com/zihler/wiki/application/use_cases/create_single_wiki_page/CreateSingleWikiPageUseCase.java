@@ -1,11 +1,10 @@
 package com.zihler.wiki.application.use_cases.create_single_wiki_page;
 
-import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
-import com.zihler.wiki.application.outbound_ports.presenter.Presenter;
-import com.zihler.wiki.application.use_cases.create_single_wiki_page.context.CreateSingleWikiPageContext;
+import com.zihler.wiki.application.use_cases.create_single_wiki_page.context.CreateSingleWikiPageUseCaseContext;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.inbound_ports.CreateSingleWikiPage;
+import com.zihler.wiki.application.use_cases.create_single_wiki_page.outbound_port.presenter.SingleWikiPagePresenter;
 import com.zihler.wiki.domain.values.Title;
 
 public class CreateSingleWikiPageUseCase implements CreateSingleWikiPage {
@@ -18,8 +17,8 @@ public class CreateSingleWikiPageUseCase implements CreateSingleWikiPage {
     }
 
     @Override
-    public void from(Title title, Presenter<WikiPageDocument> presenter) {
-        CreateSingleWikiPageContext.initialize(title, findWikiPage, storeWikiPage, presenter)
+    public void from(Title title, SingleWikiPagePresenter presenter) {
+        CreateSingleWikiPageUseCaseContext.initialize(title, findWikiPage, storeWikiPage, presenter)
                 .enactUseCase();
     }
 

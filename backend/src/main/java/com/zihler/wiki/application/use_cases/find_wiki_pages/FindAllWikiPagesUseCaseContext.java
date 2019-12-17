@@ -1,22 +1,21 @@
 package com.zihler.wiki.application.use_cases.find_wiki_pages;
 
 import com.zihler.wiki.application.outbound_ports.gateway.RetrieveAllWikiPages;
-import com.zihler.wiki.application.outbound_ports.presenter.Presenter;
-import com.zihler.wiki.application.use_cases.Context;
+import com.zihler.wiki.application.use_cases.UseCaseContext;
+import com.zihler.wiki.application.use_cases.create_multiple_wiki_pages.outbound_port.presenter.MultipleWikiPagesPresenter;
 import com.zihler.wiki.application.use_cases.find_wiki_pages.roles.WikiPagesSearchResult;
-import com.zihler.wiki.domain.values.WikiPagesDocument;
 
-public class FindAllWikiPagesContext implements Context {
+public class FindAllWikiPagesUseCaseContext implements UseCaseContext {
     private WikiPagesSearchResult searchResult;
 
-    public FindAllWikiPagesContext(WikiPagesSearchResult searchResult) {
+    private FindAllWikiPagesUseCaseContext(WikiPagesSearchResult searchResult) {
         this.searchResult = searchResult;
     }
 
-    public static Context initialize(RetrieveAllWikiPages retrieveAllWikiPages, Presenter<WikiPagesDocument> presenter) {
+    static UseCaseContext initialize(RetrieveAllWikiPages retrieveAllWikiPages, MultipleWikiPagesPresenter presenter) {
         var self = retrieveAllWikiPages.get();
         var searchResult = new WikiPagesSearchResult(self, presenter);
-        return new FindAllWikiPagesContext(searchResult);
+        return new FindAllWikiPagesUseCaseContext(searchResult);
     }
 
     @Override
