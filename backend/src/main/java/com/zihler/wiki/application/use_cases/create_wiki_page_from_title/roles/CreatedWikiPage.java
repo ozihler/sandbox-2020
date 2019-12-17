@@ -1,6 +1,7 @@
-package com.zihler.wiki.application.habits.create_wiki_page.roles;
+package com.zihler.wiki.application.use_cases.create_wiki_page_from_title.roles;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
+import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
 import com.zihler.wiki.domain.entity.WikiPage;
@@ -17,13 +18,21 @@ public class CreatedWikiPage {
         this.presenter = presenter;
     }
 
-    public static CreatedWikiPage create(WikiPage wikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
+    public static CreatedWikiPage from(WikiPageDocument intendedWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter, FindWikiPage findWikiPage) {
+        WikiPage wikiPage = findOrCreateWikiPage(intendedWikiPage, findWikiPage);
+
         return new CreatedWikiPage(wikiPage, storeWikiPage, presenter);
     }
 
-    public CreatedWikiPage store() {
+
+    private static WikiPage findOrCreateWikiPage(WikiPageDocument intendedWikiPage, FindWikiPage findWikiPage) {
+        return findWikiPage.by(intendedWikiPage.getReferenceTag())
+                .orElse(WikiPage.from(intendedWikiPage.getReferenceTag(), intendedWikiPage.getTitle()));
+    }
+
+
+    public void store() {
         self = storeWikiPage.as(self);
-        return this;
     }
 
     private WikiPageDocument asDocument() {
