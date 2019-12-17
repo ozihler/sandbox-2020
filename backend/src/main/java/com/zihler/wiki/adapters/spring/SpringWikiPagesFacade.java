@@ -1,4 +1,4 @@
-package com.zihler.wiki.adapters.facades;
+package com.zihler.wiki.adapters.spring;
 
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.RetrieveAllWikiPages;

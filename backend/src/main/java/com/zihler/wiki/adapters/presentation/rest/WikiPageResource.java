@@ -1,6 +1,5 @@
 package com.zihler.wiki.adapters.presentation.rest;
 
-import com.zihler.wiki.adapters.facades.SpringWikiPagesFacade;
 import com.zihler.wiki.adapters.presentation.rest.dto.WikiPageDto;
 import com.zihler.wiki.adapters.presentation.rest.dto.WikiPagesDto;
 import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPageFromTitleInput;
@@ -8,6 +7,7 @@ import com.zihler.wiki.adapters.presentation.rest.input.CreateWikiPagesFromBodyI
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagePresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesPresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenter.RestWikiPagesSearchResultPresenter;
+import com.zihler.wiki.adapters.spring.SpringWikiPagesFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

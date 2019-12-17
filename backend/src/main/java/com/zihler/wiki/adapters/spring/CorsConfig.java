@@ -1,4 +1,4 @@
-package com.zihler;
+package com.zihler.wiki.adapters.spring;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -13,8 +13,6 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD")
-                .allowCredentials(true)
-        ;
+                .allowCredentials(true);
     }
-
 }
