@@ -3,8 +3,8 @@ package com.zihler.wiki.application.use_cases.create_single_wiki_page;
 import com.zihler.wiki.adapters.data_access.in_memory.InMemoryWikiPageRepository;
 import com.zihler.wiki.application.outbound_ports.documents.BodyDocument;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
+import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.inbound_ports.CreateSingleWikiPage;
-import com.zihler.wiki.application.use_cases.create_single_wiki_page.outbound_port.presenter.SingleWikiPagePresenter;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.roles.CamelCaseTitle;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.roles.ReferenceTagFromCamelCaseTitle;
 import com.zihler.wiki.domain.values.Body;
@@ -42,7 +42,7 @@ class CreateSingleWikiPageUseCaseTest {
                 .isEqualTo(BodyDocument.from(Body.empty()));
     }
 
-    private static class TestPresenter implements SingleWikiPagePresenter {
+    private static class TestPresenter implements WikiPagePresenter {
         private WikiPageDocument document;
 
         WikiPageDocument getDocument() {

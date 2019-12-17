@@ -34,6 +34,6 @@ public class WikiPageDocument implements Comparable<WikiPageDocument> {
 
     @Override
     public int compareTo(WikiPageDocument wikiPageDocument) {
-        return this.referenceTag.compareTo(wikiPageDocument.referenceTag);
+        return referenceTag.compareTo(wikiPageDocument.referenceTag);
     }
 }

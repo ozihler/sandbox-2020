@@ -2,7 +2,7 @@ package com.zihler.wiki.application.use_cases.create_multiple_wiki_pages.roles;
 
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
-import com.zihler.wiki.application.use_cases.create_single_wiki_page.outbound_port.presenter.SingleWikiPagePresenter;
+import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
 import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
 
@@ -21,7 +21,7 @@ public class BodyReferenceTags {
         this.self = self;
     }
 
-    public static BodyReferenceTags from(Body body, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, SingleWikiPagePresenter presenter) {
+    public static BodyReferenceTags from(Body body, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
         Set<BodyReferenceTag> bodyReferenceTags =
                 extractReferenceTagsFrom(body)
                         .stream()
@@ -52,4 +52,6 @@ public class BodyReferenceTags {
             referenceTag.createAndStoreWikiPage();
         }
     }
+
+
 }

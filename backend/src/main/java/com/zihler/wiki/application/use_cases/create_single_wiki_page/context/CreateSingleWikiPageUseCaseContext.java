@@ -2,8 +2,8 @@ package com.zihler.wiki.application.use_cases.create_single_wiki_page.context;
 
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
+import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.UseCaseContext;
-import com.zihler.wiki.application.use_cases.create_single_wiki_page.outbound_port.presenter.SingleWikiPagePresenter;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.roles.CamelCaseTitle;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.roles.CreatedWikiPage;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.roles.ReferenceTagFromCamelCaseTitle;
@@ -17,8 +17,7 @@ public class CreateSingleWikiPageUseCaseContext implements UseCaseContext {
         this.wikiPage = wikiPage;
     }
 
-    public static CreateSingleWikiPageUseCaseContext initialize(Title title, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, SingleWikiPagePresenter presenter) {
-
+    public static CreateSingleWikiPageUseCaseContext initialize(Title title, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
         var camelCaseTitle = CamelCaseTitle.from(title);
         var titleReferenceTag = ReferenceTagFromCamelCaseTitle.from(camelCaseTitle);
 

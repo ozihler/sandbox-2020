@@ -2,8 +2,8 @@ package com.zihler.wiki.application.use_cases.create_multiple_wiki_pages.roles;
 
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
+import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.create_single_wiki_page.context.CreateSingleWikiPageUseCaseContext;
-import com.zihler.wiki.application.use_cases.create_single_wiki_page.outbound_port.presenter.SingleWikiPagePresenter;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
 import com.zihler.wiki.domain.values.Tokens;
@@ -12,9 +12,9 @@ class BodyReferenceTag {
     private ReferenceTag self;
     private FindWikiPage findWikiPage;
     private StoreWikiPage storeWikiPage;
-    private SingleWikiPagePresenter presenter;
+    private WikiPagePresenter presenter;
 
-    private BodyReferenceTag(ReferenceTag self, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, SingleWikiPagePresenter presenter) {
+    private BodyReferenceTag(ReferenceTag self, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
         this.self = self;
         this.findWikiPage = findWikiPage;
         this.storeWikiPage = storeWikiPage;
@@ -22,7 +22,7 @@ class BodyReferenceTag {
     }
 
 
-    public static BodyReferenceTag from(ReferenceTag self, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, SingleWikiPagePresenter presenter) {
+    public static BodyReferenceTag from(ReferenceTag self, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
         return new BodyReferenceTag(self, findWikiPage, storeWikiPage, presenter);
     }
 

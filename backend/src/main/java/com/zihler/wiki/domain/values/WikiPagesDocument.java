@@ -2,12 +2,17 @@ package com.zihler.wiki.domain.values;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 
 public class WikiPagesDocument {
     private Set<WikiPageDocument> wikiPages;
+
+    public WikiPagesDocument() {
+        wikiPages = new LinkedHashSet<>();
+    }
 
     private WikiPagesDocument(Set<WikiPageDocument> wikiPages) {
         this.wikiPages = wikiPages;
@@ -23,5 +28,9 @@ public class WikiPagesDocument {
 
     public Set<WikiPageDocument> getWikiPages() {
         return wikiPages;
+    }
+
+    public void add(WikiPageDocument wikiPageDocument) {
+        wikiPages.add(wikiPageDocument);
     }
 }

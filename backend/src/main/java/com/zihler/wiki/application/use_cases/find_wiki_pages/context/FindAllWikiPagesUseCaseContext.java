@@ -1,8 +1,8 @@
-package com.zihler.wiki.application.use_cases.find_wiki_pages;
+package com.zihler.wiki.application.use_cases.find_wiki_pages.context;
 
 import com.zihler.wiki.application.outbound_ports.gateway.RetrieveAllWikiPages;
 import com.zihler.wiki.application.use_cases.UseCaseContext;
-import com.zihler.wiki.application.use_cases.create_multiple_wiki_pages.outbound_port.presenter.MultipleWikiPagesPresenter;
+import com.zihler.wiki.application.use_cases.find_wiki_pages.outbound_port.WikiPagesSearchResultPresenter;
 import com.zihler.wiki.application.use_cases.find_wiki_pages.roles.WikiPagesSearchResult;
 
 public class FindAllWikiPagesUseCaseContext implements UseCaseContext {
@@ -12,7 +12,7 @@ public class FindAllWikiPagesUseCaseContext implements UseCaseContext {
         this.searchResult = searchResult;
     }
 
-    static UseCaseContext initialize(RetrieveAllWikiPages retrieveAllWikiPages, MultipleWikiPagesPresenter presenter) {
+    public static UseCaseContext initialize(RetrieveAllWikiPages retrieveAllWikiPages, WikiPagesSearchResultPresenter presenter) {
         var self = retrieveAllWikiPages.get();
         var searchResult = new WikiPagesSearchResult(self, presenter);
         return new FindAllWikiPagesUseCaseContext(searchResult);
@@ -22,5 +22,4 @@ public class FindAllWikiPagesUseCaseContext implements UseCaseContext {
     public void enactUseCase() {
         searchResult.present();
     }
-
 }

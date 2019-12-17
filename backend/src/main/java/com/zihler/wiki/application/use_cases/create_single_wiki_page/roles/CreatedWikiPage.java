@@ -3,7 +3,7 @@ package com.zihler.wiki.application.use_cases.create_single_wiki_page.roles;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.gateway.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateway.StoreWikiPage;
-import com.zihler.wiki.application.use_cases.create_single_wiki_page.outbound_port.presenter.SingleWikiPagePresenter;
+import com.zihler.wiki.application.outbound_ports.presenter.WikiPagePresenter;
 import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.exceptions.IllegalTitleException;
 import com.zihler.wiki.domain.values.ReferenceTag;
@@ -15,9 +15,9 @@ public class CreatedWikiPage {
 
     private WikiPage self;
     private StoreWikiPage storeWikiPage;
-    private SingleWikiPagePresenter presenter;
+    private WikiPagePresenter presenter;
 
-    private CreatedWikiPage(WikiPage wikiPage, StoreWikiPage storeWikiPage, SingleWikiPagePresenter presenter) {
+    private CreatedWikiPage(WikiPage wikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
         self = wikiPage;
         this.storeWikiPage = storeWikiPage;
         this.presenter = presenter;
@@ -27,7 +27,7 @@ public class CreatedWikiPage {
                                        ReferenceTag referenceTag,
                                        StoreWikiPage storeWikiPage,
                                        FindWikiPage findWikiPage,
-                                       SingleWikiPagePresenter presenter) {
+                                       WikiPagePresenter presenter) {
 
         if (findWikiPage.with(referenceTag)) {
             throw new IllegalTitleException(format("Wiki Page with reference tag %s exists already", title));
