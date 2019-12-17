@@ -6,8 +6,8 @@ import com.zihler.wiki.domain.values.Tokens;
 public class CamelCaseTitle {
     private final Title self;
 
-    private CamelCaseTitle(Title title) {
-        self = Title.from(Tokens.from(title).toCamelCase());
+    private CamelCaseTitle(Title self) {
+        this.self = self;
     }
 
     public static CamelCaseTitle from(Title title) {
@@ -15,6 +15,6 @@ public class CamelCaseTitle {
     }
 
     public String asString() {
-        return self.asString();
+        return Title.from(Tokens.from(self).toCamelCase()).asString();
     }
 }
