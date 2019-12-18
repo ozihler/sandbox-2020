@@ -28,21 +28,24 @@ public class ExtendWikiArticleUseCaseContext implements UseCaseContext {
 
         Body updatedBody = Body.from(updatedWikiPage.body().toString());
 
+        CreatedWikiPages createdWikiPages = from(findWikiPage, storeWikiPage, updatedBody);
+
+        return new ExtendWikiArticleUseCaseContext(updatedBody, existingWikiPage, createdWikiPages);
+    }
+
+    private static CreatedWikiPages from(FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, Body updatedBody) {
         BodyReferenceTags bodyReferenceTags = BodyReferenceTags.from(updatedBody);
 
         WikiPagesDocument wikiPagesToStore = bodyReferenceTags.toWikiPagesDocument();
 
-        CreatedWikiPages createdWikiPages = CreatedWikiPages.from(wikiPagesToStore, findWikiPage, storeWikiPage);
-
-        return new ExtendWikiArticleUseCaseContext(updatedBody, existingWikiPage, createdWikiPages);
+        return CreatedWikiPages.from(wikiPagesToStore, findWikiPage, storeWikiPage);
     }
 
     @Override
     public void enactUseCase() {
         existingWikiPage.updateWith(updatedBody);
 
-        createdWikiPages.storeAll()
-                .linkWith(existingWikiPage);
+        createdWikiPages.storeAll().linkWith(existingWikiPage);
 
         existingWikiPage.present();
     }
