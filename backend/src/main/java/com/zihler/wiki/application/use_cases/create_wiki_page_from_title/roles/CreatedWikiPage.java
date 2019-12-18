@@ -28,10 +28,10 @@ public class CreatedWikiPage {
         wikiPage.setReferenceTag(intendedWikiPage.referenceTag());
         wikiPage.setTitle(intendedWikiPage.title());
         wikiPage.setBody(Body.from(intendedWikiPage.body().toString()));
+        wikiPage.setReferencedWikiPages(intendedWikiPage.referencedWikiPages());
 
         return new CreatedWikiPage(wikiPage, storeWikiPage, presenter);
     }
-
 
     public void store() {
         self = storeWikiPage.as(self);

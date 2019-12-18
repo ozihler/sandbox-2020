@@ -73,6 +73,10 @@ public class WikiPage implements Comparable<WikiPage> {
         return referencedWikiPages;
     }
 
+    public void setReferencedWikiPages(ReferencedWikiPages referencedWikiPages) {
+        this.referencedWikiPages = referencedWikiPages;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

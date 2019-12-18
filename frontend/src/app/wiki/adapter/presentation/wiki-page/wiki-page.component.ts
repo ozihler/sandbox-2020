@@ -27,7 +27,11 @@ export class WikiPageComponent implements OnInit {
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
       if (params.keys.length > 0) {
-        this.wikiPage = WikiPage.new(params.get('referenceTag'), params.get('title'), params.get('body'));
+        this.wikiPage = WikiPage.new(
+          params.get('referenceTag'),
+          params.get('title'),
+          params.get('body'),
+          JSON.parse(params.get('referencedWikiPages')));
       }
     });
   }

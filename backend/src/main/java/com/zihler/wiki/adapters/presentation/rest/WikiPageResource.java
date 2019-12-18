@@ -5,7 +5,6 @@ import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPagesDto;
 import com.zihler.wiki.adapters.presentation.rest.inputs.CreateWikiPageFromTitleInput;
 import com.zihler.wiki.adapters.presentation.rest.inputs.WikiPagesInput;
 import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagePresenter;
-import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagesPresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagesSearchResultPresenter;
 import com.zihler.wiki.adapters.spring.SpringWikiPagesFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +33,10 @@ public class WikiPageResource {
     }
 
     @PostMapping(path = "/body")
-    public ResponseEntity<WikiPagesDto> extendWikiArticle(@RequestBody WikiPageDto request) {
+    public ResponseEntity<WikiPageDto> extendWikiArticle(@RequestBody WikiPageDto request) {
         var input = new WikiPagesInput(request);
 
-        var output = new RestWikiPagesPresenter();
+        var output = new RestWikiPagePresenter();
 
         wikiPagesFacade.extendWikiArticle(input.wikiPage(), output);
 

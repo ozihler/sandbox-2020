@@ -51,7 +51,7 @@ public class WikiPageDocument implements Comparable<WikiPageDocument> {
     }
 
     public ReferencedWikiPages referencedWikiPages() {
-        return referencedWikiPages;
+        return referencedWikiPages == null ? ReferencedWikiPages.empty() : referencedWikiPages;
     }
 
     @Override
