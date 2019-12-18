@@ -33,9 +33,9 @@ public class CreatedWikiPages {
         return this;
     }
 
-    public void linkWith(ExistingWikiPage existingWikiPage) {
+    public void referenceAllIn(ExtendedWikiPage extendedWikiPage) {
         self.stream()
                 .map(CreatedWikiPage::getReferenceTag)
-                .forEach(existingWikiPage::add);
+                .forEach(extendedWikiPage::add);
     }
 }

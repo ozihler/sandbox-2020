@@ -7,19 +7,19 @@ import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
 
-public class ExistingWikiPage {
+public class ExtendedWikiPage {
     private WikiPage self;
     private WikiPagePresenter output;
 
-    private ExistingWikiPage(WikiPage self, WikiPagePresenter output) {
+    private ExtendedWikiPage(WikiPage self, WikiPagePresenter output) {
         this.self = self;
         this.output = output;
     }
 
-    public static ExistingWikiPage from(ReferenceTag referenceTag, FindWikiPage findWikiPage, WikiPagePresenter output) {
+    public static ExtendedWikiPage from(ReferenceTag referenceTag, FindWikiPage findWikiPage, WikiPagePresenter output) {
         WikiPage self = findWikiPage.findOrThrow(referenceTag);
 
-        return new ExistingWikiPage(self, output);
+        return new ExtendedWikiPage(self, output);
     }
 
     public void updateWith(Body updatedBody) {

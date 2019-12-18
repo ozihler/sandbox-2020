@@ -6,47 +6,41 @@ import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.UseCaseContext;
-import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles.BodyReferenceTags;
 import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles.CreatedWikiPages;
-import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles.ExistingWikiPage;
+import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles.ExtendedWikiPage;
+import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles.ReferenceTagsFoundInBody;
 import com.zihler.wiki.domain.values.Body;
 
 public class ExtendWikiArticleUseCaseContext implements UseCaseContext {
     private Body updatedBody;
-    private ExistingWikiPage existingWikiPage;
+    private ExtendedWikiPage extendedWikiPage;
     private CreatedWikiPages createdWikiPages;
 
-    private ExtendWikiArticleUseCaseContext(Body updatedBody, ExistingWikiPage existingWikiPage, CreatedWikiPages createdWikiPages) {
-        this.updatedBody = updatedBody;
-        this.existingWikiPage = existingWikiPage;
+    private ExtendWikiArticleUseCaseContext(Body extendedBody, ExtendedWikiPage extendedWikiPage, CreatedWikiPages createdWikiPages) {
+        updatedBody = extendedBody;
+        this.extendedWikiPage = extendedWikiPage;
         this.createdWikiPages = createdWikiPages;
     }
 
 
-    public static ExtendWikiArticleUseCaseContext initialize(WikiPageDocument updatedWikiPage, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
-        ExistingWikiPage existingWikiPage = ExistingWikiPage.from(updatedWikiPage.referenceTag(), findWikiPage, presenter);
+    public static ExtendWikiArticleUseCaseContext initialize(WikiPageDocument theUpdate, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
+        ExtendedWikiPage extendedWikiPage = ExtendedWikiPage.from(theUpdate.referenceTag(), findWikiPage, presenter);
 
-        Body updatedBody = Body.from(updatedWikiPage.body().toString());
+        Body updatedBody = Body.from(theUpdate.body().toString());
 
-        CreatedWikiPages createdWikiPages = from(findWikiPage, storeWikiPage, updatedBody);
+        WikiPagesDocument wikiPagesToStore = ReferenceTagsFoundInBody.from(updatedBody).toWikiPagesDocument();
 
-        return new ExtendWikiArticleUseCaseContext(updatedBody, existingWikiPage, createdWikiPages);
-    }
+        CreatedWikiPages createdWikiPages = CreatedWikiPages.from(wikiPagesToStore, findWikiPage, storeWikiPage);
 
-    private static CreatedWikiPages from(FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, Body updatedBody) {
-        BodyReferenceTags bodyReferenceTags = BodyReferenceTags.from(updatedBody);
-
-        WikiPagesDocument wikiPagesToStore = bodyReferenceTags.toWikiPagesDocument();
-
-        return CreatedWikiPages.from(wikiPagesToStore, findWikiPage, storeWikiPage);
+        return new ExtendWikiArticleUseCaseContext(updatedBody, extendedWikiPage, createdWikiPages);
     }
 
     @Override
     public void enactUseCase() {
-        existingWikiPage.updateWith(updatedBody);
+        extendedWikiPage.updateWith(updatedBody);
 
-        createdWikiPages.storeAll().linkWith(existingWikiPage);
+        createdWikiPages.storeAll().referenceAllIn(extendedWikiPage);
 
-        existingWikiPage.present();
+        extendedWikiPage.present();
     }
 }

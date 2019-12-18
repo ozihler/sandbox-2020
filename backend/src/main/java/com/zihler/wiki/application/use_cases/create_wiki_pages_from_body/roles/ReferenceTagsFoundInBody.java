@@ -12,23 +12,23 @@ import static com.zihler.wiki.domain.values.Patterns.NON_CHARACTER_TOKEN_REGEX;
 import static com.zihler.wiki.domain.values.Patterns.REFERENCE_TAG_MATCHING_REGEX;
 import static java.util.stream.Collectors.toSet;
 
-public class BodyReferenceTags {
-    private Set<BodyReferenceTag> bodyReferenceTags;
+public class ReferenceTagsFoundInBody {
+    private Set<ReferenceTagFoundInBody> referenceTagsFoundInBody;
 
-    private BodyReferenceTags(Set<BodyReferenceTag> bodyReferenceTags) {
-        this.bodyReferenceTags = bodyReferenceTags;
+    private ReferenceTagsFoundInBody(Set<ReferenceTagFoundInBody> referenceTagsFoundInBody) {
+        this.referenceTagsFoundInBody = referenceTagsFoundInBody;
     }
 
-    public static BodyReferenceTags from(Body body) {
-        return new BodyReferenceTags(extractReferenceTagsFrom(body)
+    public static ReferenceTagsFoundInBody from(Body body) {
+        return new ReferenceTagsFoundInBody(extractReferenceTagsFrom(body)
                 .stream()
-                .map(BodyReferenceTag::from)
+                .map(ReferenceTagFoundInBody::from)
                 .collect(toSet()));
     }
 
     private static Set<ReferenceTag> extractReferenceTagsFrom(Body body) {
         return toWordTokens(body)
-                .filter(BodyReferenceTags::isReferenceTag)
+                .filter(ReferenceTagsFoundInBody::isReferenceTag)
                 .map(ReferenceTag::from)
                 .collect(toSet());
     }
@@ -42,13 +42,9 @@ public class BodyReferenceTags {
     }
 
     public WikiPagesDocument toWikiPagesDocument() {
-        return new WikiPagesDocument(bodyReferenceTags
+        return new WikiPagesDocument(referenceTagsFoundInBody
                 .stream()
-                .map(BodyReferenceTag::toWikiPageDocument)
+                .map(ReferenceTagFoundInBody::toWikiPageDocument)
                 .collect(toSet()));
-    }
-
-    public Set<BodyReferenceTag> get() {
-        return null;
     }
 }
