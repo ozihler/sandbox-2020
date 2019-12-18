@@ -1,4 +1,4 @@
-import {WikiPageUpdateResponse} from '../adapter/gateway/create-wiki-page/wiki-page-update-response';
+import {WikiPageDto} from '../adapter/gateway/create-wiki-page/wiki-page-dto';
 import {Title} from './title';
 import {Body} from './body';
 import {ReferenceTag} from './reference-tag';
@@ -53,7 +53,7 @@ export class WikiPage {
     );
   }
 
-  static from(response: WikiPageUpdateResponse): WikiPage {
+  static from(response: WikiPageDto): WikiPage {
     return new WikiPage(
       ReferenceTag.from(response.referenceTag),
       Title.from(response.title),
@@ -68,6 +68,7 @@ export class WikiPage {
 
   asDto(): {} {
     return {
+      referencedWikiPages: this.referencedWikiPages.referencedWikiPages.map(r => r.referenceTag),
       referenceTag: this.referenceTag.referenceTag,
       title: this.title.title,
       body: this.body.body

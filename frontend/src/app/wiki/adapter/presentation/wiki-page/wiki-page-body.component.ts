@@ -39,27 +39,10 @@ export class WikiPageBodyComponent implements OnChanges {
       this.wikiPage.body = Body.from(res);
 
       this.updateWikiPageBody.with(this.wikiPage)
-        .subscribe(wikiPages => {
-          this.handleReceived(wikiPages);
+        .subscribe(wikiPage => {
+          this.wikiPage = wikiPage;
         });
     });
   }
-
-  private handleReceived(wikiPages: WikiPage[]) {
-    // todo: move to use case, add presenter to format bodyInputValue and assign it to body here
-    if (wikiPages.length > 0) {
-      wikiPages.forEach(wikiPage => {
-        const referenceTag = wikiPage.referenceTag.referenceTag;
-        const currentBody = this.bodyInput.value;
-
-        this.wikiPage.body = Body.from(currentBody.replace(referenceTag, this.newRouterLinkTo(referenceTag)));
-      });
-    } else {
-      this.wikiPage.body.body = this.bodyInput.value;
-    }
-  }
-
-  private newRouterLinkTo(referenceTag: string) {
-    return '<a routerLink="wiki-page" [queryParams]=[wikiPage.toDto()]>' + referenceTag + '</a>';
-  }
 }
+

@@ -1,4 +1,4 @@
-export class WikiPageUpdateResponse {
+export class WikiPageDto {
   title: string;
   body: string;
   referenceTag: string;

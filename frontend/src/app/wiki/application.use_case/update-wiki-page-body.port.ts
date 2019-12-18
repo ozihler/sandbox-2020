@@ -3,5 +3,5 @@ import {Observable} from 'rxjs';
 
 
 export abstract class UpdateWikiPageBody {
-  abstract with(wikiPage: WikiPage): Observable<WikiPage[]>;
+  abstract with(wikiPage: WikiPage): Observable<WikiPage>;
 }

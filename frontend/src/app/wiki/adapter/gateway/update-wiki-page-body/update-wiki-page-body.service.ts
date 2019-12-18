@@ -3,10 +3,9 @@ import {UpdateWikiPageBody} from '../../../application.use_case/update-wiki-page
 import {Observable} from 'rxjs';
 import {WikiPage} from '../../../domain/wiki-page';
 import {environment} from '../../../../../environments/environment';
-import {WikiPageUpdateResponse} from '../create-wiki-page/wiki-page-update-response';
+import {WikiPageDto} from '../create-wiki-page/wiki-page-dto';
 import {map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
-import {WikiPages} from '../../../application.use_case/wiki-pages';
 import {WikiPagesDto} from './wiki-pages-dto';
 
 @Injectable({
@@ -19,11 +18,11 @@ export class UpdateWikiPageBodyGateway implements UpdateWikiPageBody {
   constructor(private http: HttpClient) {
   }
 
-  with(wikiPage: WikiPage): Observable<WikiPage[]> {
+  with(wikiPage: WikiPage): Observable<WikiPage> {
     const request = new WikiPagesDto(wikiPage);
 
-    return this.http.post<WikiPageUpdateResponse>(this.url, request)
-      .pipe(map(response => WikiPages.from(response)));
+    return this.http.post<WikiPageDto>(this.url, request)
+      .pipe(map(response => WikiPage.from(response)));
   }
 
 }
