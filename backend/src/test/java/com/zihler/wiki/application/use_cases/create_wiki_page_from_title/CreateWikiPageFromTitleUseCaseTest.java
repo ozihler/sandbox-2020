@@ -1,6 +1,5 @@
 package com.zihler.wiki.application.use_cases.create_wiki_page_from_title;
 
-import com.zihler.wiki.application.outbound_ports.documents.BodyDocument;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
@@ -42,7 +41,7 @@ class CreateWikiPageFromTitleUseCaseTest {
 
         assertThat(document)
                 .extracting(WikiPageDocument::body)
-                .isEqualTo(BodyDocument.from(Body.empty()));
+                .isEqualTo(Body.empty());
     }
 
     private static class TestPresenter implements WikiPagePresenter {

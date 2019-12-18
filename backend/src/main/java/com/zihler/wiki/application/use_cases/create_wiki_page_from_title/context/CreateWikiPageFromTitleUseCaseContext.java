@@ -1,6 +1,5 @@
 package com.zihler.wiki.application.use_cases.create_wiki_page_from_title.context;
 
-import com.zihler.wiki.application.outbound_ports.documents.BodyDocument;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
@@ -21,9 +20,9 @@ public class CreateWikiPageFromTitleUseCaseContext implements UseCaseContext {
 
     public static CreateWikiPageFromTitleUseCaseContext initialize(Title title, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
         ReferenceTag referenceTag = TitleBasedReferenceTag.from(title).get();
-        WikiPageDocument intendedWikiPage = WikiPageDocument.from(referenceTag, title, BodyDocument.from(Body.empty()));
+        WikiPageDocument intendedWikiPage = WikiPageDocument.from(referenceTag, title, Body.empty());
 
-        CreatedWikiPage createdWikiPage = CreatedWikiPage.from(intendedWikiPage, storeWikiPage, presenter, findWikiPage);
+        CreatedWikiPage createdWikiPage = CreatedWikiPage.from(intendedWikiPage, findWikiPage, storeWikiPage, presenter);
 
         return new CreateWikiPageFromTitleUseCaseContext(createdWikiPage);
     }

@@ -8,18 +8,18 @@ public class Title {
     private String title;
 
     private Title(String title) {
-        this.title = title;
-
-        if (!isValid()) {
+        if (!isValid(title)) {
             throw new IllegalTitleException("A title cannot be empty!");
         }
+        this.title = title;
+
     }
 
     public static Title from(String titleString) {
         return new Title(titleString);
     }
 
-    private boolean isValid() {
+    private static boolean isValid(String title) {
         return !(title == null || title.isBlank());
     }
 

@@ -6,6 +6,7 @@ import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.Body;
+import com.zihler.wiki.domain.values.ReferenceTag;
 
 public class CreatedWikiPage {
 
@@ -19,7 +20,7 @@ public class CreatedWikiPage {
         this.presenter = presenter;
     }
 
-    public static CreatedWikiPage from(WikiPageDocument intendedWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter, FindWikiPage findWikiPage) {
+    public static CreatedWikiPage from(WikiPageDocument intendedWikiPage, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
         WikiPage wikiPage = findWikiPage
                 .by(intendedWikiPage.referenceTag())
                 .orElse(WikiPage.empty());
@@ -42,5 +43,9 @@ public class CreatedWikiPage {
 
     public void present() {
         presenter.present(asDocument());
+    }
+
+    public ReferenceTag getReferenceTag() {
+        return self.getReferenceTag();
     }
 }

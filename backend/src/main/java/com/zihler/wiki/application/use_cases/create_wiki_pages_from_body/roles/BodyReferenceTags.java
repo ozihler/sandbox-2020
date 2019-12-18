@@ -47,4 +47,8 @@ public class BodyReferenceTags {
                 .map(BodyReferenceTag::toWikiPageDocument)
                 .collect(toSet()));
     }
+
+    public Set<BodyReferenceTag> get() {
+        return null;
+    }
 }

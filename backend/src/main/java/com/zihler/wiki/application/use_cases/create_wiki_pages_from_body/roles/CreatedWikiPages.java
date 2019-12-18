@@ -16,18 +16,26 @@ public class CreatedWikiPages {
         this.self = self;
     }
 
-    public static CreatedWikiPages from(WikiPagesDocument intendedWikiPages, WikiPagePresenter presenter, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage) {
-        return new CreatedWikiPages(intendedWikiPages.getWikiPages()
+    public static CreatedWikiPages from(WikiPagesDocument intendedWikiPages, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage) {
+        List<CreatedWikiPage> self = toCreatedWikiPages(intendedWikiPages, findWikiPage, storeWikiPage, null);
+        return new CreatedWikiPages(self);
+    }
+
+    private static List<CreatedWikiPage> toCreatedWikiPages(WikiPagesDocument intendedWikiPages, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter output) {
+        return intendedWikiPages.getWikiPages()
                 .stream()
-                .map(wikiPage -> CreatedWikiPage.from(wikiPage, storeWikiPage, presenter, findWikiPage))
-                .collect(Collectors.toList()));
+                .map(wikiPage -> CreatedWikiPage.from(wikiPage, findWikiPage, storeWikiPage, output))
+                .collect(Collectors.toList());
     }
 
-    public void present() {
-        self.forEach(CreatedWikiPage::present);
-    }
-
-    public void store() {
+    public CreatedWikiPages storeAll() {
         self.forEach(CreatedWikiPage::store);
+        return this;
+    }
+
+    public void linkWith(ExistingWikiPage existingWikiPage) {
+        self.stream()
+                .map(CreatedWikiPage::getReferenceTag)
+                .forEach(existingWikiPage::add);
     }
 }

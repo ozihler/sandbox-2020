@@ -34,12 +34,12 @@ public class WikiPageResource {
     }
 
     @PostMapping(path = "/body")
-    public ResponseEntity<WikiPagesDto> createWikiPagesFromBody(@RequestBody WikiPageDto request) {
+    public ResponseEntity<WikiPagesDto> extendWikiArticle(@RequestBody WikiPageDto request) {
         var input = new WikiPagesInput(request);
 
         var output = new RestWikiPagesPresenter();
 
-        wikiPagesFacade.createMultipleWikiPagesFrom(input.wikiPage(), output);
+        wikiPagesFacade.extendWikiArticle(input.wikiPage(), output);
 
         return output.getResponseEntity();
     }
