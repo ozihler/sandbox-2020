@@ -28,23 +28,24 @@ class ExtendWikiArticleUseCaseTest {
         String tag1 = "#ThisIsARefTag";
         String tag2 = "#WithCertainPersuasion";
 
-        InMemoryWikiPageRepository repo = new InMemoryWikiPageRepository();
-        StoreWikiPage storeWikiPage = repo;
-        FindWikiPage findWikiPage = repo;
+        var repo = new InMemoryWikiPageRepository();
 
-        var wikiPageToUpdate = WikiPage.from(
+        var wikiPageToExtend = WikiPage.from(
                 ReferenceTag.from("#HelloWorld"),
                 Title.from("Hello World"),
                 Body.from("New Body"),
                 ReferencedWikiPages.empty());
 
-        storeWikiPage.as(wikiPageToUpdate);
+        repo.as(wikiPageToExtend);
+
+        StoreWikiPage storeWikiPage = repo;
+        FindWikiPage findWikiPage = repo;
 
         ExtendWikiArticle createWikiPagesFromBody = new ExtendWikiArticleUseCase(findWikiPage, storeWikiPage);
 
         Body bodyToParse = Body.from(String.format("Hello world %s and %s.", tag1, tag2));
 
-        WikiPageDocument updatedWikiArticle = WikiPageDocument.from(wikiPageToUpdate.getReferenceTag(), wikiPageToUpdate.getTitle(), bodyToParse);
+        WikiPageDocument updatedWikiArticle = WikiPageDocument.from(wikiPageToExtend.getReferenceTag(), wikiPageToExtend.getTitle(), bodyToParse);
 
         createWikiPagesFromBody.with(updatedWikiArticle, output);
 
@@ -52,8 +53,8 @@ class ExtendWikiArticleUseCaseTest {
         ReferenceTag referenceTag2 = ReferenceTag.from(tag2);
 
         WikiPageDocument expectedUpdatedWikiPage = WikiPageDocument.from(
-                wikiPageToUpdate.getReferenceTag(),
-                wikiPageToUpdate.getTitle(),
+                wikiPageToExtend.getReferenceTag(),
+                wikiPageToExtend.getTitle(),
                 updatedWikiArticle.body(),
                 ReferencedWikiPages.from(Set.of(referenceTag1, referenceTag2))
         );
