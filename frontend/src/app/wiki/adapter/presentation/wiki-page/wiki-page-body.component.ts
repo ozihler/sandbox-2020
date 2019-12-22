@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 
 import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
@@ -16,14 +16,14 @@ import {WikiPage} from '../../../domain/wiki-page';
                     class="form-control"
                     [formControl]="bodyInput"
                     *ngIf="!wikiPage.referenceTag.isEmpty()"></textarea>
-
-      <span [innerHTML]="wikiPage.body.body"></span>
     </div>`
 })
 export class WikiPageBodyComponent implements OnChanges {
 
   @Input() wikiPage: WikiPage;
   bodyInput: FormControl;
+
+  @Output() wikiPageUpdated = new EventEmitter<WikiPage>();
 
   constructor(private updateWikiPageBody: UpdateWikiPageBody) {
     this.wikiPage = WikiPage.empty();
@@ -41,6 +41,7 @@ export class WikiPageBodyComponent implements OnChanges {
       this.updateWikiPageBody.with(this.wikiPage)
         .subscribe(wikiPage => {
           this.wikiPage = wikiPage;
+          this.wikiPageUpdated.emit(this.wikiPage);
         });
     });
   }

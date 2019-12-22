@@ -37,6 +37,13 @@ public class WikiPageDocument implements Comparable<WikiPageDocument> {
         return from(referenceTag, title, Body.empty(), ReferencedWikiPages.empty());
     }
 
+    public static WikiPageDocument from(WikiPage wikiPage) {
+        return from(wikiPage.getReferenceTag(),
+                wikiPage.getTitle(),
+                wikiPage.getBody(),
+                wikiPage.getReferencedWikiPages());
+    }
+
 
     public ReferenceTag referenceTag() {
         return referenceTag;

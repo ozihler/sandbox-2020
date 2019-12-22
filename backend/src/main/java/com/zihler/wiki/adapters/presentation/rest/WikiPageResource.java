@@ -3,6 +3,7 @@ package com.zihler.wiki.adapters.presentation.rest;
 import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPageDto;
 import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPagesDto;
 import com.zihler.wiki.adapters.presentation.rest.inputs.CreateWikiPageFromTitleInput;
+import com.zihler.wiki.adapters.presentation.rest.inputs.ReferenceTagInput;
 import com.zihler.wiki.adapters.presentation.rest.inputs.WikiPagesInput;
 import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagePresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagesSearchResultPresenter;
@@ -48,6 +49,17 @@ public class WikiPageResource {
         var output = new RestWikiPagesSearchResultPresenter();
 
         wikiPagesFacade.findAllWikiPages(output);
+
+        return output.getResponseEntity();
+    }
+
+    @GetMapping("/{referenceTag}")
+    ResponseEntity<WikiPageDto> fetchWikiPageByReferenceTag(@PathVariable("referenceTag") String referenceTag) {
+        var input = new ReferenceTagInput(referenceTag);
+
+        var output = new RestWikiPagePresenter();
+
+        wikiPagesFacade.fetchWikiPageByReferenceTag(input.referenceTag(), output);
 
         return output.getResponseEntity();
     }
