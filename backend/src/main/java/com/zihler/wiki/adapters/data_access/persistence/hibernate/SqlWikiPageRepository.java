@@ -1,7 +1,7 @@
 package com.zihler.wiki.adapters.data_access.persistence.hibernate;
 
 import com.zihler.wiki.adapters.data_access.persistence.hibernate.framework.JpaWikiPageRepository;
-import com.zihler.wiki.adapters.data_access.persistence.hibernate.framework.WikiPageTable;
+import com.zihler.wiki.adapters.data_access.persistence.hibernate.framework.WikiPageRow;
 import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateways.RetrieveAllWikiPages;
 import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
@@ -33,7 +33,7 @@ public class SqlWikiPageRepository implements StoreWikiPage, FindWikiPage, Retri
         return db.findById(referenceTag.toString()).map(this::toWikiPage);
     }
 
-    private WikiPage toWikiPage(WikiPageTable rowData) {
+    private WikiPage toWikiPage(WikiPageRow rowData) {
         return WikiPage.from(
                 ReferenceTag.from(rowData.getReferenceTag()),
                 Title.from(rowData.getTitle()),
@@ -43,8 +43,8 @@ public class SqlWikiPageRepository implements StoreWikiPage, FindWikiPage, Retri
 
     }
 
-    private Set<ReferenceTag> referenceTagsFrom(Set<WikiPageTable> referencedWikiPages) {
-        return referencedWikiPages.stream().map(WikiPageTable::getReferenceTag).map(ReferenceTag::from).collect(toSet());
+    private Set<ReferenceTag> referenceTagsFrom(Set<WikiPageRow> referencedWikiPages) {
+        return referencedWikiPages.stream().map(WikiPageRow::getReferenceTag).map(ReferenceTag::from).collect(toSet());
     }
 
     @Override
@@ -52,35 +52,35 @@ public class SqlWikiPageRepository implements StoreWikiPage, FindWikiPage, Retri
         return toWikiPage(db.save(toDatabaseRow(wikiPage)));
     }
 
-    private WikiPageTable toDatabaseRow(WikiPage wikiPage) {
-        WikiPageTable wikiPageTable = new WikiPageTable();
-        wikiPageTable.setReferenceTag(wikiPage.getReferenceTag().toString());
-        wikiPageTable.setTitle(wikiPage.getTitle().toString());
-        wikiPageTable.setBody(wikiPage.getBody().toString());
-        wikiPageTable.setReferencedWikiPages(existingWikiPages(wikiPage));
+    private WikiPageRow toDatabaseRow(WikiPage wikiPage) {
+        WikiPageRow wikiPageRow = new WikiPageRow();
+        wikiPageRow.setReferenceTag(wikiPage.getReferenceTag().toString());
+        wikiPageRow.setTitle(wikiPage.getTitle().toString());
+        wikiPageRow.setBody(wikiPage.getBody().toString());
+        wikiPageRow.setReferencedWikiPages(existingWikiPages(wikiPage));
 
-        return wikiPageTable;
+        return wikiPageRow;
     }
 
-    private Set<WikiPageTable> assureAllWikiPagesExist(Set<String> referencedWikiPagesTagStrings, Set<WikiPageTable> existingWikiPages) {
+    private Set<WikiPageRow> assureAllWikiPagesExist(Set<String> referencedWikiPagesTagStrings, Set<WikiPageRow> existingWikiPages) {
         if (containsUnknownReferenceTags(referencedWikiPagesTagStrings, existingWikiPagesTagStrings(existingWikiPages))) {
             throw new IllegalStateException("Some wiki pages were not created yet: " + referencedWikiPagesTagStrings);
         }
         return existingWikiPages;
     }
 
-    private Set<String> existingWikiPagesTagStrings(Set<WikiPageTable> existingWikiPages) {
-        return existingWikiPages.stream().map(WikiPageTable::getReferenceTag).collect(toSet());
+    private Set<String> existingWikiPagesTagStrings(Set<WikiPageRow> existingWikiPages) {
+        return existingWikiPages.stream().map(WikiPageRow::getReferenceTag).collect(toSet());
     }
 
     private boolean containsUnknownReferenceTags(Set<String> referencedWikiPagesTagStrings, Set<String> existingWikiPagesTagStrings) {
         return referencedWikiPagesTagStrings.stream().anyMatch(e -> !existingWikiPagesTagStrings.contains(e));
     }
 
-    private Set<WikiPageTable> existingWikiPages(WikiPage wikiPage) {
+    private Set<WikiPageRow> existingWikiPages(WikiPage wikiPage) {
         Set<String> referencedWikiPagesTagStrings = referencedWikiPagesTagStrings(wikiPage);
 
-        Set<WikiPageTable> existingWikiPages = referencedWikiPages(referencedWikiPagesTagStrings)
+        Set<WikiPageRow> existingWikiPages = referencedWikiPages(referencedWikiPagesTagStrings)
                 .stream()
                 .filter(Optional::isPresent)
                 .map(Optional::get)
@@ -89,7 +89,7 @@ public class SqlWikiPageRepository implements StoreWikiPage, FindWikiPage, Retri
         return assureAllWikiPagesExist(referencedWikiPagesTagStrings, existingWikiPages);
     }
 
-    private Set<Optional<WikiPageTable>> referencedWikiPages(Set<String> referencedWikiPagesTagStrings) {
+    private Set<Optional<WikiPageRow>> referencedWikiPages(Set<String> referencedWikiPagesTagStrings) {
         return referencedWikiPagesTagStrings
                 .stream()
                 .map(tag -> db.findById(tag))
