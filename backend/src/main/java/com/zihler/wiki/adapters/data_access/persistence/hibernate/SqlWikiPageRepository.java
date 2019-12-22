@@ -40,7 +40,6 @@ public class SqlWikiPageRepository implements StoreWikiPage, FindWikiPage, Retri
                 Body.from(rowData.getBody()),
                 ReferencedWikiPages.from(referenceTagsFrom(rowData.getReferencedWikiPages()))
         );
-
     }
 
     private Set<ReferenceTag> referenceTagsFrom(Set<WikiPageRow> referencedWikiPages) {
