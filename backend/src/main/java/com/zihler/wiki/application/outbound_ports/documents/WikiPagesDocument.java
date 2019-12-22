@@ -31,10 +31,6 @@ public class WikiPagesDocument {
         return wikiPages;
     }
 
-    public void add(WikiPageDocument wikiPageDocument) {
-        wikiPages.add(wikiPageDocument);
-    }
-
     @Override
     public String toString() {
         return "[\n" + wikiPages.stream().map(Object::toString).collect(joining(",\n")) + "\n]";

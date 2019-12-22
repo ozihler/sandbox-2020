@@ -2,16 +2,23 @@ package com.zihler.wiki.domain.values;
 
 import com.zihler.wiki.domain.entity.WikiPage;
 
-import java.util.LinkedHashSet;
+import java.util.HashSet;
+import java.util.Set;
 
 public class WikiPages {
-    private LinkedHashSet<WikiPage> wikiPages;
+    private Set<WikiPage> wikiPages;
 
-    public WikiPages(LinkedHashSet<WikiPage> wikiPages) {
+    private WikiPages(Set<WikiPage> wikiPages) {
+        this.wikiPages = new HashSet<>();
         this.wikiPages = wikiPages;
     }
 
-    public LinkedHashSet<WikiPage> getWikiPages() {
+    public static WikiPages from(Set<WikiPage> wikiPages) {
+        return new WikiPages(wikiPages);
+    }
+
+    public Set<WikiPage> getWikiPages() {
         return wikiPages;
     }
+
 }

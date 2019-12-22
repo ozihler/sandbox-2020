@@ -1,4 +1,4 @@
-package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.inbound_port;
+package com.zihler.wiki.application.use_cases.extend_wiki_article.inbound_port;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;

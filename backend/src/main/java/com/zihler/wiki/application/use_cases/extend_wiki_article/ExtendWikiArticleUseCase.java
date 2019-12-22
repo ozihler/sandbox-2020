@@ -1,11 +1,11 @@
-package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body;
+package com.zihler.wiki.application.use_cases.extend_wiki_article;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
-import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.context.ExtendWikiArticleUseCaseContext;
-import com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.inbound_port.ExtendWikiArticle;
+import com.zihler.wiki.application.use_cases.extend_wiki_article.context.ExtendWikiArticleUseCaseContext;
+import com.zihler.wiki.application.use_cases.extend_wiki_article.inbound_port.ExtendWikiArticle;
 
 public class ExtendWikiArticleUseCase implements ExtendWikiArticle {
 

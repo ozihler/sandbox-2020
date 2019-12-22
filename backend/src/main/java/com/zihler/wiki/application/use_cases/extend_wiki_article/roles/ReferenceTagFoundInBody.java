@@ -1,4 +1,4 @@
-package com.zihler.wiki.application.use_cases.create_wiki_pages_from_body.roles;
+package com.zihler.wiki.application.use_cases.extend_wiki_article.roles;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.use_cases.wiki_page_creation_utils.Tokens;
