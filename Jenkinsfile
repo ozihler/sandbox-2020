@@ -16,7 +16,7 @@ pipeline {
             }
         }
 
-       /* stage("Compile") {
+        stage("Compile") {
             steps {
                 sh "./gradlew compileJava"
             }
@@ -27,7 +27,6 @@ pipeline {
                 sh "./gradlew test"
             }
         }
-*/
         stage("Package") {
             steps {
                 sh "./gradlew clean build"

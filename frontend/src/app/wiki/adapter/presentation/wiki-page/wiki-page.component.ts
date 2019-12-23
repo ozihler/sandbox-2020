@@ -43,7 +43,6 @@ export class WikiPageComponent implements OnInit {
 
   updateWikiPage(wikiPage: WikiPage) {
     this.wikiPage = wikiPage;
-    this.formatBody(wikiPage);
   }
 
   private formatBody(wikiPage: WikiPage) {
