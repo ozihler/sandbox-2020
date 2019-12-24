@@ -1,7 +1,7 @@
-package com.zihler.wiki.application.use_cases.find_wiki_pages.outbound_port;
+package com.zihler.wiki.application.use_cases.view_all_wiki_pages.outbound_port;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPagesDocument;
 
-public interface WikiPagesSearchResultPresenter {
+public interface WikiPagesPresenter {
     void present(WikiPagesDocument wikiPagesDocument);
 }

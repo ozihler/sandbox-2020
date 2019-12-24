@@ -1,13 +1,13 @@
 package com.zihler.wiki.adapters.presentation.rest;
 
+import com.zihler.wiki.adapters.presentation.rest.controllers.CreateWikiPageController;
+import com.zihler.wiki.adapters.presentation.rest.controllers.ExtendWikiArticleController;
+import com.zihler.wiki.adapters.presentation.rest.controllers.FetchWikiPageController;
+import com.zihler.wiki.adapters.presentation.rest.controllers.ViewAllWikiPagesController;
 import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPageDto;
 import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPagesDto;
-import com.zihler.wiki.adapters.presentation.rest.inputs.CreateWikiPageFromTitleInput;
-import com.zihler.wiki.adapters.presentation.rest.inputs.ReferenceTagInput;
-import com.zihler.wiki.adapters.presentation.rest.inputs.WikiPagesInput;
 import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagePresenter;
-import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagesSearchResultPresenter;
-import com.zihler.wiki.adapters.spring.SpringWikiPagesFacade;
+import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagesPresenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,51 +15,54 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "wiki/pages", produces = "application/json")
 public class WikiPageResource {
-    private SpringWikiPagesFacade wikiPagesFacade;
+    private CreateWikiPageController createWikiPageController;
+    private ViewAllWikiPagesController viewAllWikiPagesController;
+    private ExtendWikiArticleController extendWikiArticleController;
+    private FetchWikiPageController fetchWikiPageController;
 
     @Autowired
-    public WikiPageResource(SpringWikiPagesFacade wikiPagesFacade) {
-        this.wikiPagesFacade = wikiPagesFacade;
+    public WikiPageResource(CreateWikiPageController createWikiPageController,
+                            ViewAllWikiPagesController viewAllWikiPagesController,
+                            ExtendWikiArticleController extendWikiArticleController,
+                            FetchWikiPageController fetchWikiPageController) {
+        this.createWikiPageController = createWikiPageController;
+        this.viewAllWikiPagesController = viewAllWikiPagesController;
+        this.extendWikiArticleController = extendWikiArticleController;
+        this.fetchWikiPageController = fetchWikiPageController;
     }
 
     @PostMapping(path = "/title")
-    public ResponseEntity<WikiPageDto> createWikiPageFromTitle(@RequestBody WikiPageDto request) {
-        var input = new CreateWikiPageFromTitleInput(request);
-
+    public ResponseEntity<WikiPageDto> createWikiPageFromTitle(@RequestBody WikiPageDto jsonRequest) {
         var output = new RestWikiPagePresenter();
 
-        wikiPagesFacade.createSingleWikiPageFrom(input.title(), output);
+        createWikiPageController.createWikiPage(jsonRequest.getTitle(), output);
 
         return output.getResponseEntity();
     }
 
     @PostMapping(path = "/body")
     public ResponseEntity<WikiPageDto> extendWikiArticle(@RequestBody WikiPageDto request) {
-        var input = new WikiPagesInput(request);
-
         var output = new RestWikiPagePresenter();
 
-        wikiPagesFacade.extendWikiArticle(input.wikiPage(), output);
+        extendWikiArticleController.extendWith(request, output);
 
         return output.getResponseEntity();
     }
 
     @GetMapping
     public ResponseEntity<WikiPagesDto> fetchAllWikiPages() {
-        var output = new RestWikiPagesSearchResultPresenter();
+        var output = new RestWikiPagesPresenter();
 
-        wikiPagesFacade.findAllWikiPages(output);
+        viewAllWikiPagesController.viewAllWikiPages(output);
 
         return output.getResponseEntity();
     }
 
     @GetMapping("/{referenceTag}")
     ResponseEntity<WikiPageDto> fetchWikiPageByReferenceTag(@PathVariable("referenceTag") String referenceTag) {
-        var input = new ReferenceTagInput(referenceTag);
-
         var output = new RestWikiPagePresenter();
 
-        wikiPagesFacade.fetchWikiPageByReferenceTag(input.referenceTag(), output);
+        fetchWikiPageController.fetchBy(referenceTag, output);
 
         return output.getResponseEntity();
     }

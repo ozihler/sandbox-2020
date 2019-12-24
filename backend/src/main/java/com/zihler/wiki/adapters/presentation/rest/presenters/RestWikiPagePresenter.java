@@ -2,10 +2,9 @@ package com.zihler.wiki.adapters.presentation.rest.presenters;
 
 import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPageDto;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
-import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import org.springframework.http.ResponseEntity;
 
-public class RestWikiPagePresenter implements WikiPagePresenter {
+public class RestWikiPagePresenter implements com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter {
     private ResponseEntity<WikiPageDto> response;
 
     @Override

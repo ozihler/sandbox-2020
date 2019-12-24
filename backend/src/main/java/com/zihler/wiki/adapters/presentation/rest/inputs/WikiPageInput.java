@@ -11,10 +11,10 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 
-public class WikiPagesInput {
+public class WikiPageInput {
     private WikiPageDto request;
 
-    public WikiPagesInput(WikiPageDto request) {
+    public WikiPageInput(WikiPageDto request) {
         this.request = request;
     }
 

@@ -2,10 +2,10 @@ package com.zihler.wiki.adapters.presentation.rest.presenters;
 
 import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPagesDto;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPagesDocument;
-import com.zihler.wiki.application.use_cases.find_wiki_pages.outbound_port.WikiPagesSearchResultPresenter;
+import com.zihler.wiki.application.use_cases.view_all_wiki_pages.outbound_port.WikiPagesPresenter;
 import org.springframework.http.ResponseEntity;
 
-public class RestWikiPagesSearchResultPresenter implements WikiPagesSearchResultPresenter {
+public class RestWikiPagesPresenter implements WikiPagesPresenter {
     private ResponseEntity<WikiPagesDto> responseEntity;
 
     @Override

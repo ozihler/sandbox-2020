@@ -12,7 +12,6 @@ public class Title {
             throw new IllegalTitleException("A title cannot be empty!");
         }
         this.title = title;
-
     }
 
     public static Title from(String titleString) {

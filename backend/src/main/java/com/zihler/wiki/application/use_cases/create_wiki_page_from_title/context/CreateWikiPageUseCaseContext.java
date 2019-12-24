@@ -11,20 +11,20 @@ import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
 import com.zihler.wiki.domain.values.Title;
 
-public class CreateWikiPageFromTitleUseCaseContext implements UseCaseContext {
+public class CreateWikiPageUseCaseContext implements UseCaseContext {
     private CreatedWikiPage createdWikiPage;
 
-    private CreateWikiPageFromTitleUseCaseContext(CreatedWikiPage createdWikiPage) {
+    private CreateWikiPageUseCaseContext(CreatedWikiPage createdWikiPage) {
         this.createdWikiPage = createdWikiPage;
     }
 
-    public static CreateWikiPageFromTitleUseCaseContext initialize(Title title, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
+    public static CreateWikiPageUseCaseContext initialize(Title title, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
         ReferenceTag referenceTag = TitleBasedReferenceTag.from(title).get();
         WikiPageDocument intendedWikiPage = WikiPageDocument.from(referenceTag, title, Body.empty());
 
         CreatedWikiPage createdWikiPage = CreatedWikiPage.from(intendedWikiPage, findWikiPage, storeWikiPage, presenter);
 
-        return new CreateWikiPageFromTitleUseCaseContext(createdWikiPage);
+        return new CreateWikiPageUseCaseContext(createdWikiPage);
     }
 
     @Override
