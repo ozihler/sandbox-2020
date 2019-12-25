@@ -105,10 +105,14 @@ public class SqlWikiPageRepository implements StoreWikiPage, FindWikiPage, Retri
 
     @Override
     public WikiPages get() {
-        Set<WikiPage> wikiPages = stream(db.findAll().spliterator(), false)
+        Iterable<WikiPageRow> allRows = db.findAll();
+        Set<WikiPage> wikiPages = toWikiPages(allRows);
+        return WikiPages.from(wikiPages);
+    }
+
+    private Set<WikiPage> toWikiPages(Iterable<WikiPageRow> allRows) {
+        return stream(allRows.spliterator(), false)
                 .map(this::toWikiPage)
                 .collect(toSet());
-
-        return WikiPages.from(wikiPages);
     }
 }

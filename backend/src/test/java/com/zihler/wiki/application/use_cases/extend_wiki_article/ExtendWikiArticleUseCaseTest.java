@@ -1,5 +1,6 @@
 package com.zihler.wiki.application.use_cases.extend_wiki_article;
 
+import com.zihler.wiki.adapters.data_access.persistence.in_memory.HashMapWikiPageRepository;
 import com.zihler.wiki.adapters.data_access.persistence.in_memory.InMemoryWikiPageRepository;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
@@ -28,7 +29,7 @@ class ExtendWikiArticleUseCaseTest {
         String tag1 = "#ThisIsARefTag";
         String tag2 = "#WithCertainPersuasion";
 
-        var repo = new InMemoryWikiPageRepository();
+        var repo = new InMemoryWikiPageRepository(new HashMapWikiPageRepository());
 
         var wikiPageToExtend = WikiPage.from(
                 ReferenceTag.from("#HelloWorld"),
