@@ -2,6 +2,7 @@ package com.zihler.wiki.adapters.presentation.rest.dtos;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.domain.values.ReferenceTag;
+import com.zihler.wiki.domain.values.ReferencedWikiPages;
 
 import java.util.Set;
 import java.util.SortedSet;
@@ -31,8 +32,12 @@ public class WikiPageDto implements Comparable<WikiPageDto> {
                 document.referenceTag().toString(),
                 document.title().toString(),
                 document.body().toString(),
-                document.referencedWikiPages().getReferencedWikiPages().stream().map(ReferenceTag::toString).collect(toSet())
+                toReferenceTagStrings(document.referencedWikiPages())
         );
+    }
+
+    private static Set<String> toReferenceTagStrings(ReferencedWikiPages referencedWikiPages) {
+        return referencedWikiPages.getReferencedWikiPages().stream().map(ReferenceTag::toString).collect(toSet());
     }
 
     public static SortedSet<WikiPageDto> from(SortedSet<WikiPageDocument> wikiPages) {
