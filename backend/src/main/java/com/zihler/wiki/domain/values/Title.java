@@ -9,13 +9,13 @@ public class Title {
 
     private Title(String title) {
         if (!isValid(title)) {
-            throw new IllegalTitleException("A title cannot be empty!");
+            throw new IllegalTitleException("Title invalid: " + title + "!");
         }
         this.title = title;
     }
 
-    public static Title from(String titleString) {
-        return new Title(titleString);
+    public static Title from(String title) {
+        return new Title(title);
     }
 
     private static boolean isValid(String title) {
