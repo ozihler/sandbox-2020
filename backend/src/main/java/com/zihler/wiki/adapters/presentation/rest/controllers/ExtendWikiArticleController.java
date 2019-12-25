@@ -8,9 +8,9 @@ import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.extend_wiki_article.ExtendWikiArticleUseCase;
 import com.zihler.wiki.application.use_cases.extend_wiki_article.inbound_port.ExtendWikiArticle;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class ExtendWikiArticleController {
 
     private final ExtendWikiArticle extendWikiArticle;

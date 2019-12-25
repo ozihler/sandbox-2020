@@ -6,9 +6,9 @@ import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.fetch_wiki_page.FetchWikiPageUseCase;
 import com.zihler.wiki.application.use_cases.fetch_wiki_page.inbound_port.FetchWikiPage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class FetchWikiPageController {
     private final FetchWikiPage fetchWikiPage;
 

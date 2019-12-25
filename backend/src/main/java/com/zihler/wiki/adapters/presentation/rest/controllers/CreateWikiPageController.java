@@ -7,9 +7,9 @@ import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.create_wiki_page_from_title.CreateWikiPageUseCase;
 import com.zihler.wiki.application.use_cases.create_wiki_page_from_title.inbound_port.CreateWikiPage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class CreateWikiPageController {
     private CreateWikiPage createWikiPage;
 
