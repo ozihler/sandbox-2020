@@ -1,4 +1,4 @@
-package com.zihler.wiki.adapters.presentation.rest.inputs;
+package com.zihler.wiki.adapters.presentation.rest.controllers.inputs;
 
 import com.zihler.wiki.domain.values.Title;
 

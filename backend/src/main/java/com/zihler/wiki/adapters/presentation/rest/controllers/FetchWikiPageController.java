@@ -1,6 +1,6 @@
 package com.zihler.wiki.adapters.presentation.rest.controllers;
 
-import com.zihler.wiki.adapters.presentation.rest.inputs.ReferenceTagInput;
+import com.zihler.wiki.adapters.presentation.rest.controllers.inputs.ReferenceTagInput;
 import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.application.use_cases.fetch_wiki_page.FetchWikiPageUseCase;

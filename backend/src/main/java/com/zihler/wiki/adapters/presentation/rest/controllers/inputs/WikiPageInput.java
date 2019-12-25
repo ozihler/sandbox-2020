@@ -1,6 +1,6 @@
-package com.zihler.wiki.adapters.presentation.rest.inputs;
+package com.zihler.wiki.adapters.presentation.rest.controllers.inputs;
 
-import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPageDto;
+import com.zihler.wiki.adapters.presentation.rest.viewmodels.WikiPageViewModel;
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.domain.values.Body;
 import com.zihler.wiki.domain.values.ReferenceTag;
@@ -12,9 +12,9 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 public class WikiPageInput {
-    private WikiPageDto request;
+    private WikiPageViewModel request;
 
-    public WikiPageInput(WikiPageDto request) {
+    public WikiPageInput(WikiPageViewModel request) {
         this.request = request;
     }
 

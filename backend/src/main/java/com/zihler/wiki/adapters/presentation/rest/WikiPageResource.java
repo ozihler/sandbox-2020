@@ -4,10 +4,10 @@ import com.zihler.wiki.adapters.presentation.rest.controllers.CreateWikiPageCont
 import com.zihler.wiki.adapters.presentation.rest.controllers.ExtendWikiArticleController;
 import com.zihler.wiki.adapters.presentation.rest.controllers.FetchWikiPageController;
 import com.zihler.wiki.adapters.presentation.rest.controllers.ViewAllWikiPagesController;
-import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPageDto;
-import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPagesDto;
 import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagePresenter;
 import com.zihler.wiki.adapters.presentation.rest.presenters.RestWikiPagesPresenter;
+import com.zihler.wiki.adapters.presentation.rest.viewmodels.WikiPageViewModel;
+import com.zihler.wiki.adapters.presentation.rest.viewmodels.WikiPagesViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +32,7 @@ public class WikiPageResource {
     }
 
     @PostMapping(path = "/title")
-    public ResponseEntity<WikiPageDto> createWikiPageFromTitle(@RequestBody WikiPageDto jsonRequest) {
+    public ResponseEntity<WikiPageViewModel> createWikiPageFromTitle(@RequestBody WikiPageViewModel jsonRequest) {
         var output = new RestWikiPagePresenter();
 
         createWikiPageController.createWikiPage(jsonRequest.getTitle(), output);
@@ -41,7 +41,7 @@ public class WikiPageResource {
     }
 
     @PostMapping(path = "/body")
-    public ResponseEntity<WikiPageDto> extendWikiArticle(@RequestBody WikiPageDto request) {
+    public ResponseEntity<WikiPageViewModel> extendWikiArticle(@RequestBody WikiPageViewModel request) {
         var output = new RestWikiPagePresenter();
 
         extendWikiArticleController.extendWith(request, output);
@@ -50,7 +50,7 @@ public class WikiPageResource {
     }
 
     @GetMapping
-    public ResponseEntity<WikiPagesDto> fetchAllWikiPages() {
+    public ResponseEntity<WikiPagesViewModel> fetchAllWikiPages() {
         var output = new RestWikiPagesPresenter();
 
         viewAllWikiPagesController.viewAllWikiPages(output);
@@ -59,7 +59,7 @@ public class WikiPageResource {
     }
 
     @GetMapping("/{referenceTag}")
-    ResponseEntity<WikiPageDto> fetchWikiPageByReferenceTag(@PathVariable("referenceTag") String referenceTag) {
+    ResponseEntity<WikiPageViewModel> fetchWikiPageByReferenceTag(@PathVariable("referenceTag") String referenceTag) {
         var output = new RestWikiPagePresenter();
 
         fetchWikiPageController.fetchBy(referenceTag, output);

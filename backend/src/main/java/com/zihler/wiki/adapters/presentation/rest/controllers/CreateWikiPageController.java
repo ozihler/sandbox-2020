@@ -1,6 +1,6 @@
 package com.zihler.wiki.adapters.presentation.rest.controllers;
 
-import com.zihler.wiki.adapters.presentation.rest.inputs.TitleInput;
+import com.zihler.wiki.adapters.presentation.rest.controllers.inputs.TitleInput;
 import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;

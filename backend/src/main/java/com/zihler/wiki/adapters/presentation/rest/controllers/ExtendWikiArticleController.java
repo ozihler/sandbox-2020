@@ -1,7 +1,8 @@
 package com.zihler.wiki.adapters.presentation.rest.controllers;
 
-import com.zihler.wiki.adapters.presentation.rest.dtos.WikiPageDto;
-import com.zihler.wiki.adapters.presentation.rest.inputs.WikiPageInput;
+import com.zihler.wiki.adapters.presentation.rest.controllers.inputs.WikiPageInput;
+import com.zihler.wiki.adapters.presentation.rest.viewmodels.WikiPageViewModel;
+import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
 import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
@@ -20,9 +21,11 @@ public class ExtendWikiArticleController {
         extendWikiArticle = new ExtendWikiArticleUseCase(findWikiPage, storeWikiPage);
     }
 
-    public void extendWith(WikiPageDto jsonRequest, WikiPagePresenter output) {
-        var input = new WikiPageInput(jsonRequest);
+    public void extendWith(WikiPageViewModel jsonRequest, WikiPagePresenter output) {
+        WikiPageInput input = new WikiPageInput(jsonRequest);
 
-        extendWikiArticle.with(input.wikiPage(), output);
+        WikiPageDocument extendedWikiPage = input.wikiPage();
+
+        extendWikiArticle.with(extendedWikiPage, output);
     }
 }
