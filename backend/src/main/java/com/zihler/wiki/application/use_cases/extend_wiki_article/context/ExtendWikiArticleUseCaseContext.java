@@ -9,6 +9,7 @@ import com.zihler.wiki.application.use_cases.UseCaseContext;
 import com.zihler.wiki.application.use_cases.extend_wiki_article.roles.CreatedWikiPages;
 import com.zihler.wiki.application.use_cases.extend_wiki_article.roles.ExtendedWikiPage;
 import com.zihler.wiki.application.use_cases.extend_wiki_article.roles.ReferenceTagsFoundInBody;
+import com.zihler.wiki.domain.entity.WikiPage;
 import com.zihler.wiki.domain.values.Body;
 
 public class ExtendWikiArticleUseCaseContext implements UseCaseContext {
@@ -24,15 +25,15 @@ public class ExtendWikiArticleUseCaseContext implements UseCaseContext {
 
 
     public static ExtendWikiArticleUseCaseContext initialize(WikiPageDocument theUpdate, FindWikiPage findWikiPage, StoreWikiPage storeWikiPage, WikiPagePresenter presenter) {
-        ExtendedWikiPage extendedWikiPage = ExtendedWikiPage.from(theUpdate.referenceTag(), storeWikiPage, findWikiPage, presenter);
+        WikiPage self = findWikiPage.findOrThrow(theUpdate.referenceTag());
 
-        Body updatedBody = Body.from(theUpdate.body().toString());
+        ExtendedWikiPage extendedWikiPage = new ExtendedWikiPage(self, storeWikiPage, presenter);
 
-        WikiPagesDocument wikiPagesToStore = ReferenceTagsFoundInBody.from(updatedBody).toWikiPagesDocument();
+        WikiPagesDocument wikiPagesToStore = ReferenceTagsFoundInBody.from(theUpdate.body()).toWikiPagesDocument();
 
         CreatedWikiPages createdWikiPages = CreatedWikiPages.from(wikiPagesToStore, findWikiPage, storeWikiPage);
 
-        return new ExtendWikiArticleUseCaseContext(updatedBody, extendedWikiPage, createdWikiPages);
+        return new ExtendWikiArticleUseCaseContext(theUpdate.body(), extendedWikiPage, createdWikiPages);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class ExtendWikiArticleUseCaseContext implements UseCaseContext {
         createdWikiPages.storeAll()
                 .andReferenceIn(extendedWikiPage);
 
-        extendedWikiPage.updateWith(updatedBody);
+        extendedWikiPage.extendWith(updatedBody);
 
         extendedWikiPage.present();
     }

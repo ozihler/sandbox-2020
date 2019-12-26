@@ -1,7 +1,6 @@
 package com.zihler.wiki.application.use_cases.extend_wiki_article.roles;
 
 import com.zihler.wiki.application.outbound_ports.documents.WikiPageDocument;
-import com.zihler.wiki.application.outbound_ports.gateways.FindWikiPage;
 import com.zihler.wiki.application.outbound_ports.gateways.StoreWikiPage;
 import com.zihler.wiki.application.outbound_ports.presenters.WikiPagePresenter;
 import com.zihler.wiki.domain.entity.WikiPage;
@@ -13,19 +12,13 @@ public class ExtendedWikiPage {
     private StoreWikiPage storeWikiPage;
     private WikiPagePresenter output;
 
-    private ExtendedWikiPage(WikiPage self, StoreWikiPage storeWikiPage, WikiPagePresenter output) {
+    public ExtendedWikiPage(WikiPage self, StoreWikiPage storeWikiPage, WikiPagePresenter output) {
         this.self = self;
         this.storeWikiPage = storeWikiPage;
         this.output = output;
     }
 
-    public static ExtendedWikiPage from(ReferenceTag referenceTag, StoreWikiPage storeWikiPage, FindWikiPage findWikiPage, WikiPagePresenter output) {
-        WikiPage self = findWikiPage.findOrThrow(referenceTag);
-
-        return new ExtendedWikiPage(self, storeWikiPage, output);
-    }
-
-    public void updateWith(Body updatedBody) {
+    public void extendWith(Body updatedBody) {
         self.setBody(updatedBody);
         self = storeWikiPage.as(self);
     }
